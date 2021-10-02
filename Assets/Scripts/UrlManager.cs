@@ -18,7 +18,6 @@ public class UrlManager : MonoBehaviour
     public void RedirectUrlAdd()
     {
         FRedirectUrl redirectUrl = new FRedirectUrl();
-        redirectUrl.Authorization = "Bearer " + tkn.token; //Bearer boþluk token gelecek.
         redirectUrl.RedirectUrl =  PasteAreaText.text; //Buraya URL gelcek.
         redirectUrl.Title = ""; //Title 
         redirectUrl.Description = ""; //Desc
@@ -43,35 +42,91 @@ public class UrlManager : MonoBehaviour
 
     IEnumerator RedirectUrlAdd(string bodyJsonString)
     {
-        var request = new UnityWebRequest("https://umuly.com/api/url/RedirectUrlAdd", UnityWebRequest.kHttpVerbPOST);
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
-        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-        
-        yield return request.SendWebRequest();
 
-        if (request.result == UnityWebRequest.Result.Success)
+        WWWForm form = new WWWForm();
+        form.AddField("RedirectUrl", PasteAreaText.text);
+        form.AddField("Title", "");
+        form.AddField("Description","");
+        form.AddField("Tags", "");
+        form.AddField("DomainId", "");
+        form.AddField("Code", "");
+        form.AddField("UrlAccessType", "5");
+        form.AddField("SpecificMembersOnly", "");
+        form.AddField("UrlType", "1");
+
+        UnityWebRequest www = UnityWebRequest.Post("https://umuly.com/api/url/RedirectUrlAdd", form);
+
+        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
         {
-            if (request.responseCode == 200)
-            {
-                Debug.Log("Baþarýlý!" + request.downloadHandler.text);
-            }
-            else
-            {
-                Debug.Log("Uyarý: " + request.downloadHandler.text);
-            }
+            Debug.Log(www.error);
         }
         else
         {
-            Debug.Log("Bilinmeyen Hata: " + request.downloadHandler.text);
+             
+            Debug.Log("Form upload complete!");
         }
+
+
+
+        //List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+
+        //formData.Add(new MultipartFormDataSection("RedirectUrl=" + PasteAreaText.text + "&Title=&Description=&Tags=&DomainId=&Code=&UrlAccessType=&SpecificMembersOnly=&UrlType=1"));
+        
+        //UnityWebRequest www = UnityWebRequest.Post("https://umuly.com/api/url/RedirectUrlAdd", formData);
+        ////www.SetRequestHeader("Content-Type", "application/json");
+        //www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+
+        //yield return www.SendWebRequest();
+
+        //if (www.result != UnityWebRequest.Result.Success)
+        //{
+        //    Debug.Log(www.error);
+        //}
+        //else
+        //{
+        //    Debug.Log("Form upload complete!");
+        //}
+
+
+
+        //var request = new UnityWebRequest("https://umuly.com/api/url/RedirectUrlAdd", UnityWebRequest.kHttpVerbPOST);
+        //byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+        //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        //request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        //request.SetRequestHeader("Content-Type", "application/json");
+        //request.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        
+
+        //yield return request.SendWebRequest();
+
+        //if (request.result == UnityWebRequest.Result.Success)
+        //{
+        //    if (request.responseCode == 200)
+        //    {
+        //        Debug.Log("Baþarýlý!" + request.downloadHandler.text);
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("Uyarý: " + request.downloadHandler.text);
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.Log("Bilinmeyen Hata: " + request.downloadHandler.text);
+        //}
     }
    
 
 // Bütün domainler gelir.
 IEnumerator Domains(string bodyJsonString)
     {
+
+
+
+
         var request = new UnityWebRequest("http://umuly.com/api/domains", UnityWebRequest.kHttpVerbGET);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -107,7 +162,7 @@ public class Token
 
 public class FRedirectUrl
 {
-    public string Authorization;
+    
     public string RedirectUrl;
     public string Title;
     public string Description;
