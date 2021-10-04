@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS8321: Yerel değişken tanımlı ancak hiç kullanılmadı
+dotnet_diagnostic.CS8321.severity = none

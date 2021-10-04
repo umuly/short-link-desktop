@@ -4,12 +4,23 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine;
+using System.Net;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Text;
+using TMPro;
+using UnityEngine.SceneManagement;
+using System;
 
 public class UrlManager : MonoBehaviour
 {
     [SerializeField] TMP_InputField PasteAreaText;
-    
-    void Start()
+    [SerializeField] TextMeshProUGUI ShortlinkText;
+
+  
+   void Start()
     {
         Debug.Log(tkn.token);
     }
@@ -18,7 +29,7 @@ public class UrlManager : MonoBehaviour
     public void RedirectUrlAdd()
     {
         FRedirectUrl redirectUrl = new FRedirectUrl();
-        redirectUrl.RedirectUrl =  PasteAreaText.text; //Buraya URL gelcek.
+        redirectUrl.RedirectUrl = PasteAreaText.text; //Buraya URL gelcek.
         redirectUrl.Title = ""; //Title 
         redirectUrl.Description = ""; //Desc
         redirectUrl.Tags = ""; // Tags
@@ -34,10 +45,12 @@ public class UrlManager : MonoBehaviour
 
     public void GetAllDomains()
     {
-        FDomain domain = new FDomain();
-        domain.Authorization = "Bearer token"; //Bearer boþluk token gelecek.
+        StartCoroutine(Domains());
+    }
 
-        StartCoroutine(Domains(JsonUtility.ToJson(domain)));
+    public void GetShortUrl()
+    {
+        StartCoroutine(GetShortUrlById("URL ID GONDER"));
     }
 
     IEnumerator RedirectUrlAdd(string bodyJsonString)
@@ -46,7 +59,7 @@ public class UrlManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("RedirectUrl", PasteAreaText.text);
         form.AddField("Title", "");
-        form.AddField("Description","");
+        form.AddField("Description", "");
         form.AddField("Tags", "");
         form.AddField("DomainId", "");
         form.AddField("Code", "");
@@ -65,46 +78,50 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
-             
-            Debug.Log("Form upload complete!");
+            
+            Debug.Log(www.downloadHandler.text + "Form upload complete!");
         }
 
     }
-   
 
-// Bütün domainler gelir.
-IEnumerator Domains(string bodyJsonString)
+    // Bütün domainler gelir.
+    IEnumerator Domains()
     {
+        UnityWebRequest www = UnityWebRequest.Get("http://umuly.com/api/domains");
 
+        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        yield return www.SendWebRequest();
 
-
-
-        var request = new UnityWebRequest("http://umuly.com/api/domains", UnityWebRequest.kHttpVerbGET);
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
-        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
+        if (www.result != UnityWebRequest.Result.Success)
         {
-            if (request.responseCode == 200)
-            {
-                Debug.Log("Baþarýlý!" + request.downloadHandler.text);
-                //Domainleri listeye yazdýr.
-            }
-            else
-            {
-                Debug.Log("Uyarý: " + request.downloadHandler.text);
-            }
+            Debug.Log(www.error);
         }
         else
         {
-            Debug.Log("Bilinmeyen Hata: " + request.downloadHandler.text);
+
+            Debug.Log("Form upload complete!");
         }
     }
+
     public static Token tkn { get; set; }
+
+    IEnumerator GetShortUrlById(string urlId)
+    {
+        UnityWebRequest www = UnityWebRequest.Get("https://umuly.com/api/url/" + urlId);
+
+        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+
+            Debug.Log("Form upload complete!");
+        }
+    }
 }
 
 public class Token
@@ -114,7 +131,7 @@ public class Token
 
 public class FRedirectUrl
 {
-    
+
     public string RedirectUrl;
     public string Title;
     public string Description;
@@ -124,9 +141,4 @@ public class FRedirectUrl
     public string UrlAccessType;
     public string SpecificMembersOnly;
     public string UrlType;
-}
-
-public class FDomain
-{
-    public string Authorization;
 }
