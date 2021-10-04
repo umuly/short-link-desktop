@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class UrlManager : MonoBehaviour
 {
     [SerializeField] TMP_InputField PasteAreaText;
-
+    
     void Start()
     {
         Debug.Log(tkn.token);
@@ -69,54 +69,6 @@ public class UrlManager : MonoBehaviour
             Debug.Log("Form upload complete!");
         }
 
-
-
-        //List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-
-        //formData.Add(new MultipartFormDataSection("RedirectUrl=" + PasteAreaText.text + "&Title=&Description=&Tags=&DomainId=&Code=&UrlAccessType=&SpecificMembersOnly=&UrlType=1"));
-        
-        //UnityWebRequest www = UnityWebRequest.Post("https://umuly.com/api/url/RedirectUrlAdd", formData);
-        ////www.SetRequestHeader("Content-Type", "application/json");
-        //www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
-
-        //yield return www.SendWebRequest();
-
-        //if (www.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.Log(www.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("Form upload complete!");
-        //}
-
-
-
-        //var request = new UnityWebRequest("https://umuly.com/api/url/RedirectUrlAdd", UnityWebRequest.kHttpVerbPOST);
-        //byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
-        //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-        //request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-        //request.SetRequestHeader("Content-Type", "application/json");
-        //request.SetRequestHeader("Authorization", "Bearer " + tkn.token);
-        
-
-        //yield return request.SendWebRequest();
-
-        //if (request.result == UnityWebRequest.Result.Success)
-        //{
-        //    if (request.responseCode == 200)
-        //    {
-        //        Debug.Log("Baþarýlý!" + request.downloadHandler.text);
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Uyarý: " + request.downloadHandler.text);
-        //    }
-        //}
-        //else
-        //{
-        //    Debug.Log("Bilinmeyen Hata: " + request.downloadHandler.text);
-        //}
     }
    
 
