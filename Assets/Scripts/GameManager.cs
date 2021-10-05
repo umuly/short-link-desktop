@@ -9,6 +9,8 @@ using UnityEngine.Networking;
 using System.Text;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Assets.Models;
+using Newtonsoft.Json;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,13 +45,12 @@ public class GameManager : MonoBehaviour
 
     public void Reqister()
     {
-        Register user = new Register();
+        MRegister.Form user = new MRegister.Form();
         user.name = nameText.text;
         user.email = emailText.text;
         user.password = passwordText.text;
 
-        StartCoroutine(Post("http://umuly.com/api/user", Register.CreateJSON(user)));
-
+        StartCoroutine(Post("http://umuly.com/api/user", JsonConvert.SerializeObject(user)));
     }
 
 
