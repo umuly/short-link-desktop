@@ -9,16 +9,11 @@ public class ResponseBase<T>
 
     public string statusText;
 
-    public List<string> statusTexts;
-
     public T item;
 
     public int count;
 
-    public static ResponseBase<T> CreateFromJSON(string jsonString)
-    {
-        return JsonUtility.FromJson<ResponseBase<T>>(jsonString);
-    }
+
 }
 
 public class Register

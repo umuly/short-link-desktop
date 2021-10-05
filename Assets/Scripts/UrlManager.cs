@@ -78,8 +78,9 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
-            
-            Debug.Log(www.downloadHandler.text + "Form upload complete!");
+            ResponseBase<RpRedirectUrl> rp = new ResponseBase<RpRedirectUrl>();
+         var rpsl=    JsonUtility.FromJson<ResponseBase<RpRedirectUrl>>(www.downloadHandler.text);
+            Debug.Log(rpsl.item);
         }
 
     }
