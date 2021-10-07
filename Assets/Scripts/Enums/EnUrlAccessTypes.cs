@@ -16,4 +16,7 @@ namespace Assets.Scripts.Enums
         OnlyThoseWhoHaveTheLinkCanAccess = 5
 
     }
+   
 }
+
+

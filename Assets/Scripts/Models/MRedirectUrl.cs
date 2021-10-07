@@ -23,7 +23,7 @@ namespace Assets.Models
 
 
         }
-
+        
         public class Response
         {
             public object title { get; set; }
@@ -40,7 +40,7 @@ namespace Assets.Models
             public object contentType { get; set; }
             public object fileType { get; set; }
             public object fileSize { get; set; }
-            public DateTime lastVisitDate { get; set; }
+            public DateTime? lastVisitDate { get; set; }
             public int visitCount { get; set; }
             public int uniqueVisitorCount { get; set; }
             public int messageCount { get; set; }
@@ -54,8 +54,8 @@ namespace Assets.Models
             public int revenueAmount { get; set; }
             public bool showAd { get; set; }
             public object listImage { get; set; }
-            public DateTime updatedOn { get; set; }
-            public DateTime createdOn { get; set; }
+            public DateTime? updatedOn { get; set; }
+            public DateTime? createdOn { get; set; }
             public string createdBy { get; set; }
             public object updatedBy { get; set; }
 
