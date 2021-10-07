@@ -11,6 +11,9 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Assets.Models;
 using Newtonsoft.Json;
+using System.Data;
+using Mono.Data.Sqlite;
+using Assets.Scripts.Data;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,12 +27,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject forgotPanel;
     [SerializeField] TextMeshProUGUI errortext;
 
+
+    public string tkn;
+
     private static readonly HttpClient client = new HttpClient();
     void Start()
     {
         emaillogintext.text = "caglar.cakmak@umuly.com";
         passwordloginText.text = "Caglar19.";
-
+        //ReadDataFromDB();
+        //Addtoken();
     }
 
 
@@ -39,7 +46,12 @@ public class GameManager : MonoBehaviour
     }
     public void Login()
     {
-        StartCoroutine(GetRequest("https://umuly.com/api/Token?Email=" + emaillogintext.text + "&Password=" + passwordloginText.text));
+
+        Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
+        var asd = shortlinkdb.Que("select * from Player");
+
+
+        //StartCoroutine(GetRequest("https://umuly.com/api/Token?Email=" + emaillogintext.text + "&Password=" + passwordloginText.text));
     }
 
 
@@ -107,8 +119,8 @@ public class GameManager : MonoBehaviour
 
             {
                 SceneManager.LoadScene(1);
-                Token token = JsonUtility.FromJson<Token>(request.downloadHandler.text);
-                UrlManager.tkn = token;
+                //Token token = JsonUtility.FromJson<Token>(request.downloadHandler.text);
+                //UrlManager.tkn = token;
             }
             else
             {
@@ -142,5 +154,54 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    void ReadToken()
+    {
+
+        string conn = "URI=file:" + Application.dataPath + "/shortlinkdb.db"; //Path to database.
+        IDbConnection dbconn;
+        dbconn = (IDbConnection)new SqliteConnection(conn);
+        dbconn.Open(); //Open connection to the database.
+        IDbCommand dbcmd = dbconn.CreateCommand();
+        string sqlQuery = "SELECT * " + "FROM token";
+        dbcmd.CommandText = sqlQuery;
+        IDataReader reader = dbcmd.ExecuteReader();
+        while (reader.Read())
+        {
+            string token = reader.GetString(0);
+
+            Debug.Log("Token = " + token);
+        }
+        reader.Close();
+        reader = null;
+        dbcmd.Dispose();
+        dbcmd = null;
+        dbconn.Close();
+        dbconn = null;
+    }
+
+    void AddToken()
+    {
+
+        string conn = "URI=file:" + Application.dataPath + "/shortlinkdb.db"; //Path to database.
+        IDbConnection dbconn;
+        dbconn = (IDbConnection)new SqliteConnection(conn);
+        dbconn.Open(); //Open connection to the database.
+        IDbCommand dbcmd = dbconn.CreateCommand();
+        string sqlQuery = "INSERT INTO token VALUES ('')";
+        dbcmd.CommandText = sqlQuery;
+        IDataReader reader = dbcmd.ExecuteReader();
+        reader.Close();
+        reader = null;
+        dbcmd.Dispose();
+        dbcmd = null;
+        dbconn.Close();
+        dbconn = null;
+    }
+
+    void UpdateToken()
+    {
+
     }
 }

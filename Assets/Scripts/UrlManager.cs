@@ -10,13 +10,18 @@ public class UrlManager : MonoBehaviour
     [SerializeField] TMP_InputField PasteAreaText;
     [SerializeField] TextMeshProUGUI ShortlinkText;
 
+    const string baseAddress = "https://umuly.com";
+
 
     void Start()
     {
-        //Debug.Log(tkn.token);
-
+        StartCoroutine(GetMultipleShortRedirectURL());
     }
 
+    public Token tkn;
+    public class Token {
+        public string token { get; set; }
+    }
 
     public void RedirectUrlAdd()
     {
@@ -25,9 +30,9 @@ public class UrlManager : MonoBehaviour
         form.Title = ""; //Title 
         form.Description = ""; //Desc
         form.Tags = ""; // Tags
-        form.DomainId = ""; // Listede seçili domainin id si buraya gelcek.
+        form.DomainId = ""; // Listede seï¿½ili domainin id si buraya gelcek.
         form.Code = ""; //Code
-        //UrlAccessTypes: Everyone: 1, Only Me: 2, Specific Members Only: 3, Members Only: 4 , Only Those Who Have The Link Can Access: 5 Bunlar dýþarýdan alýnacak.
+        //UrlAccessTypes: Everyone: 1, Only Me: 2, Specific Members Only: 3, Members Only: 4 , Only Those Who Have The Link Can Access: 5 Bunlar dï¿½ï¿½arï¿½dan alï¿½nacak.
         form.SpecificMembersOnly = "";
         form.UrlType = 1;
 
@@ -47,19 +52,32 @@ public class UrlManager : MonoBehaviour
         wwwform.AddField("SpecificMembersOnly", form.SpecificMembersOnly);
         wwwform.AddField("UrlType", form.UrlType);
 
-        UnityWebRequest www = UnityWebRequest.Post("https://umuly.com/api/url/RedirectUrlAdd", wwwform);
+        UnityWebRequest www = UnityWebRequest.Post("/api/url/RedirectUrlAdd", wwwform);
 
         www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
-        www.SendWebRequest();
+        StartCoroutine(Operation());
 
-        if (www.result != UnityWebRequest.Result.Success)
+
+        IEnumerator Operation()
         {
-            Debug.Log(www.error);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
+                Debug.Log(rsp.item.shortUrl);
+                ShortlinkText.text = rsp.item.shortUrl;
+
+
+            }
+
         }
-        else
-        {
-            var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
-        }
+
+
 
     }
 
@@ -74,10 +92,10 @@ public class UrlManager : MonoBehaviour
     }
 
 
-    // Bütün domainler gelir.
+    // Bï¿½tï¿½n domainler gelir.
     IEnumerator Domains()
     {
-        UnityWebRequest www = UnityWebRequest.Get("http://umuly.com/api/domains");
+        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/domains");
 
         www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
         yield return www.SendWebRequest();
@@ -92,12 +110,10 @@ public class UrlManager : MonoBehaviour
             Debug.Log("Form upload complete!");
         }
     }
-
-    public static Token tkn { get; set; }
 
     IEnumerator GetShortUrlById(string urlId)
     {
-        UnityWebRequest www = UnityWebRequest.Get("https://umuly.com/api/url/" + urlId);
+        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url/" + urlId);
 
         www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
         yield return www.SendWebRequest();
@@ -112,9 +128,22 @@ public class UrlManager : MonoBehaviour
             Debug.Log("Form upload complete!");
         }
     }
-}
 
-public class Token
-{
-    public string token;
+    IEnumerator GetMultipleShortRedirectURL()
+    {
+        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=0&Sort.Column=createdOn&Sort.Type=1&UrlType=1"); //Skip=0&UrlType=1
+
+        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+            Debug.Log("Form upload complete!");
+        }
+    }
 }
