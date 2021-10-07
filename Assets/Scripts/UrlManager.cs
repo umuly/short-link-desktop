@@ -13,7 +13,8 @@ public class UrlManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(tkn.token);
+        //Debug.Log(tkn.token);
+
     }
 
 
