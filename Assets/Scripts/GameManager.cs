@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using System.Data;
 using Mono.Data.Sqlite;
 using Assets.Scripts.Data;
+using System.Linq;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -46,12 +48,7 @@ public class GameManager : MonoBehaviour
     }
     public void Login()
     {
-
-        Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
-        var asd = shortlinkdb.Que("select * from Player");
-
-
-        //StartCoroutine(GetRequest("https://umuly.com/api/Token?Email=" + emaillogintext.text + "&Password=" + passwordloginText.text));
+        StartCoroutine(GetRequest("https://umuly.com/api/Token?Email=" + emaillogintext.text + "&Password=" + passwordloginText.text));
     }
 
 
@@ -119,6 +116,10 @@ public class GameManager : MonoBehaviour
 
             {
                 SceneManager.LoadScene(1);
+
+                Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
+                var asd = shortlinkdb.Que("select * from Player");
+
                 //Token token = JsonUtility.FromJson<Token>(request.downloadHandler.text);
                 //UrlManager.tkn = token;
             }

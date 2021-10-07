@@ -1,4 +1,5 @@
 ﻿using Mono.Data.Sqlite;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Data
             dbconn = (IDbConnection)new SqliteConnection(conn);
         }
 
-        public static T Test { get; set; }
+        public T Test { get; set; }
 
         public List<T> Lists { get; set; } 
 
@@ -32,12 +33,16 @@ namespace Assets.Scripts.Data
             while (reader.Read())
             {
 
-                foreach (var item in typeof(T).GetProperties())
+                Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
+                foreach (var property in typeof(T).GetProperties())
                 {
-                    item.SetValue(Test, Convert.ChangeType(reader[item.Name], item.PropertyType));
+                    string value = reader[property.Name].ToString();
+                    keyValuePairs.Add(property.Name, value);
                 }
 
-                Lists.Add(Test);
+                string json = "{" + string.Join(",", keyValuePairs.Select(k => "\"" + k.Key + "\":\"" + k.Value + "\"")) + "}";
+                var data  =  JsonConvert.DeserializeObject<T>(json);
+                Lists.Add(data);
             }
             reader.Close();
             reader = null;
