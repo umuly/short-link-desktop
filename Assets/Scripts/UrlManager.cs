@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Assets.Models;
 using Assets.Scripts.Data;
 using System.Linq;
+using System.Collections.Generic;
 
 public class UrlManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class UrlManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI ShortlinkText;
 
     const string baseAddress = "https://umuly.com";
+
+    [SerializeField] GameObject urlListParent;
+    [SerializeField] GameObject urlListItemPrefab;
 
 
     void Start()
@@ -76,7 +80,9 @@ public class UrlManager : MonoBehaviour
             {
                 var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
                 Debug.Log(rsp.item.shortUrl);
-                ShortlinkText.text = rsp.item.shortUrl;
+
+                var urlItem = Instantiate(urlListItemPrefab, urlListParent.transform).gameObject;
+                urlItem.GetComponent<TextMeshProUGUI>().text = rsp.item.shortUrl;
 
 
             }
@@ -136,10 +142,13 @@ public class UrlManager : MonoBehaviour
             Debug.Log("Form upload complete!");
         }
     }
-
+    public void GetMultipleShortRedirectUR()
+    {
+        //StartCoroutine(GetMultipleShortRedirectURL());
+    }
     IEnumerator GetMultipleShortRedirectURL()
     {
-        UnityWebRequest www = UnityWebRequest.Get("https://umuly.com/api/url?Skip=0&Sort.Column=createdOn&Sort.Type=1&UrlType=1"); //Skip=0&UrlType=1
+        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=0&Sort.Column=createdOn&Sort.Type=1&UrlType=1"); //Skip=0&UrlType=1
 
         Shortlinkdb<Player> db = new Shortlinkdb<Player>();
         string token = db.Que("select * from Player").FirstOrDefault().Token;
@@ -148,15 +157,24 @@ public class UrlManager : MonoBehaviour
 
         yield return www.SendWebRequest();
 
-        if (www.result != UnityWebRequest.Result.Success)
+        if (www.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log(www.error);
+            var rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
+
+            foreach (var item in rsp.item)
+            {
+            Debug.Log(item.shortUrl);
+                var urlItem = Instantiate(urlListItemPrefab, urlListParent.transform).gameObject;
+                urlItem.GetComponent<TextMeshProUGUI>().text = item.shortUrl;
+            }
+            
         }
         else
         {
-            var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
-            Debug.Log(rsp.item.shortUrl);
-            ShortlinkText.text = rsp.item.shortUrl;
+
+
+            Debug.Log(www.error);
+
 
 
         }
