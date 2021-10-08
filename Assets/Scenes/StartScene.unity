@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 32.6
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4712,7 +4712,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 906595933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1117784529}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ResetPassword
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &906595933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5668,9 +5680,13 @@ MonoBehaviour:
   passwordText: {fileID: 2111934841}
   emaillogintext: {fileID: 1999255229}
   passwordloginText: {fileID: 92821828}
+  emailforgottext: {fileID: 1254461228}
+  passwordResetInput: {fileID: 1143847629}
+  codeResetInput: {fileID: 1707618099}
   loginPanel: {fileID: 637339849}
   registerPanel: {fileID: 1398858957}
   forgotPanel: {fileID: 893428463}
+  changePanel: {fileID: 699271603}
   errortext: {fileID: 1306139302}
   tkn: 
 --- !u!4 &1117784530
@@ -8292,7 +8308,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.55
+  m_fontSize: 24.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8692,7 +8708,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1918911718}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1117784529}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChangePassword
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1918911718
 MonoBehaviour:
   m_ObjectHideFlags: 0

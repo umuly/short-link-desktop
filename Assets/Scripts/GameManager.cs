@@ -16,99 +16,52 @@ using Mono.Data.Sqlite;
 using Assets.Scripts.Data;
 using System.Linq;
 using Assets.Scripts.Models;
+using System;
 
 public class GameManager : MonoBehaviour
 {
+    // Register
     [SerializeField] TMP_InputField nameText;
     [SerializeField] TMP_InputField emailText;
     [SerializeField] TMP_InputField passwordText;
+
+    // Login
     [SerializeField] TMP_InputField emaillogintext;
     [SerializeField] TMP_InputField passwordloginText;
+
+
+    // Reset Password
+    [SerializeField] TMP_InputField emailforgottext;
+    [SerializeField] TMP_InputField passwordResetInput;
+    [SerializeField] TMP_InputField codeResetInput;
+
+    // Panels
     [SerializeField] GameObject loginPanel;
     [SerializeField] GameObject registerPanel;
     [SerializeField] GameObject forgotPanel;
-    [SerializeField] TextMeshProUGUI errortext;
+    [SerializeField] GameObject changePanel;
 
+    [SerializeField] TextMeshProUGUI errortext;
 
     public string tkn;
 
-    private static readonly HttpClient client = new HttpClient();
     void Start()
     {
-        
-        //ReadDataFromDB();
-        //Addtoken();
-
         Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
         var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
         if (asd != null)
         {
             SceneManager.LoadScene(1);
         }
-        
-    }
-
-
-    void Update()
-    {
 
     }
+
     public void Login()
     {
-        StartCoroutine(GetRequest("https://umuly.com/api/Token?Email=" + emaillogintext.text + "&Password=" + passwordloginText.text));
+        StartCoroutine(Login("https://umuly.com/api/Token?Email=" + emaillogintext.text + "&Password=" + passwordloginText.text));
     }
 
-
-    public void Reqister()
-    {
-        MRegister.Form user = new MRegister.Form();
-        user.name = nameText.text;
-        user.email = emailText.text;
-        user.password = passwordText.text;
-
-        StartCoroutine(Post("http://umuly.com/api/user", JsonConvert.SerializeObject(user)));
-    }
-
-
-    IEnumerator Post(string url, string bodyJsonString)
-    {
-        var request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
-        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.Success)
-        {
-            if (request.responseCode == 500)
-            {
-                errortext.text = "Unknown Error!";
-                errortext.gameObject.SetActive(true);
-            }
-            else
-            {
-                errortext.text = request.downloadHandler.text;
-                errortext.gameObject.SetActive(true);
-            }
-            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
-            //var rb = ResponseBase<string>.CreateFromJSON(request.downloadHandler.text);
-            //Debug.Log(rb.statusText);
-        }
-
-        else
-        {
-            errortext.text = request.downloadHandler.text;
-            errortext.gameObject.SetActive(true);
-
-            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
-            //var rb = ResponseBase<string>.CreateFromJSON(request.downloadHandler.text);
-            //Debug.Log(rb.statusText);
-
-        }
-    }
-    IEnumerator GetRequest(string uri)
+    IEnumerator Login(string uri)
     {
         var request = new UnityWebRequest(uri, UnityWebRequest.kHttpVerbGET);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -138,8 +91,6 @@ public class GameManager : MonoBehaviour
                     shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
                 }
 
-                //UrlManager.tkn = token;
-
                 SceneManager.LoadScene(1);
             }
             else
@@ -150,6 +101,145 @@ public class GameManager : MonoBehaviour
         else
         {
             errortext.text = request.downloadHandler.text;
+        }
+    }
+
+    public void Reqister()
+    {
+        MUser.Form user = new MUser.Form();
+        user.name = nameText.text;
+        user.email = emailText.text;
+        user.password = passwordText.text;
+
+        StartCoroutine(Register("http://umuly.com/api/user", JsonConvert.SerializeObject(user)));
+    }
+
+    IEnumerator Register(string url, string bodyJsonString)
+    {
+        var request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            if (request.responseCode == 500)
+            {
+                errortext.text = "Unknown Error!";
+                errortext.gameObject.SetActive(true);
+            }
+            else
+            {
+                errortext.text = request.downloadHandler.text;
+                errortext.gameObject.SetActive(true);
+            }
+
+            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
+        }
+        else
+        {
+            errortext.text = request.downloadHandler.text;
+            errortext.gameObject.SetActive(true);
+
+            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
+
+        }
+    }
+
+    public void ResetPassword()
+    {
+        MUser.Form user = new MUser.Form();
+        user.email = emailforgottext.text;
+
+        StartCoroutine(ResetPassword("https://umuly.com/api/user/reset-password", JsonUtility.ToJson(user)));
+    }
+
+    IEnumerator ResetPassword(string url, string bodyJsonString)
+    {
+        var request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            if (request.responseCode == 500)
+            {
+                errortext.text = "Unknown Error!";
+                errortext.gameObject.SetActive(true);
+            }
+            else
+            {
+                errortext.text = request.downloadHandler.text;
+                errortext.gameObject.SetActive(true);
+            }
+
+            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
+        }
+        else
+        {
+            errortext.text = request.downloadHandler.text;
+            errortext.gameObject.SetActive(true);
+
+            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
+
+            if (request.responseCode == 200)
+            {
+                changePanel.SetActive(true);
+            }
+        }
+    }
+
+    public void ChangePassword()
+    {
+        MUser.Form changePasswordForm = new MUser.Form();
+        changePasswordForm.email = emailforgottext.text;
+        changePasswordForm.password = passwordResetInput.text;
+        changePasswordForm.code = codeResetInput.text;
+
+        StartCoroutine(ChangePassword("https://umuly.com/api/user/change-password", JsonUtility.ToJson(changePasswordForm)));
+    }
+
+    IEnumerator ChangePassword(string url, string bodyJsonString)
+    {
+        var request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            if (request.responseCode == 500)
+            {
+                errortext.text = "Unknown Error!";
+                errortext.gameObject.SetActive(true);
+            }
+            else
+            {
+                errortext.text = request.downloadHandler.text;
+                errortext.gameObject.SetActive(true);
+            }
+
+            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
+        }
+        else
+        {
+            Debug.Log("Status Code: " + request.responseCode + " Response: " + request.downloadHandler.text);
+
+            if (request.responseCode == 200)
+            {
+                changePanel.SetActive(false);
+                loginPanel.SetActive(true);
+            }
         }
     }
 
@@ -218,10 +308,5 @@ public class GameManager : MonoBehaviour
         dbcmd = null;
         dbconn.Close();
         dbconn = null;
-    }
-
-    void UpdateToken()
-    {
-
     }
 }
