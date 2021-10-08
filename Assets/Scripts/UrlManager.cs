@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using Assets.Models;
+using Assets.Scripts.Data;
+using System.Linq;
 
 public class UrlManager : MonoBehaviour
 {
@@ -19,7 +21,8 @@ public class UrlManager : MonoBehaviour
     }
 
     public Token tkn;
-    public class Token {
+    public class Token
+    {
         public string token { get; set; }
     }
 
@@ -52,9 +55,12 @@ public class UrlManager : MonoBehaviour
         wwwform.AddField("SpecificMembersOnly", form.SpecificMembersOnly);
         wwwform.AddField("UrlType", form.UrlType);
 
-        UnityWebRequest www = UnityWebRequest.Post("/api/url/RedirectUrlAdd", wwwform);
+        UnityWebRequest www = UnityWebRequest.Post(baseAddress + "/api/url/RedirectUrlAdd", wwwform);
 
-        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        string token = db.Que("select * from Player").FirstOrDefault().Token;
+
+        www.SetRequestHeader("Authorization", "Bearer " + token);
         StartCoroutine(Operation());
 
 
@@ -115,7 +121,9 @@ public class UrlManager : MonoBehaviour
     {
         UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url/" + urlId);
 
-        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        string token = db.Que("select * from Player").FirstOrDefault().Token;
+        www.SetRequestHeader("Authorization", "Bearer " + token);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -131,9 +139,13 @@ public class UrlManager : MonoBehaviour
 
     IEnumerator GetMultipleShortRedirectURL()
     {
-        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=0&Sort.Column=createdOn&Sort.Type=1&UrlType=1"); //Skip=0&UrlType=1
+        UnityWebRequest www = UnityWebRequest.Get("https://umuly.com/api/url?Skip=0&Sort.Column=createdOn&Sort.Type=1&UrlType=1"); //Skip=0&UrlType=1
 
-        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        string token = db.Que("select * from Player").FirstOrDefault().Token;
+
+        www.SetRequestHeader("Authorization", "Bearer " + token);
+
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -142,8 +154,12 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(www.downloadHandler.text);
-            Debug.Log("Form upload complete!");
+            var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
+            Debug.Log(rsp.item.shortUrl);
+            ShortlinkText.text = rsp.item.shortUrl;
+
+
         }
+
     }
 }

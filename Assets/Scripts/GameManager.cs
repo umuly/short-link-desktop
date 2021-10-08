@@ -35,10 +35,17 @@ public class GameManager : MonoBehaviour
     private static readonly HttpClient client = new HttpClient();
     void Start()
     {
-        emaillogintext.text = "caglar.cakmak@umuly.com";
-        passwordloginText.text = "Caglar19.";
+        
         //ReadDataFromDB();
         //Addtoken();
+
+        Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
+        var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
+        if (asd != null)
+        {
+            SceneManager.LoadScene(1);
+        }
+        
     }
 
 
@@ -109,19 +116,19 @@ public class GameManager : MonoBehaviour
 
         yield return request.SendWebRequest();
         Debug.Log("Request Sended!");
-        
-        if (request.result== UnityWebRequest.Result.Success)
+
+        if (request.result == UnityWebRequest.Result.Success)
         {
             if (request.responseCode == 200)
             {
 
                 var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
-                
+
 
                 Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
                 var asd = shortlinkdb.Que("select * from Player");
                 bool isToken = asd.Any();
-                if (isToken==true)
+                if (isToken == true)
                 {
                     int userId = asd.FirstOrDefault().Id;
                     shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
