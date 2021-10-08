@@ -49,9 +49,48 @@ namespace Assets.Scripts.Data
             dbcmd.Dispose();
             dbcmd = null;
             dbconn.Close();
-            dbconn = null;
+            
 
             return Lists;
+
+        }
+
+        public void Insert(string sqlQuery)
+        {
+            dbconn.Open();
+            IDbCommand dbcmd = dbconn.CreateCommand();
+            dbcmd.CommandText = sqlQuery;
+            dbcmd.ExecuteNonQuery();
+            dbcmd.Dispose();
+            dbcmd = null;
+            dbconn.Close();
+            
+
+        }
+
+        public void Update(string sqlQuery)
+        {
+            dbconn.Open();
+            IDbCommand dbcmd = dbconn.CreateCommand();
+            dbcmd.CommandText = sqlQuery;
+            dbcmd.ExecuteNonQuery();
+            dbcmd.Dispose();
+            dbcmd = null;
+            dbconn.Close();
+
+
+        }
+
+        public void Delete(string sqlQuery)
+        {
+            dbconn.Open();
+            IDbCommand dbcmd = dbconn.CreateCommand();
+            dbcmd.CommandText = sqlQuery;
+            dbcmd.ExecuteNonQuery();
+            dbcmd.Dispose();
+            dbcmd = null;
+            dbconn.Close();
+            
 
         }
     }

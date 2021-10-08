@@ -15,7 +15,7 @@ using System.Data;
 using Mono.Data.Sqlite;
 using Assets.Scripts.Data;
 using System.Linq;
-
+using Assets.Scripts.Models;
 
 public class GameManager : MonoBehaviour
 {
@@ -113,15 +113,27 @@ public class GameManager : MonoBehaviour
         if (request.result== UnityWebRequest.Result.Success)
         {
             if (request.responseCode == 200)
-
             {
-                SceneManager.LoadScene(1);
+
+                var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
+                
 
                 Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
                 var asd = shortlinkdb.Que("select * from Player");
+                bool isToken = asd.Any();
+                if (isToken==true)
+                {
+                    int userId = asd.FirstOrDefault().Id;
+                    shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
+                }
+                else
+                {
+                    shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
+                }
 
-                //Token token = JsonUtility.FromJson<Token>(request.downloadHandler.text);
                 //UrlManager.tkn = token;
+
+                SceneManager.LoadScene(1);
             }
             else
             {

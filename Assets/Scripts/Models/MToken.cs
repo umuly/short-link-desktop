@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Models
 {
-    public static class MToken
+    public class MToken
     {
-        public static string Token { get; set; }
+        public string token { get; set; }
     }
 }

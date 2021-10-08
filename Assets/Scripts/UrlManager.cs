@@ -124,7 +124,7 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
-
+            Debug.Log(www.downloadHandler.text);
             Debug.Log("Form upload complete!");
         }
     }
