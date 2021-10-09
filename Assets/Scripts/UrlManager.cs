@@ -8,6 +8,7 @@ using Assets.Scripts.Data;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Assets.Scripts.Models;
 
 public class UrlManager : MonoBehaviour
 {
