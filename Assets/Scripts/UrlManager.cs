@@ -83,7 +83,7 @@ public class UrlManager : MonoBehaviour
 
                 var urlItem = Instantiate(urlListItemPrefab, urlListParent.transform).gameObject;
                 urlItem.transform.SetAsFirstSibling();
-                urlItem.GetComponent<TextMeshProUGUI>().text = rsp.item.shortUrl;
+                urlItem.GetComponentInChildren<TextMeshProUGUI>().text = rsp.item.shortUrl;
 
 
             }
@@ -166,7 +166,7 @@ public class UrlManager : MonoBehaviour
             {
             Debug.Log(item.shortUrl);
                 var urlItem = Instantiate(urlListItemPrefab, urlListParent.transform).gameObject;
-                urlItem.GetComponent<TextMeshProUGUI>().text = item.shortUrl;
+                urlItem.GetComponentInChildren<TextMeshProUGUI>().text = item.shortUrl;
             }
             
         }
