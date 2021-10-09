@@ -843,7 +843,7 @@ MonoBehaviour:
   PasteAreaText: {fileID: 527727162}
   ShortlinkText: {fileID: 0}
   urlListParent: {fileID: 238813726}
-  urlListItemPrefab: {fileID: 1592842452169416228, guid: 5ca2fb377e35e4b41a11e820d2503099, type: 3}
+  urlListItemPrefab: {fileID: 8796178127525307269, guid: ea1029f02c2742d48b16d8c2a789fe9a, type: 3}
 --- !u!4 &191629054
 Transform:
   m_ObjectHideFlags: 0
@@ -1305,7 +1305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.00048828125, y: -0.000007764518}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &238813728
@@ -1366,8 +1366,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_Spacing: 16
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
