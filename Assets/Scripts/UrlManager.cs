@@ -7,6 +7,7 @@ using Assets.Models;
 using Assets.Scripts.Data;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class UrlManager : MonoBehaviour
 {
@@ -18,7 +19,19 @@ public class UrlManager : MonoBehaviour
     [SerializeField] GameObject urlListParent;
     [SerializeField] GameObject urlListItemPrefab;
 
-
+    public GameObject myPanel;
+    public void HidePanel()
+    {
+        myPanel.gameObject.SetActive(false);
+    }
+    public void CloseScene()
+    {
+        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        var asd = db.Que("select * from Player").FirstOrDefault();
+        db.Delete("delete from Player where Id="+asd.Id+"");
+        SceneManager.LoadScene(0);
+        SceneManager.UnloadSceneAsync(1);
+    }
     void Start()
     {
         StartCoroutine(GetMultipleShortRedirectURL());
