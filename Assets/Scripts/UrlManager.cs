@@ -35,6 +35,7 @@ public class UrlManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(GetMultipleShortRedirectURL());
+        GetAllDomains();
     }
 
     public Token tkn;
@@ -123,7 +124,10 @@ public class UrlManager : MonoBehaviour
     {
         UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/domains");
 
-        www.SetRequestHeader("Authorization", "Bearer " + tkn.token);
+        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        string token = db.Que("select * from Player").FirstOrDefault().Token;
+
+        www.SetRequestHeader("Authorization", "Bearer " + token);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -132,8 +136,12 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
-
-            Debug.Log("Form upload complete!");
+            var rsp = JsonConvert.DeserializeObject<MResponseBase<List<MDomain.Response>>>(www.downloadHandler.text);
+            foreach (var item in rsp.item)
+            {
+                Debug.Log("Domains " + item.domainUrl);
+            }
+            
         }
     }
 
