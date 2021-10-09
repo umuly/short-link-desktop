@@ -93,5 +93,18 @@ namespace Assets.Scripts.Data
             
 
         }
+
+        public void CreateTable(string sqlQuery)
+        {
+            dbconn.Open();
+            IDbCommand dbcmd = dbconn.CreateCommand();
+            dbcmd.CommandText = sqlQuery;
+            dbcmd.ExecuteNonQuery();
+            dbcmd.Dispose();
+            dbcmd = null;
+            dbconn.Close();
+
+
+        }
     }
 }

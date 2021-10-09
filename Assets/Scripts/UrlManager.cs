@@ -9,6 +9,8 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using Assets.Scripts.Models;
+using Assets.Scripts.Enums;
+using System;
 
 public class UrlManager : MonoBehaviour
 {
@@ -20,6 +22,18 @@ public class UrlManager : MonoBehaviour
     [SerializeField] GameObject urlListParent;
     [SerializeField] GameObject urlListItemPrefab;
 
+    // Redirect URL Add
+    [SerializeField] TMP_InputField redirectUrlInput;
+    [SerializeField] TMP_InputField titleInput;
+    [SerializeField] TMP_InputField descriptionInput;
+    [SerializeField] TMP_InputField tagsInput;
+    [SerializeField] TMP_Dropdown domainIdDropdown;
+    [SerializeField] TMP_InputField codeInput;
+    [SerializeField] TMP_Dropdown urlTypeDropdown;
+
+    // Domains
+    List<MDomain.Response> allDomains;
+
     public GameObject myPanel;
     public void HidePanel()
     {
@@ -29,10 +43,13 @@ public class UrlManager : MonoBehaviour
     {
         Shortlinkdb<Player> db = new Shortlinkdb<Player>();
         var asd = db.Que("select * from Player").FirstOrDefault();
-        db.Delete("delete from Player where Id="+asd.Id+"");
-        SceneManager.LoadScene(0);
+        db.Delete("delete from Player where Id=" + asd.Id + "");
+
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(0));
         SceneManager.UnloadSceneAsync(1);
     }
+
     void Start()
     {
         StartCoroutine(GetMultipleShortRedirectURL());
@@ -48,20 +65,17 @@ public class UrlManager : MonoBehaviour
     public void RedirectUrlAdd()
     {
         MRedirectUrl.Form form = new MRedirectUrl.Form();
-        form.RedirectUrl = PasteAreaText.text; //Buraya URL gelcek.
-        form.Title = ""; //Title 
-        form.Description = ""; //Desc
-        form.Tags = ""; // Tags
-        form.DomainId = ""; // Listede se�ili domainin id si buraya gelcek.
-        form.Code = ""; //Code
-        //UrlAccessTypes: Everyone: 1, Only Me: 2, Specific Members Only: 3, Members Only: 4 , Only Those Who Have The Link Can Access: 5 Bunlar d��ar�dan al�nacak.
-        form.SpecificMembersOnly = "";
-        form.UrlType = 1;
+        form.RedirectUrl = PasteAreaText.text;
+        form.Title = titleInput.text;
+        form.Description = descriptionInput.text;
+        form.Tags = tagsInput.text;
+        form.DomainId = allDomains.Where(k=>k.name == domainIdDropdown.captionText.text).FirstOrDefault().id;
+        form.Code = codeInput.text;
+        form.SpecificMembersOnly = ((int)Enum.GetValues(typeof(EnUrlAccessTypes)).GetValue(urlTypeDropdown.value)).ToString();
+        form.UrlType = urlTypeDropdown.value;
 
-        //StartCoroutine(RedirectUrlAdd(redirectUrl));
+        Debug.Log(form.DomainId);
 
-
-        string asd = form.UrlAccessType.GetHashCode().ToString();
 
         WWWForm wwwform = new WWWForm();
         wwwform.AddField("RedirectUrl", form.RedirectUrl);
@@ -119,8 +133,6 @@ public class UrlManager : MonoBehaviour
         StartCoroutine(GetShortUrlById("URL ID GONDER"));
     }
 
-
-    // B�t�n domainler gelir.
     IEnumerator Domains()
     {
         UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/domains");
@@ -138,11 +150,17 @@ public class UrlManager : MonoBehaviour
         else
         {
             var rsp = JsonConvert.DeserializeObject<MResponseBase<List<MDomain.Response>>>(www.downloadHandler.text);
+            domainIdDropdown.ClearOptions();
+            allDomains = new List<MDomain.Response>();
+
             foreach (var item in rsp.item)
             {
-                Debug.Log("Domains " + item.domainUrl);
+                Debug.Log("Domain" + item.id);
+                allDomains.Add(item);
+                domainIdDropdown.AddOptions(new List<string> { item.name });
             }
-            
+
+
         }
     }
 
@@ -186,20 +204,14 @@ public class UrlManager : MonoBehaviour
 
             foreach (var item in rsp.item)
             {
-            Debug.Log(item.shortUrl);
                 var urlItem = Instantiate(urlListItemPrefab, urlListParent.transform).gameObject;
                 urlItem.GetComponentInChildren<TextMeshProUGUI>().text = item.shortUrl;
             }
-            
+
         }
         else
         {
-
-
             Debug.Log(www.error);
-
-
-
         }
 
     }

@@ -17,6 +17,7 @@ using Assets.Scripts.Data;
 using System.Linq;
 using Assets.Scripts.Models;
 using System;
+using System.Threading;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,15 +46,28 @@ public class GameManager : MonoBehaviour
 
     public string tkn;
 
+    void Awake()
+    {
+        try
+        {
+            Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
+            shortlinkdb.CreateTable("CREATE TABLE IF NOT EXISTS Player (Id INTEGER NOT NULL, Token TEXT NOT NULL, PRIMARY KEY(Id AUTOINCREMENT)) ;");
+
+            var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
+            if (asd != null)
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
+        catch (Exception ex)
+        {
+            errortext.text = ex.Message;
+        }
+    }
+
     void Start()
     {
-        Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
-        var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
-        if (asd != null)
-        {
-            SceneManager.LoadScene(1);
-        }
-
+        
     }
 
     public void Login()
@@ -63,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Login(string uri)
     {
+        errortext.text = "";
         var request = new UnityWebRequest(uri, UnityWebRequest.kHttpVerbGET);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
@@ -74,9 +89,7 @@ public class GameManager : MonoBehaviour
         {
             if (request.responseCode == 200)
             {
-
                 var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
-
 
                 Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
                 var asd = shortlinkdb.Que("select * from Player");
@@ -91,7 +104,10 @@ public class GameManager : MonoBehaviour
                     shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
                 }
 
+                errortext.text = "Baþarýlý!";
                 SceneManager.LoadScene(1);
+                //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
+                //SceneManager.UnloadSceneAsync(0);
             }
             else
             {
