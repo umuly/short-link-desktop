@@ -82,6 +82,7 @@ public class UrlManager : MonoBehaviour
                 Debug.Log(rsp.item.shortUrl);
 
                 var urlItem = Instantiate(urlListItemPrefab, urlListParent.transform).gameObject;
+                urlItem.transform.SetAsFirstSibling();
                 urlItem.GetComponent<TextMeshProUGUI>().text = rsp.item.shortUrl;
 
 
