@@ -695,8 +695,38 @@ PlayerSettings:
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: 2D_BuiltInRenderer
-  wsaImages: {}
-  metroTileShortName: ShortLinkUnity
+  wsaImages:
+    2031632: Assets/Resources/Square 44x44/16x16.png
+    2031640: Assets/Resources/Square 44x44/24x24.png
+    2031648: Assets/Resources/Square 44x44/32x32.png
+    2031664: Assets/Resources/Square 44x44/48x48.png
+    2031716: Assets/Resources/Square 44x44/44x44.png
+    2031741: Assets/Resources/Square 44x44/55x55.png
+    2031766: Assets/Resources/Square 44x44/66x66.png
+    2031816: Assets/Resources/Square 44x44/88x88.png
+    2031872: Assets/Resources/Square 44x44/256x256.png
+    2032016: Assets/Resources/Square 44x44/176x176.png
+    2097252: Assets/Resources/Square 71x71/71x71.png
+    2097277: Assets/Resources/Square 71x71/89x89.png
+    2097302: Assets/Resources/Square 71x71/107x107.png
+    2097352: Assets/Resources/Square 71x71/142x142.png
+    2097552: Assets/Resources/Square 71x71/284x284.png
+    2162788: Assets/Resources/Square 150x150/150x150.png
+    2162813: Assets/Resources/Square 150x150/188x188.png
+    2162838: Assets/Resources/Square 150x150/225x225.jpg
+    2162888: Assets/Resources/Square 150x150/300x300.jpg
+    2163088: Assets/Resources/Square 150x150/600x600.jpg
+    2228324: Assets/Resources/Square 310x310/310x310.jpg
+    2228349: Assets/Resources/Square 310x310/388x388.jpg
+    2228374: Assets/Resources/Square 310x310/465x465.jpg
+    2228424: Assets/Resources/Square 310x310/620x620.jpg
+    2228624: Assets/Resources/Square 310x310/1240x1240.jpg
+    2293860: Assets/Resources/Square 310x350/310x150.jpg
+    2293885: Assets/Resources/Square 310x350/388x188.jpg
+    2293910: Assets/Resources/Square 310x350/465x225.jpg
+    2293960: Assets/Resources/Square 310x350/620x300.jpg
+    2294160: Assets/Resources/Square 310x350/124x600 1.jpg
+  metroTileShortName: Short Link
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
