@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
+    path: Assets/Scenes/Login Scene.unity
     guid: f16ad396dc9dc0e45a182c8698c013b9
   - enabled: 1
-    path: Assets/Scenes/mypanelsahne.unity
+    path: Assets/Scenes/Short Link Scene.unity
     guid: a22e45399ae1f4e4f8aab075c7811497
   m_configObjects: {}
