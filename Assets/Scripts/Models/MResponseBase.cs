@@ -8,8 +8,11 @@ namespace Assets.Models
 {
     public class MResponseBase<T>
     {
+        public string type { get; set; }
+        public string title { get; set; }
         public int status { get; set; }
         public string statusText { get; set; }
+        public string traceId { get; set; }
         public T item { get; set; }
         public int itemCount { get; set; }
         public int skipCount { get; set; }
@@ -20,6 +23,7 @@ namespace Assets.Models
 
     public class Errors
     {
+        public List<string> Code { get; set; }
         public List<string> Name { get; set; }
         public List<string> Email { get; set; }
         public List<string> Password { get; set; }
