@@ -192,8 +192,8 @@ namespace DanielLochner.Assets.SimpleSideMenu
                     openPosition = new Vector2(rectTransform.rect.width, rectTransform.localPosition.y);
                     break;
                 case Placement.Right:
-                    anchorMin = new Vector2(1, 0.5f);
-                    anchorMax = new Vector2(1, 0.5f);
+                    anchorMin = new Vector2(1, 0);
+                    anchorMax = new Vector2(1, 1);
                     pivot = new Vector2(0, 0.5f);
                     closedPosition = new Vector2(0, rectTransform.localPosition.y);
                     openPosition = new Vector2(-1 * rectTransform.rect.width, rectTransform.localPosition.y);
@@ -213,7 +213,8 @@ namespace DanielLochner.Assets.SimpleSideMenu
                     openPosition = new Vector2(rectTransform.localPosition.x, rectTransform.rect.height);
                     break;
             }
-            rectTransform.sizeDelta = rectTransform.rect.size;
+            rectTransform.sizeDelta = new Vector2(rectTransform.parent.GetComponent<RectTransform>().rect.width / 2, 0);
+            //rectTransform.sizeDelta = rectTransform.rect.size;
             rectTransform.anchorMin = anchorMin;
             rectTransform.anchorMax = anchorMax;
             rectTransform.pivot = pivot;
