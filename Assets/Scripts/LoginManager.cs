@@ -18,8 +18,6 @@ using System.Linq;
 using Assets.Scripts.Models;
 using System;
 using System.Threading;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class LoginManager : MonoBehaviour
 {
@@ -47,7 +45,6 @@ public class LoginManager : MonoBehaviour
 
     // Others
     [SerializeField] TextMeshProUGUI errorText;
-    EventSystem system;
 
     void Awake()
     {
@@ -68,52 +65,6 @@ public class LoginManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        system = EventSystem.current;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (system.currentSelectedGameObject != null)
-            {
-                Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-
-                if (next != null)
-                {
-
-                    InputField inputfield = next.GetComponent<InputField>();
-                    if (inputfield != null)
-                        inputfield.OnPointerClick(new PointerEventData(system));
-
-                    system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            if (loginPanel.activeSelf)
-            {
-                Login();
-            }
-            else if (registerPanel.activeSelf)
-            {
-                Reqister();
-            }
-            else if (resetPasswordPanel.activeSelf)
-            {
-                ResetPassword();
-            }
-            else if (changePasswordPanel.activeSelf)
-            {
-                ChangePassword();
-            }
-        }
-    }
-
     public void Login()
     {
         errorText.text = "";
@@ -130,8 +81,6 @@ public class LoginManager : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            var a = JsonConvert.DeserializeObject<MResponseBase<MUser.Response>>(request.downloadHandler.text);
-
             if (request.responseCode == 200)
             {
                 var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
@@ -153,12 +102,12 @@ public class LoginManager : MonoBehaviour
             }
             else
             {
-                errorText.text = a.statusText;
+                errorText.text = "Unknown Error!";
             }
         }
         else
         {
-            errorText.text = request.downloadHandler.text.Trim('"');
+            errorText.text = "Unknown Error!";
         }
     }
 
@@ -184,43 +133,21 @@ public class LoginManager : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        var a = JsonConvert.DeserializeObject<MResponseBase<MUser.Response>>(request.downloadHandler.text);
-
         if (request.result == UnityWebRequest.Result.Success)
         {
+            ///////////////////////////////////////////////////////////////////////
             if (request.responseCode == 200)
             {
-                ChangePanel(1);
+
+            }
+            else
+            {
+
             }
         }
         else
         {
-            if (a.errors != null)
-            {
-                if (a.errors.Name != null)
-                {
-                    errorText.text += a.errors.Name[0] + "!\n";
-                }
-                if (a.errors.Email != null)
-                {
-                    errorText.text += a.errors.Email[0] + "!\n";
-                }
-                if (a.errors.Password != null)
-                {
-                    errorText.text += a.errors.Password[0] + "!\n";
-                }
-            }
-            else
-            {
-                if (request.downloadHandler.text.Contains('{'))
-                {
-                    errorText.text = a.statusText;
-                }
-                else
-                {
-                    errorText.text = request.downloadHandler.text + "!";
-                }
-            }
+            errorText.text = "Unknown Error!";
         }
     }
 
@@ -244,12 +171,9 @@ public class LoginManager : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        var a = JsonConvert.DeserializeObject<MResponseBase<MUser.Response>>(request.downloadHandler.text);
-
         if (request.result == UnityWebRequest.Result.Success)
         {
-            errorText.text = a.statusText;
-
+            ///////////////////////////////////////////////////////////////////////
             if (request.responseCode == 200)
             {
                 ChangePanel(4);
@@ -261,14 +185,7 @@ public class LoginManager : MonoBehaviour
         }
         else
         {
-            if (request.downloadHandler.text.Contains('{'))
-            {
-                errorText.text = a.statusText;
-            }
-            else
-            {
-                errorText.text = request.downloadHandler.text + "!";
-            }
+            errorText.text = "Unknown Error!";
         }
     }
 
@@ -278,8 +195,8 @@ public class LoginManager : MonoBehaviour
 
         MUser.Form changePasswordForm = new MUser.Form();
         changePasswordForm.email = resetPasswordEMailInput.text;
-        changePasswordForm.password = changePasswordInput.text;
-        changePasswordForm.code = changePasswordCodeInput.text;
+        changePasswordForm.password = changePasswordCodeInput.text;
+        changePasswordForm.code = changePasswordInput.text;
 
         StartCoroutine(ChangePassword("https://umuly.com/api/user/change-password", JsonUtility.ToJson(changePasswordForm)));
     }
@@ -293,17 +210,15 @@ public class LoginManager : MonoBehaviour
         request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
-
-        var a = JsonConvert.DeserializeObject<MResponseBase<MUser.Response>>(request.downloadHandler.text);
-
         if (request.result == UnityWebRequest.Result.Success)
         {
-            errorText.text = a.statusText;
-
+            ///////////////////////////////////////////////////////////////////////
             if (request.responseCode == 200)
             {
-                ChangePanel(1);
-                resetPasswordEMailInput.text = "";
+                if (request.responseCode == 200)
+                {
+                    ChangePanel(1);
+                }
             }
             else
             {
@@ -312,50 +227,13 @@ public class LoginManager : MonoBehaviour
         }
         else
         {
-            if (a.errors != null)
-            {
-                if (a.errors.Name != null)
-                {
-                    errorText.text += a.errors.Name[0] + "!\n";
-                }
-                if (a.errors.Email != null)
-                {
-                    errorText.text += a.errors.Email[0] + "!\n";
-                }
-                if (a.errors.Password != null)
-                {
-                    errorText.text += a.errors.Password[0] + "!\n";
-                }
-                if (a.errors.Code != null)
-                {
-                    errorText.text += a.errors.Code[0] + "!\n";
-                }
-            }
-            else
-            {
-                if (request.downloadHandler.text.Contains('{'))
-                {
-                    errorText.text = a.statusText;
-                }
-                else
-                {
-                    errorText.text = request.downloadHandler.text + "!";
-                }
-            }
+            errorText.text = "Unknown Error!";
         }
     }
 
     public void ChangePanel(int panelId)
     {
         errorText.text = "";
-        loginEMailInput.text = "";
-        loginPasswordInput.text = "";
-        registerFullNameInput.text = "";
-        registerEMailInput.text = "";
-        registerPasswordInput.text = "";
-        changePasswordCodeInput.text = "";
-        changePasswordInput.text = "";
-
         resetPasswordPanel.SetActive(false);
         loginPanel.SetActive(false);
         registerPanel.SetActive(false);
@@ -376,27 +254,6 @@ public class LoginManager : MonoBehaviour
                 changePasswordPanel.SetActive(true);
                 break;
         }
-    }
-
-    void OnGUI()
-    {
-        Event e = Event.current;
-
-        // Bir key'e basýldýðýnda bu karakterse ve shift kullanarak yapmadýysa, bu karakter ve bu karakterin büyük hali birbirine eþitse Caps Lock açýktýr.
-        // Telefonda ne olur bilmiyorum.
-        if (e.isKey & e.character != char.MinValue & !e.shift)
-        {
-            string UpperChar = e.character.ToString().ToUpper();
-            if (UpperChar == e.character.ToString())
-            {
-                errorText.text = "Caps Lock On";
-            }
-            else
-            {
-                errorText.text = "";
-            }
-        }
-
     }
 
     IEnumerator LoadAsynchronously(int sceneBuildIndex, int sceneBuildIndexToClose)

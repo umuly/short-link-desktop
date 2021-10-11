@@ -13,7 +13,6 @@ using Assets.Scripts.Enums;
 using System;
 using UnityEngine.UI;
 using DanielLochner.Assets.SimpleSideMenu;
-using UnityEngine.EventSystems;
 
 public class UrlManager : MonoBehaviour
 {
@@ -50,37 +49,12 @@ public class UrlManager : MonoBehaviour
     [SerializeField] GameObject myPanel;
     [SerializeField] GameObject redirectUrlAddPanel;
 
-    // Others
-    EventSystem system;
-
     void Start()
     {
         StartCoroutine(GetMultipleShortRedirectURL());
         GetAllDomains();
         menuScript = menu.GetComponent<SimpleSideMenu>();
         menuScript.onStateChanging.AddListener(()=> ToggleMenu());
-        system = EventSystem.current;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (system.currentSelectedGameObject != null)
-            {
-                Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-
-                if (next != null)
-                {
-
-                    InputField inputfield = next.GetComponent<InputField>();
-                    if (inputfield != null)
-                        inputfield.OnPointerClick(new PointerEventData(system));
-
-                    system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
-                }
-            }
-        }
     }
 
     public Token tkn;
