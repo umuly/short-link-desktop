@@ -1,22 +1,21 @@
-﻿using Mono.Data.Sqlite;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using System.Data;
+using Mono.Data.Sqlite;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Scripts.Data
 {
     public class Shortlinkdb<T>
     {
-        IDbConnection dbconn;
+        readonly IDbConnection dbconn;
         public Shortlinkdb()
         {
-            string conn = "URI=file:" + Application.dataPath + "/shortlinkdb.db"; //Path to database.
+            string conn = "URI=file:" + Application.persistentDataPath + "/shortlinkdb.db"; //Path to database.
             dbconn = (IDbConnection)new SqliteConnection(conn);
+            Debug.Log("Connection STRING: " + conn);
         }
 
         public T Test { get; set; }

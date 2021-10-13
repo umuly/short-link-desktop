@@ -1326,6 +1326,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1279502676}
     m_Modifications:
+    - target: {fileID: 7223410887416840069, guid: c8b33d2f16c4a364889a525dbeb01c67, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7223410887416840070, guid: c8b33d2f16c4a364889a525dbeb01c67, type: 3}
       propertyPath: m_Name
       value: Error Text

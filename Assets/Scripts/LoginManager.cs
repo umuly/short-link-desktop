@@ -134,22 +134,30 @@ public class LoginManager : MonoBehaviour
 
             if (request.responseCode == 200)
             {
-                var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
-
-                Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
-                var asd = shortlinkdb.Que("select * from Player");
-                bool isToken = asd.Any();
-                if (isToken == true)
+                try
                 {
-                    int userId = asd.FirstOrDefault().Id;
-                    shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
-                }
-                else
-                {
-                    shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
-                }
 
-                StartCoroutine(LoadAsynchronously(1, 0));
+                    var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
+
+                    Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
+                    var asd = shortlinkdb.Que("select * from Player");
+                    bool isToken = asd.Any();
+                    if (isToken == true)
+                    {
+                        int userId = asd.FirstOrDefault().Id;
+                        shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
+                    }
+                    else
+                    {
+                        shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
+                    }
+
+                    StartCoroutine(LoadAsynchronously(1, 0));
+                }
+                catch (Exception ex)
+                {
+                    errorText.text = ex.Message;
+                }
             }
             else
             {
