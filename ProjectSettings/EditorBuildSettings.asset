@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Login Scene.unity
     guid: f16ad396dc9dc0e45a182c8698c013b9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Short Link Scene.unity
     guid: a22e45399ae1f4e4f8aab075c7811497
+  - enabled: 1
+    path: Assets/Scenes/Short Link Scene - new.unity
+    guid: 943799da79a942749a54d2900e60ad84
   m_configObjects: {}
