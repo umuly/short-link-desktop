@@ -13,8 +13,8 @@ public class SlinderMenuAnim : MonoBehaviour
             Animator animator = PanelMenu.GetComponent<Animator>();
             if (animator != null)
             {
-                bool isOpen = animator.GetBool("openClose");
-                animator.SetBool("openClose", !isOpen);
+                bool isOpen = animator.GetBool("closeOpen");
+                animator.SetBool("closeOpen", !isOpen);
             }
         }
     }
