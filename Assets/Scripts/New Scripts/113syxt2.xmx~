@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlinderMenuAnim : MonoBehaviour
+public class panelOpener : MonoBehaviour
 {
     public GameObject PanelMenu;
 
-    public void ShowHidePanel()
+    public void ShowHideMenu()
     {
         if (PanelMenu != null)
         {
