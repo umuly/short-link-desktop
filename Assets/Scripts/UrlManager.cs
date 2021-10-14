@@ -120,8 +120,9 @@ public class UrlManager : MonoBehaviour
         www.SetRequestHeader("Authorization", "Bearer " + token);
         StartCoroutine(Operation());
 
-
-        IEnumerator Operation()
+        
+        
+            IEnumerator Operation()
         {
             yield return www.SendWebRequest();
 
@@ -131,13 +132,16 @@ public class UrlManager : MonoBehaviour
             }
             else
             {
-                var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
-
-                var urlItem = Instantiate(urlListItemPrefab, shortUrlsListParent.transform).gameObject;
-                urlItem.transform.SetAsFirstSibling();
-                urlItem.GetComponentInChildren<TextMeshProUGUI>().text = rsp.item.shortUrl;
-                urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(rsp.item.shortUrl));
-                ChangePanel(1);
+                if (www.responseCode==200)
+                {
+                    var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
+                    var urlItem = Instantiate(urlListItemPrefab, shortUrlsListParent.transform).gameObject;
+                    urlItem.transform.SetAsFirstSibling();
+                    urlItem.GetComponentInChildren<TextMeshProUGUI>().text = rsp.item.shortUrl;
+                    urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(rsp.item.shortUrl));
+                    ChangePanel(1);
+                }
+                
             }
 
         }
@@ -145,6 +149,7 @@ public class UrlManager : MonoBehaviour
 
 
     }
+
 
     public void GetAllDomains()
     {

@@ -17,9 +17,9 @@ using Assets.Scripts.Data;
 using System.Linq;
 using Assets.Scripts.Models;
 using System;
-using System.Threading;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+
 
 public class LoginManager : MonoBehaviour
 {
@@ -392,17 +392,21 @@ public class LoginManager : MonoBehaviour
 
         // Bir key'e basýldýðýnda bu karakterse ve shift kullanarak yapmadýysa, bu karakter ve bu karakterin büyük hali birbirine eþitse Caps Lock açýktýr.
         // Telefonda ne olur bilmiyorum.
-        if (e.isKey & e.character != char.MinValue & !e.shift)
+        if (e.capsLock)
         {
             string UpperChar = e.character.ToString().ToUpper();
             if (UpperChar == e.character.ToString())
             {
                 errorText.text = "Caps Lock On";
+
+
             }
             else
             {
                 errorText.text = "";
+
             }
+
         }
 
     }
