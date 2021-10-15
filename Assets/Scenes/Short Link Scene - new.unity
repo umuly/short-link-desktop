@@ -24672,6 +24672,67 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &868313187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868313189}
+  - component: {fileID: 868313188}
+  m_Layer: 0
+  m_Name: Url Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &868313188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868313187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8592f1bf6f3d5f409674bd6d54ba58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redirectUrlInput: {fileID: 0}
+  titleInput: {fileID: 0}
+  descriptionInput: {fileID: 0}
+  tagsInput: {fileID: 0}
+  domainIdDropdown: {fileID: 0}
+  codeInput: {fileID: 0}
+  specificMembersOnlyDropdown: {fileID: 0}
+  optionsItems: []
+  toggleOptionsButtonText: {fileID: 0}
+  shortUrlsListParent: {fileID: 0}
+  urlListItemPrefab: {fileID: 0}
+  menu: {fileID: 0}
+  menuScript: {fileID: 0}
+  menuButton: {fileID: 0}
+  hamburgerImage: {fileID: 0}
+  rightArrowImage: {fileID: 0}
+  myPanel: {fileID: 0}
+  redirectUrlAddPanel: {fileID: 0}
+--- !u!4 &868313189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868313187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &870074308
 GameObject:
   m_ObjectHideFlags: 0
