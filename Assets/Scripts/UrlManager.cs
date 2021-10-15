@@ -42,6 +42,7 @@ public class UrlManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
         StartCoroutine(GetMultipleShortRedirectURL());
         GetAllDomains();
         system = EventSystem.current;
