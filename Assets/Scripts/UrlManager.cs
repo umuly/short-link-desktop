@@ -41,6 +41,7 @@ public class UrlManager : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         StartCoroutine(GetMultipleShortRedirectURL());
         GetAllDomains();
         system = EventSystem.current;
@@ -202,7 +203,7 @@ public class UrlManager : MonoBehaviour
             MResponseBase<List<MRedirectUrl.Response>> rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
 
 
-            foreach (MRedirectUrl.Response item in rsp.item)
+            foreach (MRedirectUrl.Response response in rsp.item)
             {
                 var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
                 TextMeshProUGUI[] textMeshProUGUIs = urlItem.GetComponentsInChildren<TextMeshProUGUI>();
@@ -210,11 +211,11 @@ public class UrlManager : MonoBehaviour
                 {
                     if (textMeshProUGUI.name == "Count - Text")
                     {
-                        textMeshProUGUI.text = (rsp.item.IndexOf(item) + 1).ToString();
+                        textMeshProUGUI.text = (rsp.item.IndexOf(response) + 1).ToString() + '.';
                     }
                     else if (textMeshProUGUI.name == "Active - Text")
                     {
-                        switch (item.status)
+                        switch (response.status)
                         {
                             case -4:
                                 textMeshProUGUI.text = "Error";
@@ -235,23 +236,49 @@ public class UrlManager : MonoBehaviour
                     }
                     else if (textMeshProUGUI.name == "Date - Text")
                     {
-                        textMeshProUGUI.text = item.createdOn.ToString();
+                        textMeshProUGUI.text = response.createdOn.ToString("MM/dd/yyyy HH:mm");
                     }
                     else if (textMeshProUGUI.name == "Link - Text")
                     {
-                        textMeshProUGUI.text = item.shortUrl;
+                        textMeshProUGUI.text = response.code;
                     }
                     else if (textMeshProUGUI.name == "Title - Text")
                     {
-                        textMeshProUGUI.text = item.title;
+                        textMeshProUGUI.text = response.title;
                     }
                     else if (textMeshProUGUI.name == "Description - Text")
                     {
-                        textMeshProUGUI.text = item.description;
+                        textMeshProUGUI.text = response.description;
                     }
                     else if (textMeshProUGUI.name == "Tag - Text")
                     {
-                        textMeshProUGUI.text = item.tags;
+                        textMeshProUGUI.text = response.tags;
+                    }
+                }
+
+                LayoutElement[] layoutElements = urlItem.GetComponentsInChildren<LayoutElement>();
+                foreach (var layoutElement in layoutElements)
+                {
+                    if (layoutElement.name == "Title")
+                    {
+                        if (string.IsNullOrEmpty(response.title))
+                        {
+                            layoutElement.gameObject.SetActive(false);
+                        }
+                    }
+                    else if (layoutElement.name == "Description")
+                    {
+                        if (string.IsNullOrEmpty(response.description))
+                        {
+                            layoutElement.gameObject.SetActive(false);
+                        }
+                    }
+                    else if (layoutElement.name == "Tags")
+                    {
+                        if (string.IsNullOrEmpty(response.tags))
+                        {
+                            layoutElement.gameObject.SetActive(false);
+                        }
                     }
                 }
 

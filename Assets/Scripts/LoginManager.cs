@@ -70,6 +70,7 @@ public class LoginManager : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
         system = EventSystem.current;
     }
 
