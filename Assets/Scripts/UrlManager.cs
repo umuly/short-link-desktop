@@ -28,37 +28,21 @@ public class UrlManager : MonoBehaviour
     [SerializeField] TMP_Dropdown domainIdDropdown;
     [SerializeField] TMP_InputField codeInput;
     [SerializeField] TMP_Dropdown specificMembersOnlyDropdown;
-    bool toggleOptions = false;
-    [SerializeField] List<GameObject> optionsItems;
-    [SerializeField] TextMeshProUGUI toggleOptionsButtonText;
-
-    // My Panel
-    [SerializeField] GameObject shortUrlsListParent;
-    [SerializeField] GameObject urlListItemPrefab;
 
     // Domains
     List<MDomain.Response> allDomains;
 
-    // Menu Items
-    [SerializeField] GameObject menu;
-    [SerializeField] SimpleSideMenu menuScript;
-    [SerializeField] GameObject menuButton;
-    [SerializeField] Sprite hamburgerImage;
-    [SerializeField] Sprite rightArrowImage;
-
-    // Panels
-    [SerializeField] GameObject myPanel;
-    [SerializeField] GameObject redirectUrlAddPanel;
-
     // Others
     EventSystem system;
+
+    // Short Urls List Panel
+    [SerializeField] GameObject contentContainer;
+    [SerializeField] GameObject contentContainerItem;
 
     void Start()
     {
         StartCoroutine(GetMultipleShortRedirectURL());
         GetAllDomains();
-        menuScript = menu.GetComponent<SimpleSideMenu>();
-        menuScript.onStateChanging.AddListener(()=> ToggleMenu());
         system = EventSystem.current;
     }
 
@@ -81,12 +65,6 @@ public class UrlManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    public Token tkn;
-    public class Token
-    {
-        public string token { get; set; }
     }
 
     public void RedirectUrlAdd()
@@ -133,11 +111,10 @@ public class UrlManager : MonoBehaviour
             {
                 var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
 
-                var urlItem = Instantiate(urlListItemPrefab, shortUrlsListParent.transform).gameObject;
+                var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
                 urlItem.transform.SetAsFirstSibling();
                 urlItem.GetComponentInChildren<TextMeshProUGUI>().text = rsp.item.shortUrl;
                 urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(rsp.item.shortUrl));
-                ChangePanel(1);
             }
 
         }
@@ -222,13 +199,64 @@ public class UrlManager : MonoBehaviour
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            var rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
+            MResponseBase<List<MRedirectUrl.Response>> rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
 
-            foreach (var item in rsp.item)
+
+            foreach (MRedirectUrl.Response item in rsp.item)
             {
-                var urlItem = Instantiate(urlListItemPrefab, shortUrlsListParent.transform).gameObject;
-                urlItem.GetComponentInChildren<TextMeshProUGUI>().text = item.shortUrl;
-                urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(item.shortUrl));
+                var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
+                TextMeshProUGUI[] textMeshProUGUIs = urlItem.GetComponentsInChildren<TextMeshProUGUI>();
+                foreach (var textMeshProUGUI in textMeshProUGUIs)
+                {
+                    if (textMeshProUGUI.name == "Count - Text")
+                    {
+                        textMeshProUGUI.text = (rsp.item.IndexOf(item) + 1).ToString();
+                    }
+                    else if (textMeshProUGUI.name == "Active - Text")
+                    {
+                        switch (item.status)
+                        {
+                            case -4:
+                                textMeshProUGUI.text = "Error";
+                                break;
+                            case -3:
+                                textMeshProUGUI.text = "Passive";
+                                break;
+                            case -2:
+                                textMeshProUGUI.text = "Waiting For Delete";
+                                break;
+                            case -1:
+                                textMeshProUGUI.text = "Abuse";
+                                break;
+                            case 1:
+                                textMeshProUGUI.text = "Active";
+                                break;
+                        }
+                    }
+                    else if (textMeshProUGUI.name == "Date - Text")
+                    {
+                        textMeshProUGUI.text = item.createdOn.ToString();
+                    }
+                    else if (textMeshProUGUI.name == "Link - Text")
+                    {
+                        textMeshProUGUI.text = item.shortUrl;
+                    }
+                    else if (textMeshProUGUI.name == "Title - Text")
+                    {
+                        textMeshProUGUI.text = item.title;
+                    }
+                    else if (textMeshProUGUI.name == "Description - Text")
+                    {
+                        textMeshProUGUI.text = item.description;
+                    }
+                    else if (textMeshProUGUI.name == "Tag - Text")
+                    {
+                        textMeshProUGUI.text = item.tags;
+                    }
+                }
+
+                //urlItem.GetComponentInChildren<TextMeshProUGUI>().text = item.shortUrl;
+                //urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(item.shortUrl));
             }
         }
         else
@@ -237,84 +265,13 @@ public class UrlManager : MonoBehaviour
         }
     }
 
-    public void ToggleOptions()
+    public void LogOut()
     {
-        titleInput.text = "";
-        descriptionInput.text = "";
-        specificMembersOnlyDropdown.value = 0;
+        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        var asd = db.Que("select * from Player").FirstOrDefault();
+        db.Delete("delete from Player where Id=" + asd.Id + "");
 
-        if (toggleOptions)
-        {
-            toggleOptions = false;
-            foreach (var item in optionsItems)
-            {
-                item.SetActive(false);
-            }
-
-            toggleOptionsButtonText.text = "Show Options";
-        }
-        else
-        {
-            toggleOptions = true;
-            foreach (var item in optionsItems)
-            {
-                item.SetActive(true);
-            }
-
-            toggleOptionsButtonText.text = "Hide Options";
-        }
-    }
-
-    public void ToggleMenu()
-    {
-        if (menuScript.CurrentState == SimpleSideMenu.State.Open)
-        {
-            menuButton.GetComponent<Image>().sprite = hamburgerImage;
-        }
-        else
-        {
-            menuButton.GetComponent<Image>().sprite = rightArrowImage;
-        }
-    }
-
-    public void ChangePanel(int panelId)
-    {
-        redirectUrlInput.text = "";
-        codeInput.text = "";
-
-        myPanel.SetActive(false);
-        redirectUrlAddPanel.SetActive(false);
-
-        toggleOptions = false;
-        foreach (var item in optionsItems)
-        {
-            item.SetActive(false);
-        }
-
-        toggleOptionsButtonText.text = "Show Options";
-
-        switch (panelId)
-        {
-            case 1:
-                myPanel.SetActive(true);
-                break;
-            case 2:
-                redirectUrlAddPanel.SetActive(true);
-                break;
-            case 3:
-                menuScript.ToggleState();
-                Shortlinkdb<Player> db = new Shortlinkdb<Player>();
-                var asd = db.Que("select * from Player").FirstOrDefault();
-                db.Delete("delete from Player where Id=" + asd.Id + "");
-
-                StartCoroutine(LoadAsynchronously(0, 1));
-                break;
-        }
-
-        if (menuScript.CurrentState == SimpleSideMenu.State.Open)
-        {
-            menuScript.ToggleState();
-        }
+        StartCoroutine(LoadAsynchronously(0, 1));
     }
 
     private void CopyShortURL(string shortUrl)
