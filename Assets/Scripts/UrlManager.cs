@@ -113,16 +113,20 @@ public class UrlManager : MonoBehaviour
             {
                 var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
 
-                var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
-                urlItem.transform.SetAsFirstSibling();
-                urlItem.GetComponentInChildren<TextMeshProUGUI>().text = rsp.item.shortUrl;
-                urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(rsp.item.shortUrl));
+                //var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
+                //urlItem.transform.SetAsFirstSibling();
+                //urlItem.GetComponentInChildren<TextMeshProUGUI>().text = rsp.item.shortUrl;
+                //urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(rsp.item.shortUrl));
+
+                GetAllDomains();
             }
 
         }
+    }
 
-
-
+    public void OpenUrl(TextMeshProUGUI uri)
+    {
+        Application.OpenURL(uri.text);
     }
 
     public void GetAllDomains()

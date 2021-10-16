@@ -133,7 +133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 385.94028, y: 0}
+  m_AnchoredPosition: {x: 383.4103, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4885895559775180046
@@ -785,8 +785,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lynx R-1, Lynx, Kickstarter
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 86c978fd5a0c9df478dffee993325b19, type: 2}
-  m_sharedMaterial: {fileID: 3814102896167072765, guid: 86c978fd5a0c9df478dffee993325b19, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1392c020d0dd1124fac2dd49e09883e1, type: 2}
+  m_sharedMaterial: {fileID: -746558051304943073, guid: 1392c020d0dd1124fac2dd49e09883e1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2019,8 +2019,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Karma Ger\xE7eklik ba\u015Fl\u0131\u011F\u0131 Lynx R-1 (AR + VR)"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 86c978fd5a0c9df478dffee993325b19, type: 2}
-  m_sharedMaterial: {fileID: 3814102896167072765, guid: 86c978fd5a0c9df478dffee993325b19, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1392c020d0dd1124fac2dd49e09883e1, type: 2}
+  m_sharedMaterial: {fileID: -746558051304943073, guid: 1392c020d0dd1124fac2dd49e09883e1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -2310,7 +2310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
-  m_VerticalFit: 0
+  m_VerticalFit: 1
 --- !u!222 &4997282151823902028
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2504,7 +2504,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4885895560523257038
 MonoBehaviour:
@@ -4403,7 +4403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 79.604996, y: 0}
+  m_AnchoredPosition: {x: 82.134995, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4885895561157877489
@@ -4483,7 +4483,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4885895561187822552
 MonoBehaviour:
@@ -4802,7 +4802,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4885895561417699425
 MonoBehaviour:
@@ -5026,8 +5026,8 @@ MonoBehaviour:
   m_text: "Lynx R-1 \xDCr\xFCn\xFC fransa merkezli Lynx, yazl\u0131m ve donan\u0131m
     alanlar\u0131nda uzman yenilik\xE7i bir ekip taraf\u0131ndan hayata ge\xE7irildi."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 86c978fd5a0c9df478dffee993325b19, type: 2}
-  m_sharedMaterial: {fileID: 3814102896167072765, guid: 86c978fd5a0c9df478dffee993325b19, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1392c020d0dd1124fac2dd49e09883e1, type: 2}
+  m_sharedMaterial: {fileID: -746558051304943073, guid: 1392c020d0dd1124fac2dd49e09883e1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5294,8 +5294,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: xcd4
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e9068eaa21800a148a719f7c7108c023, type: 2}
-  m_sharedMaterial: {fileID: -8729035538296437250, guid: e9068eaa21800a148a719f7c7108c023, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d786d3cdfc06db4585738c94885e5f3, type: 2}
+  m_sharedMaterial: {fileID: 1347410373726497888, guid: 0d786d3cdfc06db4585738c94885e5f3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5398,7 +5398,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4885895561659581445
 MonoBehaviour:
@@ -5482,7 +5482,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4885895561661050228
 MonoBehaviour:
@@ -5674,7 +5674,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4885895561722093098
 MonoBehaviour:

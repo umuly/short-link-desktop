@@ -114,6 +114,7 @@ public class LoginManager : MonoBehaviour
                 ChangePassword();
             }
         }
+
     }
 
     public void Login()

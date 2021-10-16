@@ -3303,8 +3303,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 260, y: 0}
-  m_SizeDelta: {x: 482.961, y: 0}
+  m_AnchoredPosition: {x: 230, y: 0}
+  m_SizeDelta: {x: 460, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &305128895
 MonoBehaviour:
@@ -8059,7 +8059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.24705882}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8683,7 +8683,7 @@ MonoBehaviour:
     m_Left: 36
     m_Right: 36
     m_Top: 36
-    m_Bottom: 36
+    m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 36
   m_ChildForceExpandWidth: 1
@@ -12025,7 +12025,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 0
-    m_Bottom: 0
+    m_Bottom: 32
   m_ChildAlignment: 1
   m_Spacing: 32
   m_ChildForceExpandWidth: 1
@@ -13080,7 +13080,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b150488e6628f7349a43dd47a12e3fbb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 05a1510bb75500e4387f23c71926c21b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -15044,7 +15044,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 0
+  m_Spacing: 32
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -16145,10 +16145,10 @@ RectTransform:
   m_Father: {fileID: 606444209}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2198.4167, y: -1319.05}
+  m_AnchoredPosition: {x: 557.5, y: 0}
+  m_SizeDelta: {x: 1115, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1963189925
 MonoBehaviour:
@@ -17634,7 +17634,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2115140286}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 868313188}
+        m_TargetAssemblyTypeName: UrlManager, Assembly-CSharp
+        m_MethodName: RedirectUrlAdd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2115140286
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Short Link Scene - new.unity
     guid: 943799da79a942749a54d2900e60ad84
   - enabled: 0
-    path: Assets/Scenes/Short Link Scene.unity
+    path: Assets/Scenes/Old/Short Link Scene.unity
     guid: a22e45399ae1f4e4f8aab075c7811497
   m_configObjects: {}
