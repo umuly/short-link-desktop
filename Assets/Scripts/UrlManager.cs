@@ -12,8 +12,8 @@ using Assets.Scripts.Models;
 using Assets.Scripts.Enums;
 using System;
 using UnityEngine.UI;
-using DanielLochner.Assets.SimpleSideMenu;
 using UnityEngine.EventSystems;
+using System.IO;
 
 public class UrlManager : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class UrlManager : MonoBehaviour
     const string baseAddress = "https://umuly.com";
 
     // Redirect URL Panel
+    [SerializeField] TMP_Dropdown redirectUrlType;
     [SerializeField] TMP_InputField redirectUrlInput;
     [SerializeField] TMP_InputField titleInput;
     [SerializeField] TMP_InputField descriptionInput;
@@ -79,7 +80,7 @@ public class UrlManager : MonoBehaviour
         form.DomainId = allDomains.Where(k => k.name == domainIdDropdown.captionText.text).FirstOrDefault().id;
         form.Code = codeInput.text;
         form.SpecificMembersOnly = ((int)Enum.GetValues(typeof(EnUrlAccessTypes)).GetValue(specificMembersOnlyDropdown.value)).ToString();
-        form.UrlType = 1;
+        form.UrlType = redirectUrlType.value + 1;
 
         WWWForm wwwform = new WWWForm();
         wwwform.AddField("RedirectUrl", form.RedirectUrl);
@@ -113,20 +114,16 @@ public class UrlManager : MonoBehaviour
             {
                 var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
 
-                //var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
-                //urlItem.transform.SetAsFirstSibling();
-                //urlItem.GetComponentInChildren<TextMeshProUGUI>().text = rsp.item.shortUrl;
-                //urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(rsp.item.shortUrl));
+                var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
 
-                GetAllDomains();
+                GetMultipleShortRedirectUR();
             }
-
         }
     }
 
-    public void OpenUrl(TextMeshProUGUI uri)
+    public void OpenUrl(string uri)
     {
-        Application.OpenURL(uri.text);
+        Application.OpenURL(uri);
     }
 
     public void GetAllDomains()
@@ -287,13 +284,91 @@ public class UrlManager : MonoBehaviour
                     }
                 }
 
-                //urlItem.GetComponentInChildren<TextMeshProUGUI>().text = item.shortUrl;
-                //urlItem.GetComponent<Button>().onClick.AddListener(() => CopyShortURL(item.shortUrl));
+                Button[] buttons = urlItem.GetComponentsInChildren<Button>();
+                foreach (var button in buttons)
+                {
+                    if (button.name == "Copy")
+                    {
+                        button.onClick.AddListener(() => CopyShortURL(response.shortUrl));
+                    }
+                    else if (button.name == "Share")
+                    {
+                        button.onClick.AddListener(() => StartCoroutine(ShareUrl("Short URL", "Short URL", response.shortUrl)));
+                    }
+                    else if (button.name == "Trash")
+                    {
+                        // Trash API
+                        button.onClick.AddListener(() => Application.OpenURL("https://umuly.com/panel/my-short-urls"));
+                    }
+                    else if (button.name == "Edit")
+                    {
+                        // Edit API
+                        button.onClick.AddListener(() => Application.OpenURL("https://umuly.com/panel/my-short-urls"));
+                    }
+                    else if (button.name == "Link Button")
+                    {
+                        button.onClick.AddListener(() => Application.OpenURL(response.shortUrl));
+                    }
+                    else if (button.name == "Bullhorn")
+                    {
+                        button.onClick.AddListener(() => Application.OpenURL("https://umuly.com/panel/my-short-urls"));
+                    }
+                    else if (button.name == "Grafik")
+                    {
+                        button.onClick.AddListener(() => Application.OpenURL("https://umuly.com/panel/my-short-urls"));
+                    }
+                }
             }
         }
         else
         {
             Debug.Log(www.error);
+        }
+    }
+
+    private IEnumerator ShareUrl(string text, string subject, string url)
+    {
+        yield return new WaitForEndOfFrame();
+
+        new NativeShare()
+            .SetSubject(subject).SetText(text).SetUrl(url)
+            .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget + ", Data: " + url))
+            .Share();
+
+        // Share on WhatsApp only, if installed (Android only)
+        //if( NativeShare.TargetExists( "com.whatsapp" ) )
+        //	new NativeShare().AddFile( filePath ).AddTarget( "com.whatsapp" ).Share();
+    }
+
+    public void SetUrlType()
+    {
+        switch (redirectUrlType.value)
+        {
+            case 0:
+                break;
+            case 1:
+                redirectUrlType.value = 0;
+                Application.OpenURL("https://umuly.com/panel/my-short-urls");
+                break;
+            case 2:
+                redirectUrlType.value = 0;
+                Application.OpenURL("https://umuly.com/panel/my-short-urls");
+                break;
+            case 3:
+                redirectUrlType.value = 0;
+                Application.OpenURL("https://umuly.com/panel/my-short-urls");
+                break;
+            case 4:
+                redirectUrlType.value = 0;
+                Application.OpenURL("https://umuly.com/panel/my-short-urls");
+                break;
+            case 5:
+                redirectUrlType.value = 0;
+                Application.OpenURL("https://umuly.com/panel/my-short-urls");
+                break;
+            default:
+                redirectUrlType.value = 0;
+                break;
         }
     }
 

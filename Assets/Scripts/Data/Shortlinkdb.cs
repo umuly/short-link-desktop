@@ -15,7 +15,6 @@ namespace Assets.Scripts.Data
         {
             string conn = "URI=file:" + Application.persistentDataPath + "/shortlinkdb.db"; //Path to database.
             dbconn = (IDbConnection)new SqliteConnection(conn);
-            Debug.Log("Connection STRING: " + conn);
         }
 
         public T Test { get; set; }
