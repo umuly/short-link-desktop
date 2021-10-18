@@ -28,7 +28,8 @@ public class UrlManager : MonoBehaviour
     [SerializeField] TMP_InputField tagsInput;
     [SerializeField] TMP_Dropdown domainIdDropdown;
     [SerializeField] TMP_InputField codeInput;
-    [SerializeField] TMP_Dropdown specificMembersOnlyDropdown;
+    [SerializeField] TMP_Dropdown accessTypeDropdown;
+    [SerializeField] TMP_InputField specificMembers;
 
     // Domains
     List<MDomain.Response> allDomains;
@@ -37,6 +38,7 @@ public class UrlManager : MonoBehaviour
     EventSystem system;
 
     // Short Urls List Panel
+    [SerializeField] GameObject addLinkPanel;
     [SerializeField] GameObject contentContainer;
     [SerializeField] GameObject contentContainerItem;
 
@@ -77,9 +79,10 @@ public class UrlManager : MonoBehaviour
         form.Title = titleInput.text;
         form.Description = descriptionInput.text;
         form.Tags = tagsInput.text;
-        form.DomainId = allDomains.Where(k => k.name == domainIdDropdown.captionText.text).FirstOrDefault().id;
+        form.DomainId = allDomains.Where(k => k.domainUrl == domainIdDropdown.captionText.text).FirstOrDefault().id;
         form.Code = codeInput.text;
-        form.SpecificMembersOnly = ((int)Enum.GetValues(typeof(EnUrlAccessTypes)).GetValue(specificMembersOnlyDropdown.value)).ToString();
+        form.UrlAccessType = (EnUrlAccessTypes)Enum.GetValues(typeof(EnUrlAccessTypes)).GetValue(accessTypeDropdown.value);
+        form.SpecificMembersOnly = specificMembers.text;
         form.UrlType = redirectUrlType.value + 1;
 
         WWWForm wwwform = new WWWForm();
@@ -117,6 +120,7 @@ public class UrlManager : MonoBehaviour
                 var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
 
                 GetMultipleShortRedirectUR();
+                addLinkPanel.GetComponent<Animator>().SetTrigger("Open");
             }
         }
     }
@@ -131,9 +135,9 @@ public class UrlManager : MonoBehaviour
         StartCoroutine(Domains());
     }
 
-    public void GetShortUrl()
+    public void GetShortUrl(string urlId)
     {
-        StartCoroutine(GetShortUrlById("URL ID GONDER"));
+        StartCoroutine(GetShortUrlById(urlId));
     }
 
     IEnumerator Domains()
@@ -159,7 +163,7 @@ public class UrlManager : MonoBehaviour
             foreach (var item in rsp.item)
             {
                 allDomains.Add(item);
-                domainIdDropdown.AddOptions(new List<string> { item.name });
+                domainIdDropdown.AddOptions(new List<string> { item.domainUrl });
             }
         }
     }
@@ -179,9 +183,19 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
+            ClearInputs();
             MResponseBase<MRedirectUrl.Response> rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
+            redirectUrlInput.text = rsp.item.shortUrl;
+            titleInput.text = rsp.item.title;
+            descriptionInput.text = rsp.item.description;
+            tagsInput.text = rsp.item.tags;
+            codeInput.text = rsp.item.code;
+            redirectUrlType.value = rsp.item.urlType - 1;
+            domainIdDropdown.captionText.text = allDomains.FirstOrDefault(k => k.domainUrl == domainIdDropdown.captionText.text).domainUrl;
+            accessTypeDropdown.value = rsp.item.urlAccessType - 1;
+            specificMembers.text = rsp.item.specificMembersOnly;
 
-
+            addLinkPanel.GetComponent<Animator>().SetTrigger("Open");
         }
     }
 
@@ -304,7 +318,7 @@ public class UrlManager : MonoBehaviour
                     else if (button.name == "Edit")
                     {
                         // Edit API
-                        button.onClick.AddListener(() => Application.OpenURL("https://umuly.com/panel/my-short-urls"));
+                        button.onClick.AddListener(() => GetShortUrl(response.id));
                     }
                     else if (button.name == "Link Button")
                     {
@@ -331,10 +345,10 @@ public class UrlManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        new NativeShare()
-            .SetSubject(subject).SetText(text).SetUrl(url)
-            .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget + ", Data: " + url))
-            .Share();
+        //new NativeShare()
+        //    .SetSubject(subject).SetText(text).SetUrl(url)
+        //    .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget + ", Data: " + url))
+        //    .Share();
 
         // Share on WhatsApp only, if installed (Android only)
         //if( NativeShare.TargetExists( "com.whatsapp" ) )
@@ -391,6 +405,30 @@ public class UrlManager : MonoBehaviour
 
         editor.SelectAll();
         editor.Copy();
+    }
+
+    public void ClearInputs()
+    {
+        redirectUrlInput.text = "";
+        titleInput.text = "";
+        descriptionInput.text = "";
+        tagsInput.text = "";
+        codeInput.text = "";
+        redirectUrlType.value = 0;
+        domainIdDropdown.value = 0;
+        accessTypeDropdown.value = 0;
+    }
+
+    public void SpecificMemberToggle(GameObject specificPanel)
+    {
+        if (accessTypeDropdown.captionText.text == "Specific Members Only")
+        {
+            specificPanel.SetActive(true);
+        }
+        else
+        {
+            specificPanel.SetActive(false);
+        }
     }
 
     IEnumerator LoadAsynchronously(int sceneBuildIndex, int sceneBuildIndexToClose)
