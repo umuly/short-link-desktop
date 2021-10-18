@@ -36,11 +36,19 @@ public class UrlManager : MonoBehaviour
 
     // Others
     EventSystem system;
+    bool isEdit = false;
 
     // Short Urls List Panel
     [SerializeField] GameObject addLinkPanel;
     [SerializeField] GameObject contentContainer;
     [SerializeField] GameObject contentContainerItem;
+    [SerializeField] Button skipButton;
+    [SerializeField] ScrollRect scrollRect;
+    [SerializeField] float lastScrollRectPosition;
+    [SerializeField] List<GameObject> allShortUrls = null;
+    [SerializeField] int redirectUrlSkip = 0;
+    int skipCount = 0;
+    [SerializeField] MResponseBase<MRedirectUrl.Response> lastResponse = null;
 
     void Start()
     {
@@ -96,7 +104,17 @@ public class UrlManager : MonoBehaviour
         wwwform.AddField("SpecificMembersOnly", form.SpecificMembersOnly);
         wwwform.AddField("UrlType", form.UrlType);
 
-        UnityWebRequest www = UnityWebRequest.Post(baseAddress + "/api/url/RedirectUrlAdd", wwwform);
+        UnityWebRequest www;
+
+        if (isEdit)
+        {
+            wwwform.AddField("Id", lastResponse.item.id);
+            www = UnityWebRequest.Post(baseAddress + "/api/url/RedirectUrlUpdate", wwwform);
+        }
+        else
+        {
+            www = UnityWebRequest.Post(baseAddress + "/api/url/RedirectUrlAdd", wwwform);
+        }
 
         Shortlinkdb<Player> db = new Shortlinkdb<Player>();
         string token = db.Que("select * from Player").FirstOrDefault().Token;
@@ -117,10 +135,16 @@ public class UrlManager : MonoBehaviour
             {
                 var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
 
-                var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
+                //var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
+
+                foreach (var item in allShortUrls)
+                {
+                    Destroy(item.gameObject);
+                }
 
                 GetMultipleShortRedirectUR();
-                addLinkPanel.GetComponent<Animator>().SetTrigger("Open");
+                addLinkPanel.GetComponent<Animator>().SetTrigger("Close");
+                isEdit = false;
             }
         }
     }
@@ -137,6 +161,7 @@ public class UrlManager : MonoBehaviour
 
     public void GetShortUrl(string urlId)
     {
+        isEdit = true;
         StartCoroutine(GetShortUrlById(urlId));
     }
 
@@ -183,8 +208,10 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
+            lastResponse = null;
             ClearInputs();
             MResponseBase<MRedirectUrl.Response> rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
+            lastResponse = rsp;
             redirectUrlInput.text = rsp.item.shortUrl;
             titleInput.text = rsp.item.title;
             descriptionInput.text = rsp.item.description;
@@ -201,12 +228,13 @@ public class UrlManager : MonoBehaviour
 
     public void GetMultipleShortRedirectUR()
     {
+        lastScrollRectPosition = scrollRect.verticalNormalizedPosition;
         StartCoroutine(GetMultipleShortRedirectURL());
     }
 
     IEnumerator GetMultipleShortRedirectURL()
     {
-        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=0&Sort.Column=createdOn&Sort.Type=1&UrlType=1"); //Skip=0&UrlType=1
+        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=" + redirectUrlSkip + "&Sort.Column=createdOn&Sort.Type=1&UrlType=1");
 
         Shortlinkdb<Player> db = new Shortlinkdb<Player>();
         string token = db.Que("select * from Player").FirstOrDefault().Token;
@@ -219,16 +247,18 @@ public class UrlManager : MonoBehaviour
         {
             MResponseBase<List<MRedirectUrl.Response>> rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
 
+            skipCount = rsp.skipCount;
 
             foreach (MRedirectUrl.Response response in rsp.item)
             {
                 var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
+                allShortUrls.Add(urlItem);
                 TextMeshProUGUI[] textMeshProUGUIs = urlItem.GetComponentsInChildren<TextMeshProUGUI>();
                 foreach (var textMeshProUGUI in textMeshProUGUIs)
                 {
                     if (textMeshProUGUI.name == "Count - Text")
                     {
-                        textMeshProUGUI.text = (rsp.item.IndexOf(response) + 1).ToString() + '.';
+                        textMeshProUGUI.text = allShortUrls.Count + ".";
                     }
                     else if (textMeshProUGUI.name == "Active - Text")
                     {
@@ -334,6 +364,19 @@ public class UrlManager : MonoBehaviour
                     }
                 }
             }
+
+            if (skipCount > 1)
+            {
+                skipButton.gameObject.SetActive(true);
+                skipButton.transform.SetAsLastSibling();
+            }
+
+            if (skipCount <= redirectUrlSkip + 1)
+            {
+                skipButton.gameObject.SetActive(false);
+            }
+
+            scrollRect.verticalNormalizedPosition = 10;
         }
         else
         {
@@ -428,6 +471,16 @@ public class UrlManager : MonoBehaviour
         else
         {
             specificPanel.SetActive(false);
+        }
+    }
+
+    public void SkipUrls()
+    {
+
+        if (skipCount > redirectUrlSkip + 1)
+        {
+            redirectUrlSkip++;
+            GetMultipleShortRedirectUR();
         }
     }
 
