@@ -7406,7 +7406,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: https://umuly.com/panel/my-short-urls
+          m_StringArgument: https://umuly.com/panel/domainsurls
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &740851484
@@ -7731,7 +7731,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: https://umuly.com/panel/my-short-urls
+          m_StringArgument: https://umuly.com/panel
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &794285397
@@ -12791,7 +12791,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: https://umuly.com/panel/my-short-urls
+          m_StringArgument: https://umuly.com/panel/AccountSettings
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1508196237
@@ -17622,7 +17622,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: https://umuly.com/panel/my-short-urls
+          m_StringArgument: https://umuly.com/panel/advertisements
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &2115140283

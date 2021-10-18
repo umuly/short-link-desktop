@@ -179,8 +179,9 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(www.downloadHandler.text);
-            Debug.Log("Form upload complete!");
+            MResponseBase<MRedirectUrl.Response> rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
+
+
         }
     }
 
@@ -298,7 +299,7 @@ public class UrlManager : MonoBehaviour
                     else if (button.name == "Trash")
                     {
                         // Trash API
-                        button.onClick.AddListener(() => Application.OpenURL("https://umuly.com/panel/my-short-urls"));
+                        button.onClick.AddListener(() => Destroy(urlItem));
                     }
                     else if (button.name == "Edit")
                     {
