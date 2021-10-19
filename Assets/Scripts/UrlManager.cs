@@ -139,7 +139,6 @@ public class UrlManager : MonoBehaviour
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                EditorUtility.DisplayDialog("Error", www.error, "Do Not Place");
                 Debug.Log(www.error);
             }
             else
@@ -232,7 +231,8 @@ public class UrlManager : MonoBehaviour
             ClearInputs();
             MResponseBase<MRedirectUrl.Response> rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
             lastResponse = rsp;
-            redirectUrlInput.text = rsp.item.shortUrl;
+            redirectUrlInput.text = rsp.item.redirectUrl;
+            domainText.text = rsp.item.shortUrl;
             titleInput.text = rsp.item.title;
             descriptionInput.text = rsp.item.description;
             tagsInput.text = rsp.item.tags;
