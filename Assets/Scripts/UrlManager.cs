@@ -14,6 +14,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.IO;
+using UnityEditor;
 
 public class UrlManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class UrlManager : MonoBehaviour
     [SerializeField] TMP_InputField descriptionInput;
     [SerializeField] TMP_InputField tagsInput;
     [SerializeField] TMP_Dropdown domainIdDropdown;
+    [SerializeField] TextMeshProUGUI domainText;
     [SerializeField] TMP_InputField codeInput;
     [SerializeField] TMP_Dropdown accessTypeDropdown;
     [SerializeField] TMP_InputField specificMembers;
@@ -37,6 +39,10 @@ public class UrlManager : MonoBehaviour
     // Others
     EventSystem system;
     bool isEdit = false;
+    [SerializeField] GameObject deleteControlPanel;
+    [SerializeField] TextMeshProUGUI createUrlBannerText;
+    string lastUrlId = "";
+    string tempDomainText = "";
 
     // Short Urls List Panel
     [SerializeField] GameObject addLinkPanel;
@@ -57,6 +63,10 @@ public class UrlManager : MonoBehaviour
         StartCoroutine(GetMultipleShortRedirectURL());
         GetAllDomains();
         system = EventSystem.current;
+        tempDomainText = domainText.text;
+        codeInput.onValueChanged.AddListener(delegate {
+            domainText.text = tempDomainText + "/" + codeInput.text;
+        });
     }
 
     private void Update()
@@ -129,6 +139,7 @@ public class UrlManager : MonoBehaviour
 
             if (www.result != UnityWebRequest.Result.Success)
             {
+                EditorUtility.DisplayDialog("Error", www.error, "Do Not Place");
                 Debug.Log(www.error);
             }
             else
@@ -145,6 +156,7 @@ public class UrlManager : MonoBehaviour
                 GetMultipleShortRedirectUR();
                 addLinkPanel.GetComponent<Animator>().SetTrigger("Close");
                 isEdit = false;
+                createUrlBannerText.text = "CREATE SHORT URL";
             }
         }
     }
@@ -157,12 +169,6 @@ public class UrlManager : MonoBehaviour
     public void GetAllDomains()
     {
         StartCoroutine(Domains());
-    }
-
-    public void GetShortUrl(string urlId)
-    {
-        isEdit = true;
-        StartCoroutine(GetShortUrlById(urlId));
     }
 
     IEnumerator Domains()
@@ -185,12 +191,26 @@ public class UrlManager : MonoBehaviour
             domainIdDropdown.ClearOptions();
             allDomains = new List<MDomain.Response>();
 
+            domainText.text = rsp.item[0].domainUrl;
+            tempDomainText = domainText.text;
             foreach (var item in rsp.item)
             {
                 allDomains.Add(item);
                 domainIdDropdown.AddOptions(new List<string> { item.domainUrl });
             }
+
+            domainIdDropdown.onValueChanged.AddListener(delegate
+            {
+                domainText.text = allDomains[domainIdDropdown.value].domainUrl + "/" + codeInput.text;
+            });
         }
+    }
+
+    public void GetShortUrl(string urlId)
+    {
+        isEdit = true;
+        createUrlBannerText.text = "UPDATE SHORT URL";
+        StartCoroutine(GetShortUrlById(urlId));
     }
 
     IEnumerator GetShortUrlById(string urlId)
@@ -234,7 +254,7 @@ public class UrlManager : MonoBehaviour
 
     IEnumerator GetMultipleShortRedirectURL()
     {
-        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=" + redirectUrlSkip + "&Sort.Column=createdOn&Sort.Type=1&UrlType=1");
+        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=" + redirectUrlSkip + "&Sort.Column=createdOn&Sort.Type=1&UrlType=1&Status=1");
 
         Shortlinkdb<Player> db = new Shortlinkdb<Player>();
         string token = db.Que("select * from Player").FirstOrDefault().Token;
@@ -253,6 +273,7 @@ public class UrlManager : MonoBehaviour
             {
                 var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
                 allShortUrls.Add(urlItem);
+                urlItem.name = response.id;
                 TextMeshProUGUI[] textMeshProUGUIs = urlItem.GetComponentsInChildren<TextMeshProUGUI>();
                 foreach (var textMeshProUGUI in textMeshProUGUIs)
                 {
@@ -329,6 +350,7 @@ public class UrlManager : MonoBehaviour
                     }
                 }
 
+                // Butonlar dönülür isteðe baðlý event atanabilir.
                 Button[] buttons = urlItem.GetComponentsInChildren<Button>();
                 foreach (var button in buttons)
                 {
@@ -338,12 +360,27 @@ public class UrlManager : MonoBehaviour
                     }
                     else if (button.name == "Share")
                     {
-                        button.onClick.AddListener(() => StartCoroutine(ShareUrl("Short URL", "Short URL", response.shortUrl)));
+                        string text = "";
+
+                        if (!string.IsNullOrEmpty(response.title))
+                        {
+                            text += response.title + "\n";
+                        }
+
+                        if (!string.IsNullOrEmpty(response.description))
+                        {
+                            text += response.description + "\n";
+                        }
+
+                        button.onClick.AddListener(() => StartCoroutine(ShareUrl(text, "", response.shortUrl)));
                     }
                     else if (button.name == "Trash")
                     {
                         // Trash API
-                        button.onClick.AddListener(() => Destroy(urlItem));
+                        button.onClick.AddListener(() => {
+                            deleteControlPanel.SetActive(true);
+                            lastUrlId = urlItem.name;
+                        });
                     }
                     else if (button.name == "Edit")
                     {
@@ -375,8 +412,6 @@ public class UrlManager : MonoBehaviour
             {
                 skipButton.gameObject.SetActive(false);
             }
-
-            scrollRect.verticalNormalizedPosition = 10;
         }
         else
         {
@@ -388,14 +423,16 @@ public class UrlManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        //new NativeShare()
-        //    .SetSubject(subject).SetText(text).SetUrl(url)
-        //    .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget + ", Data: " + url))
-        //    .Share();
+        new NativeShare()
+            //.SetSubject(subject)
+            .SetText(text)
+            .SetUrl(url)
+            .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget + ", Data: " + url))
+            .Share();
 
-        // Share on WhatsApp only, if installed (Android only)
-        //if( NativeShare.TargetExists( "com.whatsapp" ) )
-        //	new NativeShare().AddFile( filePath ).AddTarget( "com.whatsapp" ).Share();
+        //Share on WhatsApp only, if installed(Android only)
+        //if (NativeShare.TargetExists("com.whatsapp"))
+        //    new NativeShare().AddFile(filePath).AddTarget("com.whatsapp").Share();
     }
 
     public void SetUrlType()
@@ -481,6 +518,43 @@ public class UrlManager : MonoBehaviour
         {
             redirectUrlSkip++;
             GetMultipleShortRedirectUR();
+        }
+    }
+
+    public void ToggleDeletePanel(int id)
+    {
+        Debug.Log(lastUrlId);
+        switch (id)
+        {
+            case 0:
+                deleteControlPanel.SetActive(false);
+                break;
+            case 1:
+                StartCoroutine(DeleteShortUrl(lastUrlId));
+                break;
+        }
+    }
+
+    IEnumerator DeleteShortUrl(string urlId)
+    {
+        UnityWebRequest request = UnityWebRequest.Delete(baseAddress + "/api/url/" + urlId);
+
+        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        string token = db.Que("select * from Player").FirstOrDefault().Token;
+
+        request.SetRequestHeader("Authorization", "Bearer " + token);
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            //var rsp = JsonConvert.DeserializeObject<MResponseBase<List<MDomain.Response>>>(request.downloadHandler.text);
+            Destroy(GameObject.Find(lastUrlId));
+            //GetMultipleShortRedirectUR();
+            deleteControlPanel.SetActive(false);
         }
     }
 
