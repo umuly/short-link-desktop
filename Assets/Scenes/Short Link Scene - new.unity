@@ -682,7 +682,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Title
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}
   m_sharedMaterial: {fileID: 741392812564990199, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}
@@ -2665,7 +2665,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 64, y: 64}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &196376014
 MonoBehaviour:
@@ -4982,7 +4982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Tags (food,pizza)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}
   m_sharedMaterial: {fileID: 741392812564990199, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}
@@ -11965,7 +11965,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Description
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}
   m_sharedMaterial: {fileID: 741392812564990199, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}
@@ -20474,7 +20474,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Key (food,pizza)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}
   m_sharedMaterial: {fileID: 741392812564990199, guid: 7d058ed603e72c14bb40bad986f8c0ce, type: 2}

@@ -322,6 +322,14 @@ public class UrlManager : MonoBehaviour
                     {
                         textMeshProUGUI.text = response.tags;
                     }
+                    else if (textMeshProUGUI.name == "Grafik - Text")
+                    {
+                        textMeshProUGUI.text = response.visitCount + " - " + response.uniqueVisitorCount;
+                    }
+                    else if (textMeshProUGUI.name == "Bulhorn - Text")
+                    {
+                        textMeshProUGUI.text = response.revenueAmount.ToString("$ #,0.00");
+                    }
                 }
 
                 LayoutElement[] layoutElements = urlItem.GetComponentsInChildren<LayoutElement>();
