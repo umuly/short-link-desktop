@@ -56,6 +56,9 @@ public class UrlManager : MonoBehaviour
     int skipCount = 0;
     [SerializeField] MResponseBase<MRedirectUrl.Response> lastResponse = null;
 
+    // Animators
+    [SerializeField] Animator copyAnimation;
+
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -365,6 +368,7 @@ public class UrlManager : MonoBehaviour
                     if (button.name == "Copy")
                     {
                         button.onClick.AddListener(() => CopyShortURL(response.shortUrl));
+                        button.onClick.AddListener(() => copyAnimation.SetTrigger("Open"));
                     }
                     else if (button.name == "Share")
                     {
