@@ -47,6 +47,7 @@ public class LoginManager : MonoBehaviour
 
     // Others
     EventSystem system;
+    [SerializeField] GameObject loadingAnimationPrefab;
 
     // Alert Panel
     [SerializeField] Animator errorAnimation;
@@ -124,6 +125,7 @@ public class LoginManager : MonoBehaviour
 
     public void Login()
     {
+        loadingAnimationPrefab.SetActive(true);
         StartCoroutine(Login("https://umuly.com/api/Token?Email=" + loginEMailInput.text + "&Password=" + loginPasswordInput.text));
     }
 
@@ -163,22 +165,26 @@ public class LoginManager : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
+                    loadingAnimationPrefab.SetActive(false);
                     ShowError(ex.Message);
                 }
             }
             else
             {
+                loadingAnimationPrefab.SetActive(false);
                 ShowError(a.statusText);
             }
         }
         else
         {
+            loadingAnimationPrefab.SetActive(false);
             ShowError(request.downloadHandler.text.Trim('"'));
         }
     }
 
     public void Reqister()
     {
+        loadingAnimationPrefab.SetActive(true);
         MUser.Form user = new MUser.Form();
         user.name = registerFullNameInput.text;
         user.email = registerEMailInput.text;
@@ -235,10 +241,13 @@ public class LoginManager : MonoBehaviour
                 }
             }
         }
+
+        loadingAnimationPrefab.SetActive(false);
     }
 
     public void ResetPassword()
     {
+        loadingAnimationPrefab.SetActive(true);
         MUser.Form user = new MUser.Form();
         user.email = resetPasswordEMailInput.text;
 
@@ -279,10 +288,13 @@ public class LoginManager : MonoBehaviour
                 ShowError(request.downloadHandler.text);
             }
         }
+
+        loadingAnimationPrefab.SetActive(false);
     }
 
     public void ChangePassword()
     {
+        loadingAnimationPrefab.SetActive(true);
         MUser.Form changePasswordForm = new MUser.Form();
         changePasswordForm.email = resetPasswordEMailInput.text;
         changePasswordForm.password = changePasswordInput.text;
@@ -348,6 +360,8 @@ public class LoginManager : MonoBehaviour
                 }
             }
         }
+
+        loadingAnimationPrefab.SetActive(false);
     }
 
     public void ShowError(List<string> errors)
@@ -426,6 +440,7 @@ public class LoginManager : MonoBehaviour
             yield return null;
         }
 
+        loadingAnimationPrefab.SetActive(false);
         SceneManager.UnloadSceneAsync(sceneBuildIndexToClose);
     }
 }

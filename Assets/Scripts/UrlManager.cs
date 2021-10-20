@@ -59,6 +59,7 @@ public class UrlManager : MonoBehaviour
 
     // Animators
     [SerializeField] Animator copyAnimation;
+    [SerializeField] GameObject loadingAnimationPrefab;
 
     // Alert Panel
     [SerializeField] Animator errorAnimation;
@@ -102,6 +103,8 @@ public class UrlManager : MonoBehaviour
 
     public void RedirectUrlAdd()
     {
+        loadingAnimationPrefab.SetActive(true);
+
         MRedirectUrl.Form form = new MRedirectUrl.Form();
         form.RedirectUrl = redirectUrlInput.text;
         form.Title = titleInput.text;
@@ -159,6 +162,7 @@ public class UrlManager : MonoBehaviour
                 error.transform.SetAsLastSibling();
                 error.GetComponent<TextMeshProUGUI>().text = www.error;
                 errorAnimation.SetTrigger("Open");
+                loadingAnimationPrefab.SetActive(false);
             }
             else
             {
@@ -190,6 +194,8 @@ public class UrlManager : MonoBehaviour
                     error.GetComponent<TextMeshProUGUI>().text = rsp.statusText;
                     errorAnimation.SetTrigger("Open");
                 }
+
+                loadingAnimationPrefab.SetActive(false);
             }
         }
     }
@@ -201,6 +207,7 @@ public class UrlManager : MonoBehaviour
 
     public void GetAllDomains()
     {
+        loadingAnimationPrefab.SetActive(true);
         StartCoroutine(Domains());
     }
 
@@ -217,6 +224,7 @@ public class UrlManager : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             //Debug.Log(www.error);
+            loadingAnimationPrefab.SetActive(false);
         }
         else
         {
@@ -236,11 +244,13 @@ public class UrlManager : MonoBehaviour
             {
                 domainText.text = allDomains[domainIdDropdown.value].domainUrl + "/" + codeInput.text;
             });
+            loadingAnimationPrefab.SetActive(false);
         }
     }
 
     public void GetShortUrl(string urlId)
     {
+        loadingAnimationPrefab.SetActive(true);
         isEdit = true;
         createUrlBannerText.text = "UPDATE SHORT URL";
         StartCoroutine(GetShortUrlById(urlId));
@@ -258,6 +268,7 @@ public class UrlManager : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             //Debug.Log(www.error);
+            loadingAnimationPrefab.SetActive(false);
         }
         else
         {
@@ -277,11 +288,13 @@ public class UrlManager : MonoBehaviour
             specificMembers.text = rsp.item.specificMembersOnly;
 
             addLinkPanel.GetComponent<Animator>().SetTrigger("Open");
+            loadingAnimationPrefab.SetActive(false);
         }
     }
 
     public void GetMultipleShortRedirectUR()
     {
+        loadingAnimationPrefab.SetActive(true);
         lastScrollRectPosition = scrollRect.verticalNormalizedPosition;
         StartCoroutine(GetMultipleShortRedirectURL());
     }
@@ -471,10 +484,12 @@ public class UrlManager : MonoBehaviour
             {
                 skipButton.gameObject.SetActive(false);
             }
+            loadingAnimationPrefab.SetActive(false);
         }
         else
         {
             //Debug.Log(www.error);
+            loadingAnimationPrefab.SetActive(false);
         }
     }
 
@@ -528,6 +543,7 @@ public class UrlManager : MonoBehaviour
 
     public void LogOut()
     {
+        loadingAnimationPrefab.SetActive(true);
         Shortlinkdb<Player> db = new Shortlinkdb<Player>();
         var asd = db.Que("select * from Player").FirstOrDefault();
         db.Delete("delete from Player where Id=" + asd.Id + "");
@@ -588,6 +604,7 @@ public class UrlManager : MonoBehaviour
                 deleteControlPanel.SetActive(false);
                 break;
             case 1:
+                loadingAnimationPrefab.SetActive(true);
                 StartCoroutine(DeleteShortUrl(lastUrlId));
                 break;
         }
@@ -606,6 +623,7 @@ public class UrlManager : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             //Debug.Log(request.error);
+            loadingAnimationPrefab.SetActive(false);
         }
         else
         {
@@ -613,6 +631,7 @@ public class UrlManager : MonoBehaviour
             Destroy(GameObject.Find(lastUrlId));
             GetMultipleShortRedirectUR();
             deleteControlPanel.SetActive(false);
+            loadingAnimationPrefab.SetActive(false);
         }
     }
 
@@ -625,6 +644,7 @@ public class UrlManager : MonoBehaviour
             yield return null;
         }
 
+        loadingAnimationPrefab.SetActive(false);
         SceneManager.UnloadSceneAsync(sceneBuildIndexToClose);
     }
 }
