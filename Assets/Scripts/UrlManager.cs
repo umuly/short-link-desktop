@@ -59,12 +59,6 @@ public class UrlManager : MonoBehaviour
     // Animators
     [SerializeField] Animator copyAnimation;
 
-    // Alert Panel
-    [SerializeField] Animator errorAnimation;
-    [SerializeField] GameObject errorMessageTextPrefab;
-    [SerializeField] GameObject errorMessageTextParent;
-    [SerializeField] List<GameObject> errorMessageTexts;
-
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -148,47 +142,23 @@ public class UrlManager : MonoBehaviour
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                foreach (var item in errorMessageTexts)
-                {
-                    Destroy(item.gameObject);
-                }
-
-                var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                errorMessageTexts.Add(error);
-                error.transform.SetAsLastSibling();
-                error.GetComponent<TextMeshProUGUI>().text = www.error;
-                errorAnimation.SetTrigger("Open");
+                Debug.Log(www.error);
             }
             else
             {
                 var rsp = JsonConvert.DeserializeObject<MResponseBase<MRedirectUrl.Response>>(www.downloadHandler.text);
 
-                if (www.responseCode == 200)
+                //var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
+
+                foreach (var item in allShortUrls)
                 {
-                    //var urlItem = Instantiate(contentContainerItem, contentContainer.transform).gameObject;
-
-                    foreach (var item in allShortUrls)
-                    {
-                        Destroy(item.gameObject);
-                    }
-
-                    GetMultipleShortRedirectUR();
-                    addLinkPanel.GetComponent<Animator>().SetTrigger("Close");
-                    isEdit = false;
-                    createUrlBannerText.text = "CREATE SHORT URL";
+                    Destroy(item.gameObject);
                 }
-                else
-                {
-                    foreach (var item in errorMessageTexts)
-                    {
-                        Destroy(item.gameObject);
-                    }
 
-                    var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                    errorMessageTexts.Add(error);
-                    error.GetComponent<TextMeshProUGUI>().text = rsp.statusText;
-                    errorAnimation.SetTrigger("Open");
-                }
+                GetMultipleShortRedirectUR();
+                addLinkPanel.GetComponent<Animator>().SetTrigger("Close");
+                isEdit = false;
+                createUrlBannerText.text = "CREATE SHORT URL";
             }
         }
     }
@@ -301,13 +271,6 @@ public class UrlManager : MonoBehaviour
             MResponseBase<List<MRedirectUrl.Response>> rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
 
             skipCount = rsp.skipCount;
-
-            foreach (var item in allShortUrls)
-            {
-                Destroy(item.gameObject);
-            }
-
-            allShortUrls.Clear();
 
             foreach (MRedirectUrl.Response response in rsp.item)
             {

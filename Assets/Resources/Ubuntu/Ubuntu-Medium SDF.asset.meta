@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 9b8872760a2395442afcb65e985e5c50
+=======
+guid: 0d786d3cdfc06db4585738c94885e5f3
+>>>>>>> parent of 4291829 (Login sahnesi prefab geliştirmeleri)
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

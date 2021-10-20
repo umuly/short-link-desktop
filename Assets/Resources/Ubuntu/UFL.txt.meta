@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8b7cc309f3eb2c3459882bec0c677596
+=======
+guid: 7484604a1880da64484e45af4e5f7aba
+>>>>>>> parent of 4291829 (Login sahnesi prefab geliştirmeleri)
 TextScriptImporter:
   externalObjects: {}
   userData: 

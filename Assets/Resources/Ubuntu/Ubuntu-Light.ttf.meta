@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 0e25c628131041144ae65ba304c5bd5c
+=======
+guid: 4b1c489b40bb6da41bfbf3f5a356777f
+>>>>>>> parent of 4291829 (Login sahnesi prefab geliştirmeleri)
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
