@@ -46,7 +46,6 @@ public class LoginManager : MonoBehaviour
     [SerializeField] GameObject changePasswordPanel;
 
     // Others
-    [SerializeField] TextMeshProUGUI errorText;
     EventSystem system;
 
     // Alert Panel
@@ -70,7 +69,7 @@ public class LoginManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            errorText.text = ex.Message;
+            ShowError(ex.Message);
         }
     }
 
@@ -125,7 +124,6 @@ public class LoginManager : MonoBehaviour
 
     public void Login()
     {
-        errorText.text = "";
         StartCoroutine(Login("https://umuly.com/api/Token?Email=" + loginEMailInput.text + "&Password=" + loginPasswordInput.text));
     }
 
@@ -165,24 +163,22 @@ public class LoginManager : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    errorText.text = ex.Message;
+                    ShowError(ex.Message);
                 }
             }
             else
             {
-                errorText.text = a.statusText;
+                ShowError(a.statusText);
             }
         }
         else
         {
-            errorText.text = request.downloadHandler.text.Trim('"');
+            ShowError(request.downloadHandler.text.Trim('"'));
         }
     }
 
     public void Reqister()
     {
-        errorText.text = "";
-
         MUser.Form user = new MUser.Form();
         user.name = registerFullNameInput.text;
         user.email = registerEMailInput.text;
@@ -214,63 +210,28 @@ public class LoginManager : MonoBehaviour
         {
             if (a.errors != null)
             {
-                foreach (var item in errorMessageTexts)
-                {
-                    Destroy(item.gameObject);
-                }
-                errorMessageTexts.Clear();
-
                 if (a.errors.Name != null)
                 {
-                    foreach (var item in a.errors.Name)
-                    {
-                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
-                        errorAnimation.SetTrigger("Open");
-                    }
+                    ShowError(a.errors.Name);
                 }
                 if (a.errors.Email != null)
                 {
-                    foreach (var item in a.errors.Email)
-                    {
-                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
-                        errorAnimation.SetTrigger("Open");
-                    }
+                    ShowError(a.errors.Email);
                 }
                 if (a.errors.Password != null)
                 {
-                    foreach (var item in a.errors.Password)
-                    {
-                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
-                        errorAnimation.SetTrigger("Open");
-                    }
+                    ShowError(a.errors.Password);
                 }
             }
             else
             {
                 if (request.downloadHandler.text.Contains('{'))
                 {
-                    var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + a.statusText;
-                        errorAnimation.SetTrigger("Open");
+                    ShowError(a.statusText);
                 }
                 else
                 {
-                    var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                    errorMessageTexts.Add(error);
-                    error.transform.SetAsLastSibling();
-                    error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + request.downloadHandler.text;
-                    errorAnimation.SetTrigger("Open");
+                    ShowError(request.downloadHandler.text);
                 }
             }
         }
@@ -278,8 +239,6 @@ public class LoginManager : MonoBehaviour
 
     public void ResetPassword()
     {
-        errorText.text = "";
-
         MUser.Form user = new MUser.Form();
         user.email = resetPasswordEMailInput.text;
 
@@ -300,34 +259,30 @@ public class LoginManager : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            errorText.text = a.statusText;
-
             if (request.responseCode == 200)
             {
                 ChangePanel(4);
             }
             else
             {
-
+                ShowError(a.statusText);
             }
         }
         else
         {
             if (request.downloadHandler.text.Contains('{'))
             {
-                errorText.text = a.statusText;
+                ShowError(a.statusText);
             }
             else
             {
-                errorText.text = request.downloadHandler.text + "!";
+                ShowError(request.downloadHandler.text);
             }
         }
     }
 
     public void ChangePassword()
     {
-        errorText.text = "";
-
         MUser.Form changePasswordForm = new MUser.Form();
         changePasswordForm.email = resetPasswordEMailInput.text;
         changePasswordForm.password = changePasswordInput.text;
@@ -350,8 +305,6 @@ public class LoginManager : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            errorText.text = a.statusText;
-
             if (request.responseCode == 200)
             {
                 ChangePanel(1);
@@ -359,7 +312,7 @@ public class LoginManager : MonoBehaviour
             }
             else
             {
-
+                ShowError(a.statusText);
             }
         }
         else
@@ -368,38 +321,72 @@ public class LoginManager : MonoBehaviour
             {
                 if (a.errors.Name != null)
                 {
-                    errorText.text += a.errors.Name[0] + "!\n";
+                    ShowError(a.errors.Name);
                 }
                 if (a.errors.Email != null)
                 {
-                    errorText.text += a.errors.Email[0] + "!\n";
+                    ShowError(a.errors.Email);
                 }
                 if (a.errors.Password != null)
                 {
-                    errorText.text += a.errors.Password[0] + "!\n";
+                    ShowError(a.errors.Password);
                 }
                 if (a.errors.Code != null)
                 {
-                    errorText.text += a.errors.Code[0] + "!\n";
+                    ShowError(a.errors.Code);
                 }
             }
             else
             {
                 if (request.downloadHandler.text.Contains('{'))
                 {
-                    errorText.text = a.statusText;
+                    ShowError(a.statusText);
                 }
                 else
                 {
-                    errorText.text = request.downloadHandler.text + "!";
+                    ShowError(request.downloadHandler.text);
                 }
             }
         }
     }
 
+    public void ShowError(List<string> errors)
+    {
+        foreach (var item in errorMessageTexts)
+        {
+            Destroy(item.gameObject);
+        }
+
+        errorMessageTexts.Clear();
+
+        foreach (var error in errors)
+        {
+            var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+            errorMessageTexts.Add(gameObject);
+            gameObject.transform.SetAsLastSibling();
+            gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + error;
+            errorAnimation.SetTrigger("Open");
+        }
+    }
+
+    public void ShowError(string error)
+    {
+        foreach (var item in errorMessageTexts)
+        {
+            Destroy(item.gameObject);
+        }
+
+        errorMessageTexts.Clear();
+
+        var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+        errorMessageTexts.Add(gameObject);
+        gameObject.transform.SetAsLastSibling();
+        gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + error;
+        errorAnimation.SetTrigger("Open");
+    }
+
     public void ChangePanel(int panelId)
     {
-        errorText.text = "";
         loginEMailInput.text = "";
         loginPasswordInput.text = "";
         registerFullNameInput.text = "";
@@ -428,31 +415,6 @@ public class LoginManager : MonoBehaviour
                 changePasswordPanel.SetActive(true);
                 break;
         }
-    }
-
-    void OnGUI()
-    {
-        Event e = Event.current;
-
-        // Bir key'e basýldýðýnda bu karakterse ve shift kullanarak yapmadýysa, bu karakter ve bu karakterin büyük hali birbirine eþitse Caps Lock açýktýr.
-        // Telefonda ne olur bilmiyorum.
-        if (e.capsLock)
-        {
-            string UpperChar = e.character.ToString().ToUpper();
-            if (UpperChar == e.character.ToString())
-            {
-                errorText.text = "Caps Lock On";
-
-
-            }
-            else
-            {
-                errorText.text = "";
-
-            }
-
-        }
-
     }
 
     IEnumerator LoadAsynchronously(int sceneBuildIndex, int sceneBuildIndexToClose)
