@@ -43,6 +43,7 @@ public class UrlManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI createUrlBannerText;
     string lastUrlId = "";
     string tempDomainText = "";
+    [SerializeField] GameObject createPlus;
 
     // Short Urls List Panel
     [SerializeField] GameObject addLinkPanel;
@@ -215,7 +216,7 @@ public class UrlManager : MonoBehaviour
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log(www.error);
+            //Debug.Log(www.error);
         }
         else
         {
@@ -256,7 +257,7 @@ public class UrlManager : MonoBehaviour
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log(www.error);
+            //Debug.Log(www.error);
         }
         else
         {
@@ -299,6 +300,15 @@ public class UrlManager : MonoBehaviour
         if (www.result == UnityWebRequest.Result.Success)
         {
             MResponseBase<List<MRedirectUrl.Response>> rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
+
+            if (rsp.itemCount == 0)
+            {
+                createPlus.SetActive(true);
+            }
+            else
+            {
+                createPlus.SetActive(false);
+            }
 
             skipCount = rsp.skipCount;
 
@@ -464,7 +474,7 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(www.error);
+            //Debug.Log(www.error);
         }
     }
 
@@ -572,7 +582,6 @@ public class UrlManager : MonoBehaviour
 
     public void ToggleDeletePanel(int id)
     {
-        Debug.Log(lastUrlId);
         switch (id)
         {
             case 0:
@@ -596,13 +605,13 @@ public class UrlManager : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log(request.error);
+            //Debug.Log(request.error);
         }
         else
         {
             //var rsp = JsonConvert.DeserializeObject<MResponseBase<List<MDomain.Response>>>(request.downloadHandler.text);
             Destroy(GameObject.Find(lastUrlId));
-            //GetMultipleShortRedirectUR();
+            GetMultipleShortRedirectUR();
             deleteControlPanel.SetActive(false);
         }
     }
