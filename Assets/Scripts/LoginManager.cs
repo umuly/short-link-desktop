@@ -49,6 +49,12 @@ public class LoginManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI errorText;
     EventSystem system;
 
+    // Alert Panel
+    [SerializeField] Animator errorAnimation;
+    [SerializeField] GameObject errorMessageTextPrefab;
+    [SerializeField] GameObject errorMessageTextParent;
+    [SerializeField] List<GameObject> errorMessageTexts;
+
     void Awake()
     {
         try
@@ -208,36 +214,63 @@ public class LoginManager : MonoBehaviour
         {
             if (a.errors != null)
             {
+                foreach (var item in errorMessageTexts)
+                {
+                    Destroy(item.gameObject);
+                }
+                errorMessageTexts.Clear();
+
                 if (a.errors.Name != null)
                 {
-                    errorText.text += a.errors.Name[0] + "!\n";
+                    foreach (var item in a.errors.Name)
+                    {
+                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+                        errorMessageTexts.Add(error);
+                        error.transform.SetAsLastSibling();
+                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
+                        errorAnimation.SetTrigger("Open");
+                    }
                 }
                 if (a.errors.Email != null)
                 {
-                    errorText.text += a.errors.Email[0] + "!\n";
+                    foreach (var item in a.errors.Email)
+                    {
+                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+                        errorMessageTexts.Add(error);
+                        error.transform.SetAsLastSibling();
+                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
+                        errorAnimation.SetTrigger("Open");
+                    }
                 }
                 if (a.errors.Password != null)
                 {
-                    errorText.text += a.errors.Password[0] + "!\n";
+                    foreach (var item in a.errors.Password)
+                    {
+                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+                        errorMessageTexts.Add(error);
+                        error.transform.SetAsLastSibling();
+                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
+                        errorAnimation.SetTrigger("Open");
+                    }
                 }
             }
             else
             {
                 if (request.downloadHandler.text.Contains('{'))
                 {
-<<<<<<< HEAD
                     var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
                         errorMessageTexts.Add(error);
                         error.transform.SetAsLastSibling();
                         error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + a.statusText;
                         errorAnimation.SetTrigger("Open");
-=======
-                    errorText.text = a.statusText;
->>>>>>> parent of 4291829 (Login sahnesi prefab geliştirmeleri)
                 }
                 else
                 {
-                    errorText.text = request.downloadHandler.text + "!";
+                    var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+                    errorMessageTexts.Add(error);
+                    error.transform.SetAsLastSibling();
+                    error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + request.downloadHandler.text;
+                    errorAnimation.SetTrigger("Open");
                 }
             }
         }
