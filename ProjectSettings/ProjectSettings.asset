@@ -794,11 +794,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: a4e007dd-e2a2-4ec4-ab39-87be82401583
+  cloudProjectId: a10fcb71-2fd6-4823-bd7a-cffa0b4b93f1
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Short Link
-  organizationId: ccakmak19
+  projectName: ShortLinkUnity
+  organizationId: naimserin
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0
