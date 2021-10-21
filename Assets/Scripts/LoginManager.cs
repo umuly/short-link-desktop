@@ -137,14 +137,10 @@ public class LoginManager : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        if (request.downloadHandler.text.Contains("Form"))
-        {
-            ConvertErrorsToString(null, request.downloadHandler.text.Trim('"'));
-            loadingAnimationPrefab.SetActive(false);
-        }
-        else
+        try
         {
             var a = JsonConvert.DeserializeObject<MResponseBase<MUser.Response>>(request.downloadHandler.text);
+
             if (request.result == UnityWebRequest.Result.Success)
             {
                 if (request.responseCode == 200)
@@ -176,6 +172,11 @@ public class LoginManager : MonoBehaviour
                 loadingAnimationPrefab.SetActive(false);
                 ConvertErrorsToString(a.errors, a.statusText);
             }
+        }
+        catch (JsonSerializationException)
+        {
+            ConvertErrorsToString(null, request.downloadHandler.text.Trim('"'));
+            loadingAnimationPrefab.SetActive(false);
         }
     }
 

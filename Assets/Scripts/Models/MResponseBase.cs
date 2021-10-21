@@ -20,12 +20,4 @@ namespace Assets.Models
         public DateTime responseDate { get; set; }
         public Dictionary<string,string[]> errors { get; set; }
     }
-
-    //public class Errors
-    //{
-    //    public List<string> Code { get; set; }
-    //    public List<string> Name { get; set; }
-    //    public List<string> Email { get; set; }
-    //    public List<string> Password { get; set; }
-    //}
 }
