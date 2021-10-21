@@ -19,7 +19,7 @@ using Assets.Scripts.Models;
 using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using Newtonsoft.Json.Linq;
 
 public class LoginManager : MonoBehaviour
 {
@@ -70,7 +70,7 @@ public class LoginManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            ShowError(ex.Message);
+            ConvertErrorsToString(null, ex.Message);
         }
     }
 
@@ -137,15 +137,18 @@ public class LoginManager : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        if (request.result == UnityWebRequest.Result.Success)
+        if (request.downloadHandler.text.Contains("Form"))
+        {
+            ConvertErrorsToString(null, request.downloadHandler.text.Trim('"'));
+            loadingAnimationPrefab.SetActive(false);
+        }
+        else
         {
             var a = JsonConvert.DeserializeObject<MResponseBase<MUser.Response>>(request.downloadHandler.text);
-
-            if (request.responseCode == 200)
+            if (request.result == UnityWebRequest.Result.Success)
             {
-                try
+                if (request.responseCode == 200)
                 {
-
                     var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
 
                     Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
@@ -163,22 +166,16 @@ public class LoginManager : MonoBehaviour
 
                     StartCoroutine(LoadAsynchronously(1, 0));
                 }
-                catch (Exception ex)
+                else
                 {
-                    loadingAnimationPrefab.SetActive(false);
-                    ShowError(ex.Message);
+                    ConvertErrorsToString(a.errors, a.statusText);
                 }
             }
             else
             {
                 loadingAnimationPrefab.SetActive(false);
-                ShowError(a.statusText);
+                ConvertErrorsToString(a.errors, a.statusText);
             }
-        }
-        else
-        {
-            loadingAnimationPrefab.SetActive(false);
-            ShowError(request.downloadHandler.text.Trim('"'));
         }
     }
 
@@ -212,37 +209,44 @@ public class LoginManager : MonoBehaviour
                 ChangePanel(1);
             }
         }
-        else
+
+        ConvertErrorsToString(a.errors, a.statusText);
+
+        loadingAnimationPrefab.SetActive(false);
+    }
+
+    public void ConvertErrorsToString(Dictionary<string, string[]> errors, string statusText)
+    {
+        foreach (var item in errorMessageTexts)
         {
-            if (a.errors != null)
+            Destroy(item.gameObject);
+        }
+
+        errorMessageTexts.Clear();
+
+        if (errors != null)
+        {
+            foreach (string[] property in errors.Values)
             {
-                if (a.errors.Name != null)
+                foreach (var error in property)
                 {
-                    ShowError(a.errors.Name);
-                }
-                if (a.errors.Email != null)
-                {
-                    ShowError(a.errors.Email);
-                }
-                if (a.errors.Password != null)
-                {
-                    ShowError(a.errors.Password);
-                }
-            }
-            else
-            {
-                if (request.downloadHandler.text.Contains('{'))
-                {
-                    ShowError(a.statusText);
-                }
-                else
-                {
-                    ShowError(request.downloadHandler.text);
+                    var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+                    errorMessageTexts.Add(gameObject);
+                    gameObject.transform.SetAsLastSibling();
+                    gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + error;
                 }
             }
         }
 
-        loadingAnimationPrefab.SetActive(false);
+        if (!string.IsNullOrEmpty(statusText))
+        {
+            var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+            errorMessageTexts.Add(gameObject);
+            gameObject.transform.SetAsLastSibling();
+            gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + statusText;
+        }
+
+        errorAnimation.SetTrigger("Open");
     }
 
     public void ResetPassword()
@@ -272,22 +276,9 @@ public class LoginManager : MonoBehaviour
             {
                 ChangePanel(4);
             }
-            else
-            {
-                ShowError(a.statusText);
-            }
         }
-        else
-        {
-            if (request.downloadHandler.text.Contains('{'))
-            {
-                ShowError(a.statusText);
-            }
-            else
-            {
-                ShowError(request.downloadHandler.text);
-            }
-        }
+
+        ConvertErrorsToString(a.errors, a.statusText);
 
         loadingAnimationPrefab.SetActive(false);
     }
@@ -322,81 +313,11 @@ public class LoginManager : MonoBehaviour
                 ChangePanel(1);
                 resetPasswordEMailInput.text = "";
             }
-            else
-            {
-                ShowError(a.statusText);
-            }
         }
-        else
-        {
-            if (a.errors != null)
-            {
-                if (a.errors.Name != null)
-                {
-                    ShowError(a.errors.Name);
-                }
-                if (a.errors.Email != null)
-                {
-                    ShowError(a.errors.Email);
-                }
-                if (a.errors.Password != null)
-                {
-                    ShowError(a.errors.Password);
-                }
-                if (a.errors.Code != null)
-                {
-                    ShowError(a.errors.Code);
-                }
-            }
-            else
-            {
-                if (request.downloadHandler.text.Contains('{'))
-                {
-                    ShowError(a.statusText);
-                }
-                else
-                {
-                    ShowError(request.downloadHandler.text);
-                }
-            }
-        }
+
+        ConvertErrorsToString(a.errors, a.statusText);
 
         loadingAnimationPrefab.SetActive(false);
-    }
-
-    public void ShowError(List<string> errors)
-    {
-        foreach (var item in errorMessageTexts)
-        {
-            Destroy(item.gameObject);
-        }
-
-        errorMessageTexts.Clear();
-
-        foreach (var error in errors)
-        {
-            var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-            errorMessageTexts.Add(gameObject);
-            gameObject.transform.SetAsLastSibling();
-            gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + error;
-            errorAnimation.SetTrigger("Open");
-        }
-    }
-
-    public void ShowError(string error)
-    {
-        foreach (var item in errorMessageTexts)
-        {
-            Destroy(item.gameObject);
-        }
-
-        errorMessageTexts.Clear();
-
-        var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-        errorMessageTexts.Add(gameObject);
-        gameObject.transform.SetAsLastSibling();
-        gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + error;
-        errorAnimation.SetTrigger("Open");
     }
 
     public void ChangePanel(int panelId)

@@ -18,14 +18,14 @@ namespace Assets.Models
         public int skipCount { get; set; }
         public DateTime requestDate { get; set; }
         public DateTime responseDate { get; set; }
-        public Errors errors { get; set; }
+        public Dictionary<string,string[]> errors { get; set; }
     }
 
-    public class Errors
-    {
-        public List<string> Code { get; set; }
-        public List<string> Name { get; set; }
-        public List<string> Email { get; set; }
-        public List<string> Password { get; set; }
-    }
+    //public class Errors
+    //{
+    //    public List<string> Code { get; set; }
+    //    public List<string> Name { get; set; }
+    //    public List<string> Email { get; set; }
+    //    public List<string> Password { get; set; }
+    //}
 }
