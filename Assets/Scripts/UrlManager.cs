@@ -53,6 +53,7 @@ public class UrlManager : MonoBehaviour
     [SerializeField] List<GameObject> allShortUrls = null;
     [SerializeField] int redirectUrlSkip = 0;
     int skipCount = 0;
+    bool skip = false;
     [SerializeField] MResponseBase<MRedirectUrl.Response> lastResponse = null;
 
     // Animators
@@ -308,18 +309,18 @@ public class UrlManager : MonoBehaviour
 
     IEnumerator GetMultipleShortRedirectURL()
     {
-        UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/url?Skip=" + redirectUrlSkip + "&Sort.Column=createdOn&Sort.Type=1&UrlType=1&Status=1");
+        UnityWebRequest request = UnityWebRequest.Get(baseAddress + "/api/url?Skip=" + redirectUrlSkip + "&Sort.Column=createdOn&Sort.Type=1&UrlType=1&Status=1");
 
         Shortlinkdb<Player> db = new Shortlinkdb<Player>();
         string token = db.Que("select * from Player").FirstOrDefault().Token;
 
-        www.SetRequestHeader("Authorization", "Bearer " + token);
+        request.SetRequestHeader("Authorization", "Bearer " + token);
 
-        yield return www.SendWebRequest();
+        yield return request.SendWebRequest();
 
-        if (www.result == UnityWebRequest.Result.Success)
+        if (request.result == UnityWebRequest.Result.Success)
         {
-            MResponseBase<List<MRedirectUrl.Response>> rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(www.downloadHandler.text);
+            MResponseBase<List<MRedirectUrl.Response>> rsp = JsonConvert.DeserializeObject<MResponseBase<List<MRedirectUrl.Response>>>(request.downloadHandler.text);
 
             if (rsp.itemCount == 0)
             {
@@ -332,12 +333,17 @@ public class UrlManager : MonoBehaviour
 
             skipCount = rsp.skipCount;
 
-            foreach (var item in allShortUrls)
+            if (!skip)
             {
-                Destroy(item.gameObject);
+                foreach (var item in allShortUrls)
+                {
+                    Destroy(item.gameObject);
+                }
+
+                allShortUrls.Clear();
             }
 
-            allShortUrls.Clear();
+            skip = false;
 
             foreach (MRedirectUrl.Response response in rsp.item)
             {
@@ -595,6 +601,7 @@ public class UrlManager : MonoBehaviour
 
     public void SkipUrls()
     {
+        skip = true;
 
         if (skipCount > redirectUrlSkip + 1)
         {
