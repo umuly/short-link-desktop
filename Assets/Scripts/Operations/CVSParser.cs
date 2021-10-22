@@ -11,16 +11,13 @@ public class CVSParser : MonoBehaviour
 
     static public string[] Splitline(string line)
     {
-        return (from System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(input: line,
-            pattern: @"(((?<x> (?= [, \r\n]+)) |""(?<x> ([^"""""")+)"" | (?<x> [^,\r\n]+)),?)",
+        return (from System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(input:line,
+            pattern: @"(((?<x>(?=[,\r\n]+))|""(?<x>([^""])|"""")+)""|(?<x> [^,\r\n]+)),?)",
             System.Text.RegularExpressions.RegexOptions.ExplicitCapture)
                 select m.Groups[1].Value).ToArray();
     }
 
-    internal static string GetTextfromId(int index, string key)
-    {
-        throw new NotImplementedException();
-    }
+    
 
     static public List<string> GetAvailableLanguages()
     {

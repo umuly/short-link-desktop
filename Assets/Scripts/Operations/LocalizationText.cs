@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class LocalizationText : MonoBehaviour
     {
         ChangeLanguage(index: 0); 
     }
-    private void ChangeLanguage(int index) => gameObject.GetComponent<Text>().text = CVSParser.GetTextfromId(index, key);
+    private void ChangeLanguage(int index) => gameObject.GetComponent<Text>().text = CVSParser.GetTextFromId(index, key);
 
     private void OnEnable()
     {
