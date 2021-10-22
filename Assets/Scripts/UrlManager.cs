@@ -136,6 +136,7 @@ public class UrlManager : MonoBehaviour
         }
         else
         {
+            createUrlBannerText.text = "CREATE SHORT URL";
             request = UnityWebRequest.Post(baseAddress + "/api/url/RedirectUrlAdd", wwwform);
         }
 
@@ -270,13 +271,16 @@ public class UrlManager : MonoBehaviour
                     lastResponse = null;
                     lastResponse = response;
                     redirectUrlInput.text = response.item.redirectUrl;
+
+                    redirectUrlType.value = response.item.urlType - 1;
+                    domainIdDropdown.value = allDomains.IndexOf(allDomains.FirstOrDefault(k => k.id == response.item.domainID));
                     domainText.text = response.item.shortUrl;
+                    tempDomainText = allDomains.FirstOrDefault(k => k.id == response.item.domainID).domainUrl;
+
                     titleInput.text = response.item.title;
                     descriptionInput.text = response.item.description;
                     tagsInput.text = response.item.tags;
                     codeInput.text = response.item.code;
-                    redirectUrlType.value = response.item.urlType - 1;
-                    domainIdDropdown.captionText.text = allDomains.FirstOrDefault(k => k.domainUrl == domainIdDropdown.captionText.text).domainUrl;
                     accessTypeDropdown.value = response.item.urlAccessType - 1;
                     specificMembers.text = response.item.specificMembersOnly;
 
@@ -577,7 +581,7 @@ public class UrlManager : MonoBehaviour
 
     public void ClearInputs()
     {
-        redirectUrlInput.text = "";
+        redirectUrlInput.text = "https://";
         titleInput.text = "";
         descriptionInput.text = "";
         tagsInput.text = "";
