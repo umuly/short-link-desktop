@@ -20,4 +20,12 @@ MonoBehaviour:
   - _key: "lOG\u0130N"
     _rawText: "Giri\u015F Yap"
   - _key: E-Mail
-    _rawText: 
+    _rawText: E-Posta
+  - _key: Password
+    _rawText: "\u015Eifreni Yaz"
+  - _key: Or
+    _rawText: Ya Da
+  - _key: Sign Up
+    _rawText: "\xDCye Ol"
+  - _key: forgot Password
+    _rawText: Sifremi Unuttum

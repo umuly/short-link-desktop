@@ -21,3 +21,11 @@ MonoBehaviour:
     _rawText: Login
   - _key: E-Mail
     _rawText: E-Mail
+  - _key: Password
+    _rawText: Password
+  - _key: Or
+    _rawText: Or
+  - _key: Sign Up
+    _rawText: Sign Up
+  - _key: forgot Password
+    _rawText: Forgot Password ?

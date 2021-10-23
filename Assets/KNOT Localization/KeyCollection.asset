@@ -29,5 +29,21 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Password
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Or
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Sign Up
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: forgot Password
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 1

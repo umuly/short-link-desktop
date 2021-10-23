@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aee690d347527342904c37b9b1c4bb6, type: 3}
   m_Name: KnotProjectSettings
   m_EditorClassIdentifier: 
-  _defaultDatabase: {fileID: 11400000, guid: fb45b3c1f88ad8843b14b6485bc29f2f, type: 2}
+  _defaultDatabase: {fileID: 0}
   _manager:
     id: 0
   _loadOnStartup: 1
