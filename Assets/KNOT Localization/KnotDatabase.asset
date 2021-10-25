@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ce4382dfc0b464d981a3118a0b95f3, type: 3}
+  m_Name: KnotDatabase
+  m_EditorClassIdentifier: 
+  _languages:
+  - _cultureName: en
+    _systemLanguage: 10
+    _nativeName: English
+    _collectionProviders:
+    - id: 0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: tr
+    _systemLanguage: 37
+    _nativeName: "T\xFCrk\xE7e"
+    _collectionProviders:
+    - id: 1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: de
+    _systemLanguage: 15
+    _nativeName: Deutsch
+    _collectionProviders:
+    - id: 2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: fr
+    _systemLanguage: 14
+    _nativeName: "fran\xE7ais "
+    _collectionProviders:
+    - id: 3
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: es
+    _systemLanguage: 34
+    _nativeName: "espa\xF1ol"
+    _collectionProviders:
+    - id: 4
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: ru
+    _systemLanguage: 30
+    _nativeName: "\u0440\u0443\u0441\u0441\u043A\u0438\u0439"
+    _collectionProviders:
+    - id: 5
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: zh
+    _systemLanguage: 6
+    _nativeName: "\u4E2D\u6587"
+    _collectionProviders:
+    - id: 6
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: ar
+    _systemLanguage: 1
+    _nativeName: "\u0627\u0644\u0639\u0631\u0628\u064A\u0629"
+    _collectionProviders:
+    - id: 7
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: pt
+    _systemLanguage: 28
+    _nativeName: "portugu\xEAs"
+    _collectionProviders:
+    - id: 8
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _cultureName: it
+    _systemLanguage: 21
+    _nativeName: italiano
+    _collectionProviders:
+    - id: 9
+    _metadata:
+      _runtime: []
+      _editor: []
+  _textKeyCollections:
+  - {fileID: 11400000, guid: fa7578c074268ff499ae8417022a1b1a, type: 2}
+  _assetKeyCollections: []
+  _settings:
+    _languageSelector:
+      id: 10
+    _textController:
+      id: 11
+    _assetController:
+      id: 12
+    _metadata:
+      _runtime: []
+      _editor: []
+  references:
+    version: 1
+    00000000:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: 9da2baf3b2bfc0e41a0549e51ddcb434, type: 2}
+    00000001:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: 13ef5febbcb8aae4ab48b43cef013e20, type: 2}
+    00000002:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: d76d6132b3e97a543a313e468116c413, type: 2}
+    00000003:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: 6bb0221c6fba03e4a8bc21631eb6d7c8, type: 2}
+    00000004:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: c3a8f8366f2ff2046b3cd442e831d74a, type: 2}
+    00000005:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: ab6b5a09f3e318c438a6ccf4a5d0f49e, type: 2}
+    00000006:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: cceeb5081edcfe64eb8a594689400039, type: 2}
+    00000007:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: aa8faf11dbed69f4e9f60895c8010057, type: 2}
+    00000008:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: d220fb8226bfc9a499db3145a76396b9, type: 2}
+    00000009:
+      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _collection: {fileID: 11400000, guid: 4b471c9b3d094ba4897a0f2daf424bfb, type: 2}
+    0000000A:
+      type: {class: KnotDefaultLanguageSelector, ns: Knot.Localization, asm: Knot.Localization}
+      data:
+        _serializationPlaceholder: 0
+    0000000B:
+      type: {class: KnotTextController, ns: Knot.Localization, asm: Knot.Localization}
+      data:
+        _serializationPlaceholder: 0
+        _fallbackValue: '{key}'
+    0000000C:
+      type: {class: KnotAssetController, ns: Knot.Localization, asm: Knot.Localization}
+      data:
+        _serializationPlaceholder: 0
