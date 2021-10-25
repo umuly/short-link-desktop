@@ -140,10 +140,10 @@ public class UrlManager : MonoBehaviour
             request = UnityWebRequest.Post(baseAddress + "/api/url/RedirectUrlAdd", wwwform);
         }
 
-        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
-        string token = db.Que("select * from Player").FirstOrDefault().Token;
+        //Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        //string token = db.Que("select * from Player").FirstOrDefault().Token;
 
-        request.SetRequestHeader("Authorization", "Bearer " + token);
+        request.SetRequestHeader("Authorization", "Bearer " + ShortLinkTxtDB.ReadString());
         StartCoroutine(Operation());
 
 
@@ -207,10 +207,10 @@ public class UrlManager : MonoBehaviour
     {
         UnityWebRequest www = UnityWebRequest.Get(baseAddress + "/api/domains");
 
-        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
-        string token = db.Que("select * from Player").FirstOrDefault().Token;
+        //Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        //string token = db.Que("select * from Player").FirstOrDefault().Token;
 
-        www.SetRequestHeader("Authorization", "Bearer " + token);
+        www.SetRequestHeader("Authorization", "Bearer " + ShortLinkTxtDB.ReadString());
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -252,9 +252,9 @@ public class UrlManager : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(baseAddress + "/api/url/" + urlId);
 
-        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
-        string token = db.Que("select * from Player").FirstOrDefault().Token;
-        request.SetRequestHeader("Authorization", "Bearer " + token);
+        //Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        //string token = db.Que("select * from Player").FirstOrDefault().Token;
+        request.SetRequestHeader("Authorization", "Bearer " + ShortLinkTxtDB.ReadString());
 
         yield return request.SendWebRequest();
 
@@ -315,10 +315,10 @@ public class UrlManager : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(baseAddress + "/api/url?Skip=" + redirectUrlSkip + "&Sort.Column=createdOn&Sort.Type=1&UrlType=1&Status=1");
 
-        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
-        string token = db.Que("select * from Player").FirstOrDefault().Token;
+        //Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        //string token = db.Que("select * from Player").FirstOrDefault().Token;
 
-        request.SetRequestHeader("Authorization", "Bearer " + token);
+        request.SetRequestHeader("Authorization", "Bearer " + ShortLinkTxtDB.ReadString());
 
         yield return request.SendWebRequest();
 
@@ -561,10 +561,10 @@ public class UrlManager : MonoBehaviour
     public void LogOut()
     {
         loadingAnimationPrefab.SetActive(true);
-        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
-        var asd = db.Que("select * from Player").FirstOrDefault();
-        db.Delete("delete from Player where Id=" + asd.Id + "");
-
+        //Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        //var asd = db.Que("select * from Player").FirstOrDefault();
+        //db.Delete("delete from Player where Id=" + asd.Id + "");
+        ShortLinkTxtDB.ClearToken();
         StartCoroutine(LoadAsynchronously(0, 1));
     }
 
@@ -666,10 +666,10 @@ public class UrlManager : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Delete(baseAddress + "/api/url/" + urlId);
 
-        Shortlinkdb<Player> db = new Shortlinkdb<Player>();
-        string token = db.Que("select * from Player").FirstOrDefault().Token;
+        //Shortlinkdb<Player> db = new Shortlinkdb<Player>();
+        //string token = db.Que("select * from Player").FirstOrDefault().Token;
 
-        request.SetRequestHeader("Authorization", "Bearer " + token);
+        request.SetRequestHeader("Authorization", "Bearer " + ShortLinkTxtDB.ReadString());
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)

@@ -12,7 +12,6 @@ using UnityEngine.SceneManagement;
 using Assets.Models;
 using Newtonsoft.Json;
 using System.Data;
-using Mono.Data.Sqlite;
 using Assets.Scripts.Data;
 using System.Linq;
 using Assets.Scripts.Models;
@@ -20,6 +19,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Newtonsoft.Json.Linq;
+using UnityEditor;
 
 public class LoginManager : MonoBehaviour
 {
@@ -57,20 +57,26 @@ public class LoginManager : MonoBehaviour
 
     void Awake()
     {
-        try
-        {
-            Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
-            shortlinkdb.CreateTable("CREATE TABLE IF NOT EXISTS Player (Id INTEGER NOT NULL, Token TEXT NOT NULL, PRIMARY KEY(Id AUTOINCREMENT)) ;");
+        //try
+        //{
+        //    Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
+        //    shortlinkdb.CreateTable("CREATE TABLE IF NOT EXISTS Player (Id INTEGER NOT NULL, Token TEXT NOT NULL, PRIMARY KEY(Id AUTOINCREMENT)) ;");
 
-            var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
-            if (asd != null)
-            {
-                StartCoroutine(LoadAsynchronously(1, 0));
-            }
-        }
-        catch (Exception ex)
+        //    var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
+        //    if (asd != null)
+        //    {
+        //        StartCoroutine(LoadAsynchronously(1, 0));
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    ConvertErrorsToString(null, ex.Message);
+        //}
+
+        string token = ShortLinkTxtDB.ReadString();
+        if (!string.IsNullOrEmpty(token))
         {
-            ConvertErrorsToString(null, ex.Message);
+            StartCoroutine(CheckToken(token));
         }
     }
 
@@ -147,18 +153,21 @@ public class LoginManager : MonoBehaviour
                 {
                     var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
 
-                    Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
-                    var asd = shortlinkdb.Que("select * from Player");
-                    bool isToken = asd.Any();
-                    if (isToken == true)
-                    {
-                        int userId = asd.FirstOrDefault().Id;
-                        shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
-                    }
-                    else
-                    {
-                        shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
-                    }
+                    //ShortLinkTxtDB<Player> shortlinkdb = new Shortlinkdb<Player>();
+                    //var asd = shortlinkdb.Que("select * from Player");
+                    //bool isToken = asd.Any();
+                    //if (isToken == true)
+                    //{
+                    //    int userId = asd.FirstOrDefault().Id;
+                    //    shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
+                    //}
+                    //else
+                    //{
+                    //    shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
+                    //}
+
+                    ShortLinkTxtDB.WriteString(token.token);
+                    string t = ShortLinkTxtDB.ReadString();
 
                     StartCoroutine(LoadAsynchronously(1, 0));
                 }
@@ -319,6 +328,21 @@ public class LoginManager : MonoBehaviour
         ConvertErrorsToString(a.errors, a.statusText);
 
         loadingAnimationPrefab.SetActive(false);
+    }
+
+    IEnumerator CheckToken(string token)
+    {
+        var request = new UnityWebRequest("https://umuly.com/api/token/check", UnityWebRequest.kHttpVerbGET);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Authorization", "Bearer " + token);
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.responseCode == 200)
+        {
+            StartCoroutine(LoadAsynchronously(1, 0));
+        }
     }
 
     public void ChangePanel(int panelId)
