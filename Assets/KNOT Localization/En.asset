@@ -15,3 +15,69 @@ MonoBehaviour:
   _items:
   - _key: "Login_Ba\u015Fl\u0131k"
     _rawText: SIGN IN TO YOUR ACCOUNT
+  - _key: Login_email
+    _rawText: E-Mail
+  - _key: Login_password
+    _rawText: Password
+  - _key: Login_Buton
+    _rawText: Login
+  - _key: Or
+    _rawText: Or
+  - _key: Sign Up
+    _rawText: Sign Up
+  - _key: Forgot Password
+    _rawText: Forgot Password ?
+  - _key: "Register_Ba\u015Fl\u0131k"
+    _rawText: CREATE AN ACCOUNT
+  - _key: Register_Name
+    _rawText: Name Surname
+  - _key: Email address
+    _rawText: Email Address
+  - _key: Register
+    _rawText: Register
+  - _key: Sing In
+    _rawText: Sing In
+  - _key: Reset Password
+    _rawText: Reset Password
+  - _key: CHANGE PASSWORD
+    _rawText: CHANGE PASSWORD
+  - _key: Code
+    _rawText: Code
+  - _key: New Password
+    _rawText: New Password
+  - _key: My Short Urls
+    _rawText: 'My Short Urls:'
+  - _key: Waiting For Delete
+    _rawText: Waiting For Delete
+  - _key: Edit
+    _rawText: Edit
+  - _key: Short link
+    _rawText: Short link
+  - _key: Title
+    _rawText: Title
+  - _key: Description
+    _rawText: Description
+  - _key: Tags
+    _rawText: Tags
+  - _key: Copy Link
+    _rawText: Copy Link
+  - _key: Share
+    _rawText: Share
+  - _key: Create Free Short Url
+    _rawText: Create Free Short Url
+  - _key: Dashboard
+    _rawText: Dashboard
+  - _key: My Domains
+    _rawText: My Domains
+  - _key: My Advertisements
+    _rawText: My Advertisements
+  - _key: Documentation
+    _rawText: Documentation
+  - _key: Feedback
+    _rawText: Feedback
+  - _key: Support
+    _rawText: Support
+  - _key: Account Settings
+    _rawText: Account Settings
+  - _key: Log Out
+    _rawText: Log Out

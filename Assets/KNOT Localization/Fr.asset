@@ -15,3 +15,69 @@ MonoBehaviour:
   _items:
   - _key: "Login_Ba\u015Fl\u0131k"
     _rawText: "CONNECTEZ-VOUS \xC0 VOTRE COMPTE"
+  - _key: Login_email
+    _rawText: E-Mail
+  - _key: Login_password
+    _rawText: Mot de passe
+  - _key: Login_Buton
+    _rawText: Connexion
+  - _key: Or
+    _rawText: Ou
+  - _key: Sign Up
+    _rawText: S'inscrire
+  - _key: Forgot Password
+    _rawText: "Mot de passe oubli\xE9 ?"
+  - _key: "Register_Ba\u015Fl\u0131k"
+    _rawText: "CR\xC9ER UN COMPTE"
+  - _key: Register_Name
+    _rawText: "Pr\xE9nom / nom de famille"
+  - _key: Email address
+    _rawText: Adresse e-mail
+  - _key: Register
+    _rawText: S'inscrire
+  - _key: Sing In
+    _rawText: S'identifier
+  - _key: Reset Password
+    _rawText: "r\xE9initialiser le mot de passe"
+  - _key: CHANGE PASSWORD
+    _rawText: Changer le mot de passe
+  - _key: Code
+    _rawText: Code
+  - _key: New Password
+    _rawText: nouveau mot de passe
+  - _key: My Short Urls
+    _rawText: 'Mes URL courtes:'
+  - _key: Waiting For Delete
+    _rawText: En attente de suppression
+  - _key: Edit
+    _rawText: "\xC9diter"
+  - _key: Short link
+    _rawText: Lien court
+  - _key: Title
+    _rawText: Titre
+  - _key: Description
+    _rawText: La description
+  - _key: Tags
+    _rawText: Stichworte
+  - _key: Copy Link
+    _rawText: Copier le lien
+  - _key: Share
+    _rawText: Partager
+  - _key: Create Free Short Url
+    _rawText: "Cr\xE9er Une URL Courte Gratuite"
+  - _key: Dashboard
+    _rawText: Tableau de bord
+  - _key: My Domains
+    _rawText: Domaines
+  - _key: My Advertisements
+    _rawText: Mes Annonces
+  - _key: Documentation
+    _rawText: Documentation
+  - _key: Feedback
+    _rawText: Retour d'information
+  - _key: Support
+    _rawText: Soutien
+  - _key: Account Settings
+    _rawText: "Param\xE8tres du compte"
+  - _key: Log Out
+    _rawText: "Se D\xE9connecter"

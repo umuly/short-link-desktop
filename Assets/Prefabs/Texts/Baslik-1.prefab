@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7120187436450575929}
   - component: {fileID: 6009460596942717899}
   - component: {fileID: 7786445878623700254}
+  - component: {fileID: 5887371583816944187}
   m_Layer: 7
   m_Name: Baslik-1
   m_TagString: Untagged
@@ -70,8 +71,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Baslik-1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7f00b2d5833ccc64bb39e886536c0b0a, type: 2}
+  m_sharedMaterial: {fileID: 8276654906789870112, guid: 7f00b2d5833ccc64bb39e886536c0b0a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 2192
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -217,3 +218,17 @@ MonoBehaviour:
   _target:
     _object: {fileID: 935802580029126014}
     _methodName: set_text
+--- !u!114 &5887371583816944187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935802580029125984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f711d75cb9b2f741a6a714dcf4a7d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keyReference:
+    _key: 

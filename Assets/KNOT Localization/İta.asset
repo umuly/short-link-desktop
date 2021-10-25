@@ -15,3 +15,69 @@ MonoBehaviour:
   _items:
   - _key: "Login_Ba\u015Fl\u0131k"
     _rawText: ACCEDI AL TUO ACCOUNT
+  - _key: Login_email
+    _rawText: E-Mail
+  - _key: Login_password
+    _rawText: Parola d'ordine
+  - _key: Login_Buton
+    _rawText: Login
+  - _key: Or
+    _rawText: o
+  - _key: Sign Up
+    _rawText: Iscriviti
+  - _key: Forgot Password
+    _rawText: Ha dimenticato la password ?
+  - _key: "Register_Ba\u015Fl\u0131k"
+    _rawText: CREARE UN ACCOUNT
+  - _key: Register_Name
+    _rawText: Nome Cognome
+  - _key: Email address
+    _rawText: Indirizzo email
+  - _key: Register
+    _rawText: Registrati
+  - _key: Sing In
+    _rawText: Registrazione
+  - _key: Reset Password
+    _rawText: Resetta la password
+  - _key: CHANGE PASSWORD
+    _rawText: Cambia la password
+  - _key: Code
+    _rawText: Codice
+  - _key: New Password
+    _rawText: nuova password
+  - _key: My Short Urls
+    _rawText: 'I miei URL brevi:'
+  - _key: Waiting For Delete
+    _rawText: In attesa di cancellazione
+  - _key: Edit
+    _rawText: Modificare
+  - _key: Short link
+    _rawText: Link breve
+  - _key: Title
+    _rawText: Titolo
+  - _key: Description
+    _rawText: Descrizione
+  - _key: Tags
+    _rawText: Tag
+  - _key: Copy Link
+    _rawText: Copia Link
+  - _key: Share
+    _rawText: Condividere
+  - _key: Create Free Short Url
+    _rawText: Crea URL breve gratuito
+  - _key: Dashboard
+    _rawText: Pannello di controllo
+  - _key: My Domains
+    _rawText: Domini
+  - _key: My Advertisements
+    _rawText: I miei annunci
+  - _key: Documentation
+    _rawText: Documentazione
+  - _key: Feedback
+    _rawText: Feedback
+  - _key: Support
+    _rawText: Supporto
+  - _key: Account Settings
+    _rawText: Impostazioni Dell'account
+  - _key: Log Out
+    _rawText: Disconnettersi

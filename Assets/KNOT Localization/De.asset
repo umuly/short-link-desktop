@@ -15,3 +15,69 @@ MonoBehaviour:
   _items:
   - _key: "Login_Ba\u015Fl\u0131k"
     _rawText: MELDEN SIE SICH BEI IHREM KONTO AN
+  - _key: Login_email
+    _rawText: E-Mail
+  - _key: Login_password
+    _rawText: Passwort
+  - _key: Login_Buton
+    _rawText: Registrieren
+  - _key: Or
+    _rawText: Oder
+  - _key: Sign Up
+    _rawText: Anmeldung
+  - _key: Forgot Password
+    _rawText: Passwort vergessen ?
+  - _key: "Register_Ba\u015Fl\u0131k"
+    _rawText: EIN KONTO ERSTELLEN
+  - _key: Register_Name
+    _rawText: Vorname Nachname
+  - _key: Email address
+    _rawText: E-Mail-Addresse
+  - _key: Register
+    _rawText: Registrieren
+  - _key: Sing In
+    _rawText: Einloggen
+  - _key: Reset Password
+    _rawText: "Passwort zur\xFCcksetzen"
+  - _key: CHANGE PASSWORD
+    _rawText: "Passwort \xE4ndern"
+  - _key: Code
+    _rawText: Code
+  - _key: New Password
+    _rawText: Neues Kennwort
+  - _key: My Short Urls
+    _rawText: 'Meine kurzen URLs:'
+  - _key: Waiting For Delete
+    _rawText: "Warten auf L\xF6schen"
+  - _key: Edit
+    _rawText: Bearbeiten
+  - _key: Short link
+    _rawText: Kurzlink
+  - _key: Title
+    _rawText: Titel
+  - _key: Description
+    _rawText: Beschreibung
+  - _key: Tags
+    _rawText: Stichworte
+  - _key: Copy Link
+    _rawText: Link Kopieren
+  - _key: Share
+    _rawText: Teilen
+  - _key: Create Free Short Url
+    _rawText: Kostenlose Kurze URL Erstellen
+  - _key: Dashboard
+    _rawText: Armaturenbrett
+  - _key: My Domains
+    _rawText: "Dom\xE4nen"
+  - _key: My Advertisements
+    _rawText: Meine Anzeigen
+  - _key: Documentation
+    _rawText: Dokumentation
+  - _key: Feedback
+    _rawText: "R\xFCckmeldung"
+  - _key: Support
+    _rawText: "Unterst\xFCtzung"
+  - _key: Account Settings
+    _rawText: Account Einstellungen
+  - _key: Log Out
+    _rawText: Ausloggen

@@ -15,3 +15,69 @@ MonoBehaviour:
   _items:
   - _key: "Login_Ba\u015Fl\u0131k"
     _rawText: "INICIAR SESI\xD3N EN SU CUENTA"
+  - _key: Login_email
+    _rawText: E-Mail
+  - _key: Login_password
+    _rawText: "Contrase\xF1a"
+  - _key: Login_Buton
+    _rawText: Acceso
+  - _key: Or
+    _rawText: O
+  - _key: Sign Up
+    _rawText: Inscribirse
+  - _key: Forgot Password
+    _rawText: "Has olvidado tu contrase\xF1a ?"
+  - _key: "Register_Ba\u015Fl\u0131k"
+    _rawText: CREA UNA CUENTA
+  - _key: Register_Name
+    _rawText: Nombre Apellido
+  - _key: Email address
+    _rawText: "Direcci\xF3n de correo electr\xF3nico"
+  - _key: Register
+    _rawText: Registrarse
+  - _key: Sing In
+    _rawText: "Iniciar sesi\xF3n"
+  - _key: Reset Password
+    _rawText: "Restablecer la contrase\xF1a"
+  - _key: CHANGE PASSWORD
+    _rawText: "Cambiar la contrase\xF1a"
+  - _key: Code
+    _rawText: "C\xF3digo"
+  - _key: New Password
+    _rawText: "Nueva contrase\xF1a"
+  - _key: My Short Urls
+    _rawText: 'Mis URL cortas:'
+  - _key: Waiting For Delete
+    _rawText: Esperando eliminar
+  - _key: Edit
+    _rawText: Editar
+  - _key: Short link
+    _rawText: Enlace corto
+  - _key: Title
+    _rawText: "T\xEDtulo"
+  - _key: Description
+    _rawText: "Descripci\xF3n"
+  - _key: Tags
+    _rawText: Etiquetas
+  - _key: Copy Link
+    _rawText: Copiar Link
+  - _key: Share
+    _rawText: Cuota
+  - _key: Create Free Short Url
+    _rawText: Crear URL Corta Gratuita
+  - _key: Dashboard
+    _rawText: Tablero
+  - _key: My Domains
+    _rawText: Dominiosv
+  - _key: My Advertisements
+    _rawText: Mis Anuncios
+  - _key: Documentation
+    _rawText: "Documentaci\xF3n"
+  - _key: Feedback
+    _rawText: "Realimentaci\xF3n"
+  - _key: Support
+    _rawText: "Unterst\xFCtzung"
+  - _key: Account Settings
+    _rawText: Configuraciones de la cuenta
+  - _key: Log Out
+    _rawText: "Cerrar Sesi\xF3n"

@@ -15,3 +15,69 @@ MonoBehaviour:
   _items:
   - _key: "Login_Ba\u015Fl\u0131k"
     _rawText: "FA\xC7A LOGIN EM SUA CONTA"
+  - _key: Login_email
+    _rawText: E-Mail
+  - _key: Login_password
+    _rawText: Senha
+  - _key: Login_Buton
+    _rawText: Conecte-se
+  - _key: Or
+    _rawText: Ou
+  - _key: Sign Up
+    _rawText: Inscrever-se
+  - _key: Forgot Password
+    _rawText: Esqueceu sua senha ?
+  - _key: "Register_Ba\u015Fl\u0131k"
+    _rawText: CRIE A SUA CONTA AQUI
+  - _key: Register_Name
+    _rawText: Nome Sobrenome
+  - _key: Email address
+    _rawText: "Endere\xE7o de e-mail"
+  - _key: Register
+    _rawText: Registro
+  - _key: Sing In
+    _rawText: Entrar
+  - _key: Reset Password
+    _rawText: Redefinir senha
+  - _key: CHANGE PASSWORD
+    _rawText: Mudar senha
+  - _key: Code
+    _rawText: "C\xF3digo"
+  - _key: New Password
+    _rawText: Nova Senha
+  - _key: My Short Urls
+    _rawText: 'Meus URLs curtos:'
+  - _key: Waiting For Delete
+    _rawText: "Aguardando exclus\xE3o"
+  - _key: Edit
+    _rawText: Editar
+  - _key: Short link
+    _rawText: "Liga\xE7\xE3o curta"
+  - _key: Title
+    _rawText: "T\xEDtulo"
+  - _key: Description
+    _rawText: "Descri\xE7\xE3o"
+  - _key: Tags
+    _rawText: Tag
+  - _key: Copy Link
+    _rawText: "Link de c\xF3pia"
+  - _key: Share
+    _rawText: Compartilhado
+  - _key: Create Free Short Url
+    _rawText: Crie um URL curto gratuito
+  - _key: Dashboard
+    _rawText: Painel
+  - _key: My Domains
+    _rawText: "Dom\xEDnios"
+  - _key: My Advertisements
+    _rawText: "Meus An\xFAncios"
+  - _key: Documentation
+    _rawText: "Documenta\xE7\xE3o"
+  - _key: Feedback
+    _rawText: "Coment\xE1rios"
+  - _key: Support
+    _rawText: Apoio, Suporte
+  - _key: Account Settings
+    _rawText: "Configura\xE7\xF5es da conta"
+  - _key: Log Out
+    _rawText: Sair

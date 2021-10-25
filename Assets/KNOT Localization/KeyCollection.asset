@@ -15,7 +15,149 @@ MonoBehaviour:
   _keyData:
   - _key: "Login_Ba\u015Fl\u0131k"
     _metadata:
+      _runtime:
+      - id: 0
+      _editor:
+      - id: 1
+  - _key: Login_email
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Login_password
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Login_Buton
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Or
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Sign Up
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Forgot Password
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: "Register_Ba\u015Fl\u0131k"
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Register_Name
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Email address
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Register
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Sing In
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Reset Password
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: CHANGE PASSWORD
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Code
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: New Password
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: My Short Urls
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Waiting For Delete
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Edit
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Short link
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Title
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Description
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Tags
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Copy Link
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Share
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Create Free Short Url
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Dashboard
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: My Domains
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: My Advertisements
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Documentation
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Feedback
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Support
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Account Settings
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Log Out
+    _metadata:
       _runtime: []
       _editor: []
   references:
     version: 1
+    00000000:
+      type: {class: KnotCustomFontMetadata, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _font: {fileID: 0}
+    00000001:
+      type: {class: KnotCustomFontMetadata, ns: Knot.Localization.Data, asm: Knot.Localization}
+      data:
+        _font: {fileID: 0}
