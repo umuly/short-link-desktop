@@ -81,3 +81,41 @@ MonoBehaviour:
     _rawText: "Param\xE8tres du compte"
   - _key: Log Out
     _rawText: "Se D\xE9connecter"
+  - _key: CREATE SHORT URL
+    _rawText: "CR\xC9ER UNE URL COURTE"
+  - _key: Long Url Or Redirect Url
+    _rawText: URL longue ou URL de redirection
+  - _key: required
+    _rawText: obligatoire
+  - _key: Custom Branded Short Link
+    _rawText: "Lien court de marque personnalis\xE9"
+  - _key: optional
+    _rawText: optionnel
+  - _key: Key (food,pizza)
+    _rawText: "Cl\xE9 (nourriture, pizza)"
+  - _key: Access Types
+    _rawText: "Types d'acc\xE8s:"
+  - _key: Everyone
+    _rawText: Toutes les personnes
+  - _key: 'Enter allowed emails:'
+    _rawText: "Saisir les e-mails autoris\xE9s:"
+  - _key: Tags (food,pizza)
+    _rawText: Tags (nourriture, pizza)
+  - _key: Show Ads
+    _rawText: Afficher les annonces
+  - _key: Close
+    _rawText: Proche
+  - _key: Save
+    _rawText: Sauvegarder
+  - _key: Menu
+    _rawText: Menu
+  - _key: Only Me
+    _rawText: Seulement moi
+  - _key: Are you sure to delete
+    _rawText: "\xCAtes-vous s\xFBr de vouloir supprimer ?"
+  - _key: Yes
+    _rawText: Oui
+  - _key: No
+    _rawText: Non
+  - _key: Copied
+    _rawText: "Copi\xE9"

@@ -81,3 +81,41 @@ MonoBehaviour:
     _rawText: "\u5E10\u53F7\u8BBE\u5B9A"
   - _key: Log Out
     _rawText: "\u767B\u51FA"
+  - _key: CREATE SHORT URL
+    _rawText: "\u521B\u5EFA\u77ED\u7F51\u5740"
+  - _key: Long Url Or Redirect Url
+    _rawText: "\u957F\u7F51\u5740\u6216\u91CD\u5B9A\u5411\u7F51\u5740"
+  - _key: required
+    _rawText: "\u5FC5\u9700\u7684"
+  - _key: Custom Branded Short Link
+    _rawText: "\u81EA\u5B9A\u4E49\u54C1\u724C\u77ED\u94FE\u63A5"
+  - _key: optional
+    _rawText: "\u53EF\u9009\u7684"
+  - _key: Key (food,pizza)
+    _rawText: "\u94A5\u5319\uFF08\u98DF\u7269\uFF0C\u6BD4\u8428\uFF09"
+  - _key: Access Types
+    _rawText: "\u8BBF\u95EE\u7C7B\u578B"
+  - _key: Everyone
+    _rawText: "\u6BCF\u4E2A\u4EBA"
+  - _key: 'Enter allowed emails:'
+    _rawText: "\u8F93\u5165\u5141\u8BB8\u7684\u7535\u5B50\u90AE\u4EF6"
+  - _key: Tags (food,pizza)
+    _rawText: "\u6807\u7B7E\uFF08\u98DF\u7269\uFF0C\u6BD4\u8428\uFF09"
+  - _key: Show Ads
+    _rawText: "\u663E\u793A\u5E7F\u544A"
+  - _key: Close
+    _rawText: "\u5173\u95ED"
+  - _key: Save
+    _rawText: "\u8282\u7701"
+  - _key: Menu
+    _rawText: "\u83DC\u5355"
+  - _key: Only Me
+    _rawText: "\u53EA\u6709\u6211"
+  - _key: Are you sure to delete
+    _rawText: "\u4F60\u786E\u5B9A\u8981\u5220\u9664\u5417"
+  - _key: Yes
+    _rawText: "\u662F\u7684"
+  - _key: No
+    _rawText: "\u4E0D"
+  - _key: Copied
+    _rawText: "\u5DF2\u590D\u5236"

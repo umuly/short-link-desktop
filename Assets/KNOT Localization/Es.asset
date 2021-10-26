@@ -81,3 +81,41 @@ MonoBehaviour:
     _rawText: Configuraciones de la cuenta
   - _key: Log Out
     _rawText: "Cerrar Sesi\xF3n"
+  - _key: CREATE SHORT URL
+    _rawText: CREAR URL CORTA
+  - _key: Long Url Or Redirect Url
+    _rawText: URL larga o URL de redireccionamiento
+  - _key: required
+    _rawText: requerido
+  - _key: Custom Branded Short Link
+    _rawText: Enlace corto de marca personalizada
+  - _key: optional
+    _rawText: opcional
+  - _key: Key (food,pizza)
+    _rawText: Key (comida, pizza)
+  - _key: Access Types
+    _rawText: 'Tipos de acceso:'
+  - _key: Everyone
+    _rawText: Todo el mundo
+  - _key: 'Enter allowed emails:'
+    _rawText: "Ingrese los correos electr\xF3nicos permitidos:"
+  - _key: Tags (food,pizza)
+    _rawText: Tags (nourriture, pizza)
+  - _key: Show Ads
+    _rawText: Mostrar anuncios
+  - _key: Close
+    _rawText: Cerrar
+  - _key: Save
+    _rawText: Ahorrar
+  - _key: Menu
+    _rawText: "Men\xFA"
+  - _key: Only Me
+    _rawText: "S\xF3lo yo"
+  - _key: Are you sure to delete
+    _rawText: "Est\xE1s seguro de eliminar ?"
+  - _key: Yes
+    _rawText: "S\xED"
+  - _key: No
+    _rawText: No
+  - _key: Copied
+    _rawText: Copiado

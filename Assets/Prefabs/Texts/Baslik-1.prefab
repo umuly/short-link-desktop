@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 935802580029126014}
   - component: {fileID: 7120187436450575929}
   - component: {fileID: 6009460596942717899}
-  - component: {fileID: 7786445878623700254}
-  - component: {fileID: 5887371583816944187}
   m_Layer: 7
   m_Name: Baslik-1
   m_TagString: Untagged
@@ -112,9 +110,9 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 3
+  m_overflowMode: 2
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -201,34 +199,3 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &7786445878623700254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935802580029125984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4c7fa275613b584799a0110331c2f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _keyReference:
-    _key: "Login_Ba\u015Fl\u0131k"
-  _target:
-    _object: {fileID: 935802580029126014}
-    _methodName: set_text
---- !u!114 &5887371583816944187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935802580029125984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f711d75cb9b2f741a6a714dcf4a7d46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _keyReference:
-    _key: 

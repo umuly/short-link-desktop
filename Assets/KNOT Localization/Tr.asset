@@ -81,3 +81,41 @@ MonoBehaviour:
     _rawText: "Hesap Ayarlar\u0131"
   - _key: Log Out
     _rawText: "\xC7\u0131k\u0131\u015F Yap"
+  - _key: CREATE SHORT URL
+    _rawText: "KISA URL OLU\u015ETUR"
+  - _key: Long Url Or Redirect Url
+    _rawText: "Uzun URL veya Y\xF6nlendirme URL:"
+  - _key: required
+    _rawText: gereklidir
+  - _key: Custom Branded Short Link
+    _rawText: "\xD6zel Domain Olu\u015Ftur:"
+  - _key: optional
+    _rawText: "iste\u011Fe ba\u011Fl\u0131"
+  - _key: Key (food,pizza)
+    _rawText: Anahtar kelimeler ekle.(yemek, pizza,)
+  - _key: Access Types
+    _rawText: "Eri\u015Fim T\xFCrleri:"
+  - _key: Everyone
+    _rawText: Herkes
+  - _key: 'Enter allowed emails:'
+    _rawText: "G\xF6nderilmek istenilen e-postalar\u0131 girin:"
+  - _key: Tags (food,pizza)
+    _rawText: Etiketler (yemek, pizza)
+  - _key: Show Ads
+    _rawText: "Reklamlar\u0131 G\xF6ster"
+  - _key: Close
+    _rawText: Kapat
+  - _key: Save
+    _rawText: Kaydet
+  - _key: Menu
+    _rawText: "Men\xFC"
+  - _key: Only Me
+    _rawText: "Kimseyle Payla\u015Fma"
+  - _key: Are you sure to delete
+    _rawText: "Silmek istedi\u011Finize emin misiniz ?"
+  - _key: Yes
+    _rawText: Evet
+  - _key: No
+    _rawText: "Hay\u0131r"
+  - _key: Copied
+    _rawText: "Kopyaland\u0131"
