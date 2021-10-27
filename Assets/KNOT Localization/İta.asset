@@ -119,3 +119,9 @@ MonoBehaviour:
     _rawText: No
   - _key: Copied
     _rawText: Copiato
+  - _key: Specific Members Only
+    _rawText: Solo membri specifici
+  - _key: Members Only
+    _rawText: Solo i membri
+  - _key: Only Those Who Have The Link Can Access
+    _rawText: "Solo chi ha il link pu\xF2 accedere"

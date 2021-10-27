@@ -119,3 +119,9 @@ MonoBehaviour:
     _rawText: Nein
   - _key: Copied
     _rawText: Kopiert
+  - _key: Specific Members Only
+    _rawText: "Nur f\xFCr bestimmte Mitglieder"
+  - _key: Members Only
+    _rawText: "Nur f\xFCr Mitglieder"
+  - _key: Only Those Who Have The Link Can Access
+    _rawText: Nur wer den Link hat, kann darauf zugreifen

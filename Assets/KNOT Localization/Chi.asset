@@ -119,3 +119,9 @@ MonoBehaviour:
     _rawText: "\u4E0D"
   - _key: Copied
     _rawText: "\u5DF2\u590D\u5236"
+  - _key: Specific Members Only
+    _rawText: "\u4EC5\u9650\u7279\u5B9A\u4F1A\u5458"
+  - _key: Members Only
+    _rawText: "\u5185\u90E8\u4F7F\u7528"
+  - _key: Only Those Who Have The Link Can Access
+    _rawText: "\u53EA\u6709\u77E5\u9053\u94FE\u63A5\u7684\u4EBA\u624D\u80FD\u8BBF\u95EE"

@@ -132,3 +132,12 @@ MonoBehaviour:
     _rawText: "\u0644\u0627"
   - _key: Copied
     _rawText: "\u0646\u0633\u062E"
+  - _key: Specific Members Only
+    _rawText: "\u0623\u0639\u0636\u0627\u0621 \u0645\u062D\u062F\u062F\u064A\u0646
+      \u0641\u0642\u0637"
+  - _key: Members Only
+    _rawText: "\u0627\u0644\u0623\u0639\u0636\u0627\u0621 \u0641\u0642\u0637"
+  - _key: Only Those Who Have The Link Can Access
+    _rawText: "\u0641\u0642\u0637 \u0623\u0648\u0644\u0626\u0643 \u0627\u0644\u0630\u064A\u0646
+      \u0644\u062F\u064A\u0647\u0645 \u0627\u0644\u0631\u0627\u0628\u0637 \u064A\u0645\u0643\u0646\u0647\u0645
+      \u0627\u0644\u0648\u0635\u0648\u0644"

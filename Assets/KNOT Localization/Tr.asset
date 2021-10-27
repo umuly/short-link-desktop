@@ -119,3 +119,9 @@ MonoBehaviour:
     _rawText: "Hay\u0131r"
   - _key: Copied
     _rawText: "Kopyaland\u0131"
+  - _key: Specific Members Only
+    _rawText: "Yaln\u0131zca Belirli Ki\u015Filer"
+  - _key: Members Only
+    _rawText: "Belirli \xDCyeler"
+  - _key: Only Those Who Have The Link Can Access
+    _rawText: "Sadece Linke Sahip Olanlar Eri\u015Febilir"

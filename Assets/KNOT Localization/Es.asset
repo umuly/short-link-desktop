@@ -119,3 +119,9 @@ MonoBehaviour:
     _rawText: No
   - _key: Copied
     _rawText: Copiado
+  - _key: Specific Members Only
+    _rawText: "Solo miembros espec\xEDficos"
+  - _key: Members Only
+    _rawText: Solo miembros
+  - _key: Only Those Who Have The Link Can Access
+    _rawText: Solo aquellos que tienen el enlace pueden acceder

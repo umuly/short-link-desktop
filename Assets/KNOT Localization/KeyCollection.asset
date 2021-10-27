@@ -227,6 +227,18 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Specific Members Only
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Members Only
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Only Those Who Have The Link Can Access
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 1
     00000000:
