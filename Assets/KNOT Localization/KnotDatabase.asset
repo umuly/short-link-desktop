@@ -170,9 +170,9 @@ MonoBehaviour:
       data:
         _font: {fileID: 12800000, guid: a26fb76913180e642b4fcd8325f0605b, type: 3}
     0000000E:
-      type: {class: KnotDefaultLanguageSelector, ns: Knot.Localization, asm: Knot.Localization}
+      type: {class: KnotPlayerPrefsLanguageSelector, ns: Knot.Localization, asm: Knot.Localization}
       data:
-        _serializationPlaceholder: 0
+        _key: KnotSelectedLanguage
     0000000F:
       type: {class: KnotTextController, ns: Knot.Localization, asm: Knot.Localization}
       data:
