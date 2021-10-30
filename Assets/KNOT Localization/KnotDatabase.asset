@@ -108,8 +108,7 @@ MonoBehaviour:
     _assetController:
       id: 16
     _metadata:
-      _runtime:
-      - id: 17
+      _runtime: []
       _editor: []
   references:
     version: 1
@@ -182,7 +181,3 @@ MonoBehaviour:
       type: {class: KnotAssetController, ns: Knot.Localization, asm: Knot.Localization}
       data:
         _serializationPlaceholder: 0
-    00000011:
-      type: {class: KnotCustomFontMetadata, ns: Knot.Localization.Data, asm: Knot.Localization}
-      data:
-        _font: {fileID: 0}
