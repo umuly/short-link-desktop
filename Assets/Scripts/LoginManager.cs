@@ -12,14 +12,14 @@ using UnityEngine.SceneManagement;
 using Assets.Models;
 using Newtonsoft.Json;
 using System.Data;
-using Mono.Data.Sqlite;
 using Assets.Scripts.Data;
 using System.Linq;
 using Assets.Scripts.Models;
 using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using Newtonsoft.Json.Linq;
+using UnityEditor;
 
 public class LoginManager : MonoBehaviour
 {
@@ -46,8 +46,8 @@ public class LoginManager : MonoBehaviour
     [SerializeField] GameObject changePasswordPanel;
 
     // Others
-    [SerializeField] TextMeshProUGUI errorText;
     EventSystem system;
+    [SerializeField] GameObject loadingAnimationPrefab;
 
     // Alert Panel
     [SerializeField] Animator errorAnimation;
@@ -57,20 +57,26 @@ public class LoginManager : MonoBehaviour
 
     void Awake()
     {
-        try
-        {
-            Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
-            shortlinkdb.CreateTable("CREATE TABLE IF NOT EXISTS Player (Id INTEGER NOT NULL, Token TEXT NOT NULL, PRIMARY KEY(Id AUTOINCREMENT)) ;");
+        //try
+        //{
+        //    Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
+        //    shortlinkdb.CreateTable("CREATE TABLE IF NOT EXISTS Player (Id INTEGER NOT NULL, Token TEXT NOT NULL, PRIMARY KEY(Id AUTOINCREMENT)) ;");
 
-            var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
-            if (asd != null)
-            {
-                StartCoroutine(LoadAsynchronously(1, 0));
-            }
-        }
-        catch (Exception ex)
+        //    var asd = shortlinkdb.Que("select * from Player").FirstOrDefault();
+        //    if (asd != null)
+        //    {
+        //        StartCoroutine(LoadAsynchronously(1, 0));
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    ConvertErrorsToString(null, ex.Message);
+        //}
+
+        string token = ShortLinkTxtDB.ReadString();
+        if (!string.IsNullOrEmpty(token))
         {
-            errorText.text = ex.Message;
+            StartCoroutine(CheckToken(token));
         }
     }
 
@@ -125,7 +131,7 @@ public class LoginManager : MonoBehaviour
 
     public void Login()
     {
-        errorText.text = "";
+        loadingAnimationPrefab.SetActive(true);
         StartCoroutine(Login("https://umuly.com/api/Token?Email=" + loginEMailInput.text + "&Password=" + loginPasswordInput.text));
     }
 
@@ -137,52 +143,55 @@ public class LoginManager : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        if (request.result == UnityWebRequest.Result.Success)
+        try
         {
             var a = JsonConvert.DeserializeObject<MResponseBase<MUser.Response>>(request.downloadHandler.text);
 
-            if (request.responseCode == 200)
+            if (request.result == UnityWebRequest.Result.Success)
             {
-                try
+                if (request.responseCode == 200)
                 {
-
                     var token = JsonConvert.DeserializeObject<MToken>(request.downloadHandler.text);
 
-                    Shortlinkdb<Player> shortlinkdb = new Shortlinkdb<Player>();
-                    var asd = shortlinkdb.Que("select * from Player");
-                    bool isToken = asd.Any();
-                    if (isToken == true)
-                    {
-                        int userId = asd.FirstOrDefault().Id;
-                        shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
-                    }
-                    else
-                    {
-                        shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
-                    }
+                    //ShortLinkTxtDB<Player> shortlinkdb = new Shortlinkdb<Player>();
+                    //var asd = shortlinkdb.Que("select * from Player");
+                    //bool isToken = asd.Any();
+                    //if (isToken == true)
+                    //{
+                    //    int userId = asd.FirstOrDefault().Id;
+                    //    shortlinkdb.Update("update Player set Token = '" + token.token + "' where Id = " + userId + "");
+                    //}
+                    //else
+                    //{
+                    //    shortlinkdb.Insert("insert into Player (Token) values ('" + token.token + "')");
+                    //}
+
+                    ShortLinkTxtDB.WriteString(token.token);
+                    string t = ShortLinkTxtDB.ReadString();
 
                     StartCoroutine(LoadAsynchronously(1, 0));
                 }
-                catch (Exception ex)
+                else
                 {
-                    errorText.text = ex.Message;
+                    ConvertErrorsToString(a.errors, a.statusText);
                 }
             }
             else
             {
-                errorText.text = a.statusText;
+                loadingAnimationPrefab.SetActive(false);
+                ConvertErrorsToString(a.errors, a.statusText);
             }
         }
-        else
+        catch (JsonSerializationException)
         {
-            errorText.text = request.downloadHandler.text.Trim('"');
+            ConvertErrorsToString(null, request.downloadHandler.text.Trim('"'));
+            loadingAnimationPrefab.SetActive(false);
         }
     }
 
     public void Reqister()
     {
-        errorText.text = "";
-
+        loadingAnimationPrefab.SetActive(true);
         MUser.Form user = new MUser.Form();
         user.name = registerFullNameInput.text;
         user.email = registerEMailInput.text;
@@ -210,76 +219,49 @@ public class LoginManager : MonoBehaviour
                 ChangePanel(1);
             }
         }
-        else
-        {
-            if (a.errors != null)
-            {
-                foreach (var item in errorMessageTexts)
-                {
-                    Destroy(item.gameObject);
-                }
-                errorMessageTexts.Clear();
 
-                if (a.errors.Name != null)
-                {
-                    foreach (var item in a.errors.Name)
-                    {
-                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
-                        errorAnimation.SetTrigger("Open");
-                    }
-                }
-                if (a.errors.Email != null)
-                {
-                    foreach (var item in a.errors.Email)
-                    {
-                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
-                        errorAnimation.SetTrigger("Open");
-                    }
-                }
-                if (a.errors.Password != null)
-                {
-                    foreach (var item in a.errors.Password)
-                    {
-                        var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + item;
-                        errorAnimation.SetTrigger("Open");
-                    }
-                }
-            }
-            else
+        ConvertErrorsToString(a.errors, a.statusText);
+
+        loadingAnimationPrefab.SetActive(false);
+    }
+
+    public void ConvertErrorsToString(Dictionary<string, string[]> errors, string statusText)
+    {
+        foreach (var item in errorMessageTexts)
+        {
+            Destroy(item.gameObject);
+        }
+
+        errorMessageTexts.Clear();
+
+        if (errors != null)
+        {
+            foreach (string[] property in errors.Values)
             {
-                if (request.downloadHandler.text.Contains('{'))
+                foreach (var error in property)
                 {
-                    var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                        errorMessageTexts.Add(error);
-                        error.transform.SetAsLastSibling();
-                        error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + a.statusText;
-                        errorAnimation.SetTrigger("Open");
-                }
-                else
-                {
-                    var error = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
-                    errorMessageTexts.Add(error);
-                    error.transform.SetAsLastSibling();
-                    error.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + request.downloadHandler.text;
-                    errorAnimation.SetTrigger("Open");
+                    var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+                    errorMessageTexts.Add(gameObject);
+                    gameObject.transform.SetAsLastSibling();
+                    gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + error;
                 }
             }
         }
+
+        if (!string.IsNullOrEmpty(statusText))
+        {
+            var gameObject = Instantiate(errorMessageTextPrefab, errorMessageTextParent.transform);
+            errorMessageTexts.Add(gameObject);
+            gameObject.transform.SetAsLastSibling();
+            gameObject.GetComponent<TextMeshProUGUI>().text = errorMessageTexts.Count + ". " + statusText;
+        }
+
+        errorAnimation.SetTrigger("Open");
     }
 
     public void ResetPassword()
     {
-        errorText.text = "";
-
+        loadingAnimationPrefab.SetActive(true);
         MUser.Form user = new MUser.Form();
         user.email = resetPasswordEMailInput.text;
 
@@ -300,34 +282,20 @@ public class LoginManager : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            errorText.text = a.statusText;
-
             if (request.responseCode == 200)
             {
                 ChangePanel(4);
             }
-            else
-            {
+        }
 
-            }
-        }
-        else
-        {
-            if (request.downloadHandler.text.Contains('{'))
-            {
-                errorText.text = a.statusText;
-            }
-            else
-            {
-                errorText.text = request.downloadHandler.text + "!";
-            }
-        }
+        ConvertErrorsToString(a.errors, a.statusText);
+
+        loadingAnimationPrefab.SetActive(false);
     }
 
     public void ChangePassword()
     {
-        errorText.text = "";
-
+        loadingAnimationPrefab.SetActive(true);
         MUser.Form changePasswordForm = new MUser.Form();
         changePasswordForm.email = resetPasswordEMailInput.text;
         changePasswordForm.password = changePasswordInput.text;
@@ -350,56 +318,35 @@ public class LoginManager : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            errorText.text = a.statusText;
-
             if (request.responseCode == 200)
             {
                 ChangePanel(1);
                 resetPasswordEMailInput.text = "";
             }
-            else
-            {
-
-            }
         }
-        else
+
+        ConvertErrorsToString(a.errors, a.statusText);
+
+        loadingAnimationPrefab.SetActive(false);
+    }
+
+    IEnumerator CheckToken(string token)
+    {
+        var request = new UnityWebRequest("https://umuly.com/api/token/check", UnityWebRequest.kHttpVerbGET);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Authorization", "Bearer " + token);
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.responseCode == 200)
         {
-            if (a.errors != null)
-            {
-                if (a.errors.Name != null)
-                {
-                    errorText.text += a.errors.Name[0] + "!\n";
-                }
-                if (a.errors.Email != null)
-                {
-                    errorText.text += a.errors.Email[0] + "!\n";
-                }
-                if (a.errors.Password != null)
-                {
-                    errorText.text += a.errors.Password[0] + "!\n";
-                }
-                if (a.errors.Code != null)
-                {
-                    errorText.text += a.errors.Code[0] + "!\n";
-                }
-            }
-            else
-            {
-                if (request.downloadHandler.text.Contains('{'))
-                {
-                    errorText.text = a.statusText;
-                }
-                else
-                {
-                    errorText.text = request.downloadHandler.text + "!";
-                }
-            }
+            StartCoroutine(LoadAsynchronously(1, 0));
         }
     }
 
     public void ChangePanel(int panelId)
     {
-        errorText.text = "";
         loginEMailInput.text = "";
         loginPasswordInput.text = "";
         registerFullNameInput.text = "";
@@ -430,31 +377,6 @@ public class LoginManager : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        Event e = Event.current;
-
-        // Bir key'e basýldýðýnda bu karakterse ve shift kullanarak yapmadýysa, bu karakter ve bu karakterin büyük hali birbirine eþitse Caps Lock açýktýr.
-        // Telefonda ne olur bilmiyorum.
-        if (e.capsLock)
-        {
-            string UpperChar = e.character.ToString().ToUpper();
-            if (UpperChar == e.character.ToString())
-            {
-                errorText.text = "Caps Lock On";
-
-
-            }
-            else
-            {
-                errorText.text = "";
-
-            }
-
-        }
-
-    }
-
     IEnumerator LoadAsynchronously(int sceneBuildIndex, int sceneBuildIndexToClose)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneBuildIndex);
@@ -464,6 +386,7 @@ public class LoginManager : MonoBehaviour
             yield return null;
         }
 
+        loadingAnimationPrefab.SetActive(false);
         SceneManager.UnloadSceneAsync(sceneBuildIndexToClose);
     }
 }
