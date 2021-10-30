@@ -129,7 +129,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0.6
+  bundleVersion: 1.0.2
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -148,7 +148,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.umuly.shortlink
+    Android: com.DefaultCompany.com.unity.template.mobile2D
     Lumin: com.DefaultCompany.com.unity.template.mobile2D
     Standalone: com.DefaultCompany.com.unity.template.mobile2D
     iPhone: com.DefaultCompany.com.unity.template.mobile2D
@@ -158,15 +158,15 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 9
+  AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
-  AndroidTargetSdkVersion: 31
+  AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  ForceInternetPermission: 1
+  ForceInternetPermission: 0
   ForceSDCardPermission: 0
   CreateWallpaper: 0
   APKExpansionFiles: 0
@@ -241,18 +241,18 @@ PlayerSettings:
   useCustomBaseGradleTemplate: 0
   useCustomGradlePropertiesTemplate: 0
   useCustomProguardFile: 0
-  AndroidTargetArchitectures: 3
+  AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Downloads/umulyshortlink.keystore'
-  AndroidKeyaliasName: shortlink
+  AndroidKeystoreName: 
+  AndroidKeyaliasName: 
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 1
+  androidUseCustomKeystore: 0
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -312,6 +312,42 @@ PlayerSettings:
       m_SubKind: 
     - m_Textures:
       - {fileID: 2800000, guid: e03115360785e464bbf9d3455b04d8d5, type: 3}
+      m_Width: 192
+      m_Height: 192
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures:
+      - {fileID: 0}
+      m_Width: 144
+      m_Height: 144
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures:
+      - {fileID: 0}
+      m_Width: 96
+      m_Height: 96
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures:
+      - {fileID: 0}
+      m_Width: 72
+      m_Height: 72
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures:
+      - {fileID: 0}
+      m_Width: 48
+      m_Height: 48
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures:
+      - {fileID: 0}
+      m_Width: 36
+      m_Height: 36
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures:
+      - {fileID: 2800000, guid: e03115360785e464bbf9d3455b04d8d5, type: 3}
       - {fileID: 2800000, guid: e03115360785e464bbf9d3455b04d8d5, type: 3}
       m_Width: 432
       m_Height: 432
@@ -341,37 +377,6 @@ PlayerSettings:
       m_Width: 81
       m_Height: 81
       m_Kind: 2
-      m_SubKind: 
-    - m_Textures:
-      - {fileID: 2800000, guid: e03115360785e464bbf9d3455b04d8d5, type: 3}
-      m_Width: 192
-      m_Height: 192
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 144
-      m_Height: 144
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 96
-      m_Height: 96
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 72
-      m_Height: 72
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 48
-      m_Height: 48
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 36
-      m_Height: 36
-      m_Kind: 0
       m_SubKind: 
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsJobs:
@@ -668,8 +673,7 @@ PlayerSettings:
     7: KNOT_LOCALIZATION
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend:
-    Android: 1
+  scriptingBackend: {}
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
@@ -683,8 +687,7 @@ PlayerSettings:
   gcIncremental: 1
   assemblyVersionValidation: 1
   gcWBarrierValidation: 0
-  apiCompatibilityLevelPerPlatform:
-    Android: 6
+  apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: 2DBuiltInRenderer
@@ -772,9 +775,9 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
-    Analytics: 0
+    Analytics: 1
     Build: 0
-    Collab: 0
+    Collab: 1
     Game Performance: 0
     Purchasing: 0
     UDP: 0
@@ -792,11 +795,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: a10fcb71-2fd6-4823-bd7a-cffa0b4b93f1
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: ShortLinkUnity
+  organizationId: naimserin
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0
