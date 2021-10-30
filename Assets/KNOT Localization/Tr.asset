@@ -110,7 +110,7 @@ MonoBehaviour:
   - _key: Menu
     _rawText: "Men\xFC"
   - _key: Only Me
-    _rawText: Sadece ben
+    _rawText: "Kimseyle Payla\u015Fma"
   - _key: Are you sure to delete
     _rawText: "Silmek istedi\u011Finize emin misiniz ?"
   - _key: Yes
