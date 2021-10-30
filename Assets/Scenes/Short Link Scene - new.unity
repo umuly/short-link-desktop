@@ -21800,6 +21800,26 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 3bf3a4c76fbdd5c4f966b1dc03d56a1d, type: 2}
+    - target: {fileID: 562024163745541138, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 562024163745541138, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 562024163745541138, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 562024163745541138, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 562024163745541138, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 661767154538068366, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
       propertyPath: m_VerticalAlignment
       value: 512
@@ -21894,6 +21914,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4120436840585582363, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560889734665139044, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
+      propertyPath: m_Options.m_Options.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8575303624914809665, guid: 568de42f8b1cde5459577df1f46a83c7, type: 3}
