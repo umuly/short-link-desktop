@@ -112,7 +112,7 @@ MonoBehaviour:
   - _key: Only Me
     _rawText: "S\xF3 eu"
   - _key: Are you sure to delete
-    _rawText: "Voc\xEA tem certeza que quer deletar"
+    _rawText: "Voc\xEA tem certeza que quer deletar ?"
   - _key: Yes
     _rawText: Sim
   - _key: No
