@@ -151,6 +151,94 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: CREATE SHORT URL
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Long Url Or Redirect Url
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: required
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Custom Branded Short Link
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: optional
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Key (food,pizza)
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Access Types
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Everyone
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: 'Enter allowed emails:'
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Tags (food,pizza)
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Show Ads
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Close
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Save
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Menu
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Only Me
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Are you sure to delete
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Yes
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: No
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Copied
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Specific Members Only
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Members Only
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Only Those Who Have The Link Can Access
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 1
     00000000:

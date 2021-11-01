@@ -81,3 +81,47 @@ MonoBehaviour:
     _rawText: Account Settings
   - _key: Log Out
     _rawText: Log Out
+  - _key: CREATE SHORT URL
+    _rawText: CREATE SHORT URL
+  - _key: Long Url Or Redirect Url
+    _rawText: Long Url Or Redirect Url
+  - _key: required
+    _rawText: required
+  - _key: Custom Branded Short Link
+    _rawText: Custom Branded Short Link
+  - _key: optional
+    _rawText: optional
+  - _key: Key (food,pizza)
+    _rawText: Key (food,pizza)
+  - _key: Access Types
+    _rawText: 'Access Types :'
+  - _key: Everyone
+    _rawText: Everyone
+  - _key: 'Enter allowed emails:'
+    _rawText: 'Enter allowed emails:'
+  - _key: Tags (food,pizza)
+    _rawText: Tags (food,pizza)
+  - _key: Show Ads
+    _rawText: Show Ads
+  - _key: Close
+    _rawText: Close
+  - _key: Save
+    _rawText: Save
+  - _key: Menu
+    _rawText: Menu
+  - _key: Only Me
+    _rawText: Only Me
+  - _key: Are you sure to delete
+    _rawText: Are you sure to delete ?
+  - _key: Yes
+    _rawText: Yes
+  - _key: No
+    _rawText: No
+  - _key: Copied
+    _rawText: Copied
+  - _key: Specific Members Only
+    _rawText: Specific Members Only
+  - _key: Members Only
+    _rawText: Members Only
+  - _key: Only Those Who Have The Link Can Access
+    _rawText: Only Those Who Have The Link Can Access
