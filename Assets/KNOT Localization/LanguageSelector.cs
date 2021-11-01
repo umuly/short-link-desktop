@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Knot.Localization;
 using System.Linq;
+using TMPro;
+using UnityEngine.Events;
 
 public class LanguageSelector : MonoBehaviour
 {
@@ -24,4 +26,6 @@ public class LanguageSelector : MonoBehaviour
     {
         
     }
+    
+    
 }
