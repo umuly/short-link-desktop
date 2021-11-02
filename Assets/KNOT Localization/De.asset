@@ -58,7 +58,7 @@ MonoBehaviour:
   - _key: Description
     _rawText: Beschreibung
   - _key: Tags
-    _rawText: Stichworte
+    _rawText: Tags
   - _key: Copy Link
     _rawText: Link Kopieren
   - _key: Share
@@ -66,7 +66,7 @@ MonoBehaviour:
   - _key: Create Free Short Url
     _rawText: Kostenlose Kurze URL Erstellen
   - _key: Dashboard
-    _rawText: Armaturenbrett
+    _rawText: Dashboard
   - _key: My Domains
     _rawText: "Dom\xE4nen"
   - _key: My Advertisements
@@ -78,9 +78,9 @@ MonoBehaviour:
   - _key: Support
     _rawText: "Unterst\xFCtzung"
   - _key: Account Settings
-    _rawText: Account Einstellungen
+    _rawText: Einstellungen
   - _key: Log Out
-    _rawText: Ausloggen
+    _rawText: Abmelden
   - _key: CREATE SHORT URL
     _rawText: KURZE URL ERSTELLEN
   - _key: Long Url Or Redirect Url
@@ -104,11 +104,11 @@ MonoBehaviour:
   - _key: Show Ads
     _rawText: Anzeigen anzeigen
   - _key: Close
-    _rawText: Nah dran
+    _rawText: "Schlie\xDFen"
   - _key: Save
     _rawText: Speichern
   - _key: Menu
-    _rawText: Speisekarte
+    _rawText: Menu
   - _key: Only Me
     _rawText: Nur ich
   - _key: Are you sure to delete
