@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 935802580029126014}
   - component: {fileID: 7120187436450575929}
   - component: {fileID: 6009460596942717899}
+  - component: {fileID: 2767792330777636779}
   m_Layer: 7
   m_Name: Baslik-1
   m_TagString: Untagged
@@ -199,3 +200,20 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &2767792330777636779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935802580029125984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c7fa275613b584799a0110331c2f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keyReference:
+    _key: Forgot Password
+  _target:
+    _object: {fileID: 935802580029126014}
+    _methodName: set_text

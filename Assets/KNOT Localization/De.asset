@@ -20,13 +20,13 @@ MonoBehaviour:
   - _key: Login_password
     _rawText: Passwort
   - _key: Login_Buton
-    _rawText: Registrieren
+    _rawText: Anmelden
   - _key: Or
     _rawText: Oder
   - _key: Sign Up
     _rawText: Anmeldung
   - _key: Forgot Password
-    _rawText: Passwort vergessen ?
+    _rawText: Passwort Vergessen ?
   - _key: "Register_Ba\u015Fl\u0131k"
     _rawText: EIN KONTO ERSTELLEN
   - _key: Register_Name
@@ -38,9 +38,9 @@ MonoBehaviour:
   - _key: Sing In
     _rawText: Einloggen
   - _key: Reset Password
-    _rawText: "Passwort zur\xFCcksetzen"
+    _rawText: "Passwort Zur\xFCcksetzen"
   - _key: CHANGE PASSWORD
-    _rawText: "Passwort \xE4ndern"
+    _rawText: "Passwort \xC4ndern"
   - _key: Code
     _rawText: Code
   - _key: New Password

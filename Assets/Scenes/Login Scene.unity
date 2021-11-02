@@ -462,7 +462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 403877383422100062, guid: eef556bac632aba488dfd05d5ef0388f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 373.7321
+      value: 204.21974
       objectReference: {fileID: 0}
     - target: {fileID: 403877383422100062, guid: eef556bac632aba488dfd05d5ef0388f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1249,7 +1249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70a90a744681854b8df19f307b42ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dropdown: {fileID: 0}
 --- !u!1 &704105584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 555743605069111117, guid: 5e9b31f5e5716cc44a1f5f445dbd85e1, type: 3}
@@ -4136,7 +4135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4266063353313690281, guid: 90a677dbeb31396499eb90c3e4e92002, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 373.7321
+      value: 204.21974
       objectReference: {fileID: 0}
     - target: {fileID: 4266063353313690281, guid: 90a677dbeb31396499eb90c3e4e92002, type: 3}
       propertyPath: m_AnchoredPosition.y
