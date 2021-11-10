@@ -77,36 +77,16 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _cultureName: zh
-    _systemLanguage: 6
-    _nativeName: "\u4E2D\u6587"
-    _collectionProviders:
-    - id: 8
-    _metadata:
-      _runtime:
-      - id: 9
-      _editor:
-      - id: 10
-  - _cultureName: ar
-    _systemLanguage: 1
-    _nativeName: "\u0627\u0644\u0639\u0631\u0628\u064A\u0629"
-    _collectionProviders:
-    - id: 11
-    _metadata:
-      _runtime:
-      - id: 12
-      _editor:
-      - id: 13
   _textKeyCollections:
   - {fileID: 11400000, guid: fa7578c074268ff499ae8417022a1b1a, type: 2}
   _assetKeyCollections: []
   _settings:
     _languageSelector:
-      id: 14
+      id: 8
     _textController:
-      id: 15
+      id: 9
     _assetController:
-      id: 16
+      id: 10
     _metadata:
       _runtime: []
       _editor: []
@@ -145,39 +125,15 @@ MonoBehaviour:
       data:
         _collection: {fileID: 11400000, guid: ab6b5a09f3e318c438a6ccf4a5d0f49e, type: 2}
     00000008:
-      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
-      data:
-        _collection: {fileID: 11400000, guid: cceeb5081edcfe64eb8a594689400039, type: 2}
-    00000009:
-      type: {class: KnotCustomFontMetadata, ns: Knot.Localization.Data, asm: Knot.Localization}
-      data:
-        _font: {fileID: 12800000, guid: d5dd705edd2ddd74ea540a4ddf4a94bf, type: 3}
-    0000000A:
-      type: {class: KnotCustomFontMetadata, ns: Knot.Localization.Data, asm: Knot.Localization}
-      data:
-        _font: {fileID: 12800000, guid: d5dd705edd2ddd74ea540a4ddf4a94bf, type: 3}
-    0000000B:
-      type: {class: KnotAssetCollectionProvider, ns: Knot.Localization.Data, asm: Knot.Localization}
-      data:
-        _collection: {fileID: 11400000, guid: aa8faf11dbed69f4e9f60895c8010057, type: 2}
-    0000000C:
-      type: {class: KnotCustomFontMetadata, ns: Knot.Localization.Data, asm: Knot.Localization}
-      data:
-        _font: {fileID: 12800000, guid: a26fb76913180e642b4fcd8325f0605b, type: 3}
-    0000000D:
-      type: {class: KnotCustomFontMetadata, ns: Knot.Localization.Data, asm: Knot.Localization}
-      data:
-        _font: {fileID: 12800000, guid: a26fb76913180e642b4fcd8325f0605b, type: 3}
-    0000000E:
       type: {class: KnotPlayerPrefsLanguageSelector, ns: Knot.Localization, asm: Knot.Localization}
       data:
         _key: KnotSelectedLanguage
-    0000000F:
+    00000009:
       type: {class: KnotTextController, ns: Knot.Localization, asm: Knot.Localization}
       data:
         _serializationPlaceholder: 0
         _fallbackValue: '{key}'
-    00000010:
+    0000000A:
       type: {class: KnotAssetController, ns: Knot.Localization, asm: Knot.Localization}
       data:
         _serializationPlaceholder: 0
