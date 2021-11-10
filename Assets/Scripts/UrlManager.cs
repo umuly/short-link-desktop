@@ -189,6 +189,10 @@ public class UrlManager : MonoBehaviour
                 ConvertErrorsToString(null, request.downloadHandler.text);
                 loadingAnimationPrefab.SetActive(false);
             }
+            if (request.responseCode == 401)
+            {
+                LogOut();
+            }
         }
     }
 
@@ -217,6 +221,7 @@ public class UrlManager : MonoBehaviour
         {
             //Debug.Log(www.error);
             loadingAnimationPrefab.SetActive(false);
+
         }
         else
         {
@@ -238,6 +243,7 @@ public class UrlManager : MonoBehaviour
             });
             loadingAnimationPrefab.SetActive(false);
         }
+
     }
 
     public void GetShortUrl(string urlId)
@@ -302,6 +308,10 @@ public class UrlManager : MonoBehaviour
         {
             ConvertErrorsToString(null, request.downloadHandler.text);
             loadingAnimationPrefab.SetActive(false);
+        }
+        if (request.responseCode == 401)
+        {
+            LogOut();
         }
     }
 
@@ -507,6 +517,11 @@ public class UrlManager : MonoBehaviour
         else
         {
             loadingAnimationPrefab.SetActive(false);
+
+            if (request.responseCode == 401)
+            {
+                LogOut();
+            }
         }
     }
 
@@ -694,6 +709,7 @@ public class UrlManager : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneBuildIndex);
 
+
         while (!operation.isDone)
         {
             yield return null;
@@ -701,5 +717,6 @@ public class UrlManager : MonoBehaviour
 
         loadingAnimationPrefab.SetActive(false);
         SceneManager.UnloadSceneAsync(sceneBuildIndexToClose);
+
     }
 }

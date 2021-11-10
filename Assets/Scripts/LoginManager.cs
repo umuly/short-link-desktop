@@ -76,7 +76,8 @@ public class LoginManager : MonoBehaviour
         string token = ShortLinkTxtDB.ReadString();
         if (!string.IsNullOrEmpty(token))
         {
-            StartCoroutine(CheckToken(token));
+            //StartCoroutine(CheckToken(token));
+            StartCoroutine(LoadAsynchronously(1, 0));
         }
     }
 
