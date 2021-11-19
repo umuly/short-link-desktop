@@ -18,7 +18,7 @@ Uzun linkleri kısa linklere çevirerek istenilen linke yönlendirmede uygulamas
 	- "Only Me" – Sadece Ben
 	- "Specific Members Only" – Yalnızca Belirli Üyeler
 	- "Members Only" – Sadece Üyeler
-	- "Only Those Who Have The Link Can Access" – Sadece Linke Sahip Olanlar 	Erişebilir
+	- "Only Those Who Have The Link Can Access" – Sadece Linke Sahip Olanlar Erişebilir
 - "Title" – alanından isteğe bağlı URL için bir başlık giriniz.
 - "Description" – alanından isteğe bağlı bir açıklama giriniz.
 - "Tags" – alanından isteğe bağlı bir etiket giriniz. Kaydedin ve linki paylaşın.
