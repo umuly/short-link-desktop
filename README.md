@@ -1,6 +1,6 @@
 ## ![image](https://user-images.githubusercontent.com/91588726/142672512-225b16fb-c623-4d62-b5eb-96f1d5ecb776.png) 
 
-Uzun linkleri kısa linklere çevirerek istenilen linke yönlendirmede uygulaması yapılmıştır. Burada yer alan projenin kaynak kodlarıdır. Halka açık olarak paylaşılmıştır. İsteyenler bu projeye gelişimine katkıda bulunabilir.
+Uzun linkleri kısa linklere çevirerek istenilen siteye yönlendirme uygulaması yapılmıştır. Burada yer alan projenin kaynak kodlarıdır. Halka açık olarak paylaşılmıştır. İsteyenler bu projeye gelişimine katkıda bulunabilir.
 
 ## Web’de Short Link nasıl oluşturulur?
 - umuly.com web sayfasına gidin.
