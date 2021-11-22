@@ -26,7 +26,7 @@ Uzun linkleri kısa linklere çevirerek istenilen siteye yönlendirme uygulamas�
 
 ## Telefonda Short Link nasıl oluşturulur <a href="https://play.google.com/store/apps/details?id=com.umuly.shortlink&hl=tr&gl=US"><img src="https://img.icons8.com/color/96/000000/google-play.png" align="right" alt="playstore"/></a>
 
-- Umuly Short Link uygulamasını indiriniz.
+- <a href="https://play.google.com/store/apps/details?id=com.umuly.shortlink&hl=tr&gl=US">Umuly Short Link uygulamasını indiriniz.</a>
 - Üye değilseniz "SIGN IN" alanından soyadınız, e-posta adresiniz ve şifre ile kayıt olunuz.
 - "Login" alanından giriş yapınız.
 <img src="https://user-images.githubusercontent.com/91588726/142673866-c6df56ec-04f2-4cf3-90c0-eaf9b6af3f04.png" align="center" alt="Girl in a jacket" width="200" height="325">
